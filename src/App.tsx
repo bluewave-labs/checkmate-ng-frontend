@@ -39,13 +39,34 @@ const AppInit = ({ children }: { children: React.ReactNode }) => {
         return;
       }
 
-      const apiResponse = await res.json();
-      const user = apiResponse.data;
-      dispatch(setAuthenticated(true));
-      dispatch(setUser(user));
-      dispatch(setSelectedTeamId(user.teamIds[0]));
-      setTeamHeader(user.teamIds[0]);
-      setInitialized(true);
+      try {
+        const apiResponse = await res.json();
+        const user = apiResponse.data;
+        if (!user) {
+          throw new Error("No user data");
+        }
+
+        const teams = user.teamIds;
+        if (!teams || teams.length === 0) {
+          throw new Error("User has no teams");
+        }
+
+        const defaultTeam = teams[0];
+
+        dispatch(setAuthenticated(true));
+        dispatch(setUser(user));
+        dispatch(setSelectedTeamId(defaultTeam));
+        setTeamHeader(defaultTeam);
+        setInitialized(true);
+      } catch (error) {
+        console.error(error);
+        dispatch(setAuthenticated(false));
+        dispatch(setUser(null));
+        dispatch(setSelectedTeamId(null));
+        setTeamHeader(null);
+        navigate("/login", { replace: true });
+        return;
+      }
     };
     init();
   }, [navigate, dispatch, location.pathname]);

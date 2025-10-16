@@ -28,10 +28,10 @@ export const authSlice = createSlice({
     setAuthenticated: (state, action: PayloadAction<boolean>) => {
       state.isAuthenticated = action.payload;
     },
-    setUser: (state, action: PayloadAction<User>) => {
+    setUser: (state, action: PayloadAction<User | null>) => {
       state.user = action.payload;
     },
-    setSelectedTeamId: (state, action: PayloadAction<string>) => {
+    setSelectedTeamId: (state, action: PayloadAction<string | null>) => {
       state.selectedTeamId = action.payload;
     },
   },
