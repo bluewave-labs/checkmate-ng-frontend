@@ -3,15 +3,19 @@ import { Button, TextInput, TextLink } from "@/components/inputs";
 import Stack from "@mui/material/Stack";
 
 import type { ApiResponse } from "@/hooks/UseApi";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePost } from "@/hooks/UseApi";
 import { useNavigate } from "react-router";
 import { useTheme } from "@mui/material/styles";
-import { useAppDispatch } from "@/hooks/AppHooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/AppHooks";
+import { setTeamHeader } from "@/utils/ApiClient";
 import { useTranslation } from "react-i18next";
-import { setAuthenticated } from "@/features/authSlice";
-import { z } from "zod";
+import {
+  setAuthenticated,
+  setSelectedTeamId,
+  setUser,
+} from "@/features/authSlice";
+import { set, z } from "zod";
 import { useForm, Controller } from "react-hook-form";
 
 const schema = z.object({
@@ -42,9 +46,14 @@ const Login = () => {
 
   const onSubmit = async (data: FormData) => {
     const result = await post("/auth/login", data);
+
     if (result) {
+      const user = result.data;
       dispatch(setAuthenticated(true));
-      navigate("/uptime");
+      dispatch(setUser(user));
+      dispatch(setSelectedTeamId(user.teamIds?.[0] || null));
+      setTeamHeader(user.teamIds?.[0] || null);
+      navigate("/");
     } else {
       dispatch(setAuthenticated(false));
     }

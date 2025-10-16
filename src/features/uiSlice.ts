@@ -4,11 +4,13 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 interface UiState {
   language: string;
   mode: string;
+  sidebarOpen: boolean;
 }
 
 const initialState: UiState = {
   language: "en",
   mode: "dark",
+  sidebarOpen: true,
 };
 
 export const uiSlice = createSlice({
@@ -21,8 +23,11 @@ export const uiSlice = createSlice({
     setMode: (state, action: PayloadAction<string>) => {
       state.mode = action.payload;
     },
+    setSidebarOpen: (state, action: PayloadAction<boolean>) => {
+      state.sidebarOpen = action.payload;
+    },
   },
 });
 
-export const { setLanguage, setMode } = uiSlice.actions;
+export const { setLanguage, setMode, setSidebarOpen } = uiSlice.actions;
 export default uiSlice.reducer;

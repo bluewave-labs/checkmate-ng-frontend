@@ -5,3 +5,6 @@ export { SelectInput as Select } from "./Select";
 export { LanguageSelector } from "./LanguageSelector";
 export { ThemeSwitch } from "./ThemeSwitch";
 export { TextLink } from "./TextLink";
+export { CheckboxInput as Checkbox } from "./Checkbox";
+export { AutoCompleteInput as AutoComplete } from "./AutoComplete";
+export { RadioInput as Radio, RadioWithDescription } from "./RadioInput";

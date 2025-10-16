@@ -1,10 +1,19 @@
 import axios from "axios";
 import type { AxiosRequestConfig, AxiosResponse } from "axios";
 const BASE_URL = import.meta.env.VITE_APP_API_BASE_URL;
+
 const api = axios.create({
   baseURL: BASE_URL || "http://localhost:55555/api/v2",
   withCredentials: true,
 });
+
+export const setTeamHeader = (teamId: string | null) => {
+  if (teamId) {
+    api.defaults.headers.common["x-team-id"] = teamId;
+  } else {
+    delete api.defaults.headers.common["x-team-id"];
+  }
+};
 
 export const get = <T>(
   url: string,

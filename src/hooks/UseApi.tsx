@@ -14,7 +14,6 @@ const fetcher = async <T,>(url: string, config?: AxiosRequestConfig) => {
   const res = await get<T>(url, config);
   return res.data;
 };
-
 export const useGet = <T,>(
   url: string,
   axiosConfig?: AxiosRequestConfig,
