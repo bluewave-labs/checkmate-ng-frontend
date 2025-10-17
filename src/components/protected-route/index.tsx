@@ -7,6 +7,7 @@ export const ProtectedRoute: React.FC<React.PropsWithChildren> = ({
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
   if (!isAuthenticated) {
+    console.log("poop");
     return <Navigate to="/login" replace />;
   }
 

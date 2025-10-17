@@ -34,9 +34,14 @@ export const authSlice = createSlice({
     setSelectedTeamId: (state, action: PayloadAction<string | null>) => {
       state.selectedTeamId = action.payload;
     },
+    logout: (state) => {
+      state.isAuthenticated = false;
+      state.user = null;
+      state.selectedTeamId = null;
+    },
   },
 });
 
-export const { setAuthenticated, setUser, setSelectedTeamId } =
+export const { setAuthenticated, setUser, setSelectedTeamId, logout } =
   authSlice.actions;
 export default authSlice.reducer;

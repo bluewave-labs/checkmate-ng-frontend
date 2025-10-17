@@ -5,7 +5,8 @@ import { lightTheme, darkTheme } from "@/theme/theme";
 import { I18nLoader } from "@/components/i18nLoader";
 import { useAppSelector } from "./hooks/AppHooks";
 import { BrowserRouter } from "react-router-dom";
-
+import { useLocation } from "react-router-dom";
+import { AuthVerifier } from "@/components/auth-verifier";
 function App() {
   const mode = useAppSelector((state) => state.ui.mode);
 
@@ -14,10 +15,25 @@ function App() {
       <CssBaseline />
       <I18nLoader />
       <BrowserRouter>
-        <AppRoutes />
+        <AppWithAuth />
       </BrowserRouter>
     </ThemeProvider>
   );
 }
+
+const AppWithAuth = () => {
+  const location = useLocation();
+  const isAuthRoute = ["/login", "/register"].includes(location.pathname);
+
+  if (isAuthRoute) {
+    return <AppRoutes />;
+  }
+
+  return (
+    <AuthVerifier>
+      <AppRoutes />
+    </AuthVerifier>
+  );
+};
 
 export default App;
