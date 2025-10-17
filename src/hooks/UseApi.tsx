@@ -84,6 +84,7 @@ export const usePost = <B = any, R = any>() => {
 };
 
 export const usePatch = <B = any, R = any>() => {
+  const currentTeamId = useAppSelector((state) => state.auth.selectedTeamId);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -96,7 +97,13 @@ export const usePatch = <B = any, R = any>() => {
     setError(null);
 
     try {
-      const res = await patch<R>(endpoint, body, config);
+      const res = await patch<R>(endpoint, body, {
+        ...config,
+        headers: {
+          ...config?.headers,
+          "x-team-id": currentTeamId,
+        },
+      });
       return res.data;
     } catch (err: any) {
       const errMsg =
