@@ -10,7 +10,7 @@ import BugReportOutlinedIcon from "@mui/icons-material/BugReportOutlined";
 import { useMediaQuery } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
-
+import { useNavigate } from "react-router";
 import type { IMonitor } from "@/types/monitor";
 
 export const HeaderControls = ({
@@ -18,15 +18,18 @@ export const HeaderControls = ({
   patch,
   isPatching,
   refetch,
+  path,
 }: {
   monitor: IMonitor;
   patch: Function;
   isPatching: boolean;
   refetch: Function;
+  path: string;
 }) => {
   const { t } = useTranslation();
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("md"));
+  const navigate = useNavigate();
 
   return (
     <Stack
@@ -64,7 +67,14 @@ export const HeaderControls = ({
           >
             {monitor?.isActive ? t("pause") : t("resume")}
           </Button>
-          <Button startIcon={<SettingsOutlinedIcon />}>{t("configure")}</Button>
+          <Button
+            startIcon={<SettingsOutlinedIcon />}
+            onClick={() => {
+              navigate(`${path}/${monitor._id}/configure`);
+            }}
+          >
+            {t("configure")}
+          </Button>
         </ButtonGroup>
       </Stack>
     </Stack>

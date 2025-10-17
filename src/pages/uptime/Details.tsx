@@ -104,6 +104,7 @@ const UptimeDetailsPage = () => {
         patch={patch}
         isPatching={isPatching}
         refetch={refetch}
+        path="/uptime"
       />
       <Stack direction="row" gap={theme.spacing(8)}>
         <StatBox

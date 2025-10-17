@@ -53,23 +53,23 @@ export const MonitorTable = ({
         id: 3,
         label: "Incidents",
         action: () => {
-          navigate(`/v2/incidents/${monitor._id}`);
+          navigate(`/incidents/${monitor._id}`);
         },
       },
       {
         id: 4,
         label: "Configure",
         action: () => {
-          console.log("Open configure");
+          navigate(`/uptime/${monitor._id}/configure`);
         },
       },
-      {
-        id: 5,
-        label: "Clone",
-        action: () => {
-          console.log("Open clone");
-        },
-      },
+      // {
+      //   id: 5,
+      //   label: "Clone",
+      //   action: () => {
+      //     console.log("Open clone");
+      //   },
+      // },
       {
         id: 6,
         label: monitor.isActive ? "Pause" : "Resume",

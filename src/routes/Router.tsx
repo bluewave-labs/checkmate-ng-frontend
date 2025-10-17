@@ -4,6 +4,7 @@ import AuthRegister from "@/pages/auth/Register";
 import UptimeMonitorsPage from "@/pages/uptime/UptimeMonitors";
 import UptimeCreatePage from "@/pages/uptime/Create";
 import UptimeDetailsPage from "@/pages/uptime/Details";
+import UptimeConfigurePage from "@/pages/uptime/UptimeConfigure";
 import RootLayout from "@/components/layouts/RootLayout";
 import { ProtectedRoute } from "@/components/protected-route";
 
@@ -23,6 +24,7 @@ const Router = () => {
         <Route index element={<UptimeMonitorsPage />} />
         <Route path="uptime" element={<UptimeMonitorsPage />} />
         <Route path="uptime/:id" element={<UptimeDetailsPage />} />
+        <Route path="uptime/:id/configure" element={<UptimeConfigurePage />} />
         <Route path="uptime/create" element={<UptimeCreatePage />} />
       </Route>
     </Routes>

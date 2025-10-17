@@ -11,6 +11,7 @@ import FormControl from "@mui/material/FormControl";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import { Typography } from "@mui/material";
 
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { monitorSchema } from "@/validation/zod";
 import { z } from "zod";
@@ -40,16 +41,22 @@ export const UptimeForm = ({
   const { t } = useTranslation();
   const theme = useTheme();
   const { defaults } = useInitForm({ initialData: initialData });
+
   const {
     handleSubmit,
     control,
     setValue,
+    reset,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(monitorSchema) as any,
     defaultValues: defaults,
     mode: "onChange",
   });
+
+  useEffect(() => {
+    reset(defaults);
+  }, [initialData, reset, defaults]);
 
   const selectedType = useWatch({
     control,
