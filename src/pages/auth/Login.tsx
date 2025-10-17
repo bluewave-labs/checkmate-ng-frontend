@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { usePost } from "@/hooks/UseApi";
 import { useNavigate } from "react-router";
 import { useTheme } from "@mui/material/styles";
-import { useAppDispatch } from "@/hooks/AppHooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/AppHooks";
 import { useTranslation } from "react-i18next";
 import {
   setAuthenticated,
@@ -30,6 +30,7 @@ const Login = () => {
   const theme = useTheme();
   const { post, loading } = usePost<FormData, ApiResponse>();
   const navigate = useNavigate();
+  const selectedTeamId = useAppSelector((state) => state.auth.selectedTeamId);
 
   const {
     handleSubmit,
@@ -60,7 +61,9 @@ const Login = () => {
 
     dispatch(setAuthenticated(true));
     dispatch(setUser(user));
-    dispatch(setSelectedTeamId(user.teamIds?.[0] || null));
+    if (!selectedTeamId || !user.teamIds.some((id) => id === selectedTeamId)) {
+      dispatch(setSelectedTeamId(user.teamIds[0]));
+    }
     navigate("/");
   };
 

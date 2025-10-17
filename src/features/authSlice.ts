@@ -37,7 +37,6 @@ export const authSlice = createSlice({
     logout: (state) => {
       state.isAuthenticated = false;
       state.user = null;
-      state.selectedTeamId = null;
     },
   },
 });

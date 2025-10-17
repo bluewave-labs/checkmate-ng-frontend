@@ -16,6 +16,7 @@ export const SelectInput: React.FC<SelectProps> = ({ ...props }) => {
         "&:hover .MuiOutlinedInput-notchedOutline": {
           borderColor: theme.palette.primary.lowContrast,
         },
+        ...props.sx,
       }}
     />
   );
