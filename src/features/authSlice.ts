@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-
+import { setTeamHeader } from "@/utils/ApiClient";
 export interface User {
   sub: string;
   email: string;
@@ -8,6 +8,7 @@ export interface User {
   iat: number;
   orgId: string;
   teamIds: string[];
+  teams: { _id: string; name: string }[];
 }
 interface AuthState {
   isAuthenticated: boolean;
@@ -33,6 +34,7 @@ export const authSlice = createSlice({
     },
     setSelectedTeamId: (state, action: PayloadAction<string | null>) => {
       state.selectedTeamId = action.payload;
+      setTeamHeader(action.payload);
     },
   },
 });

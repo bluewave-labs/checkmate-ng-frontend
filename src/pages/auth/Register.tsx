@@ -4,11 +4,7 @@ import { Button } from "@/components/inputs";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 
-import {
-  setAuthenticated,
-  setUser,
-  setSelectedTeamId,
-} from "@/features/authSlice";
+import { setAuthenticated } from "@/features/authSlice";
 import { useAppDispatch } from "@/hooks/AppHooks";
 import type { ApiResponse } from "@/hooks/UseApi";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -44,6 +40,7 @@ const Register = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const { post, loading, error } = usePost<FormData, ApiResponse>();
+
   const dispatch = useAppDispatch();
 
   const {
@@ -60,16 +57,13 @@ const Register = () => {
 
   const onSubmit = async (data: FormData) => {
     const result = await post("/auth/register", data);
-    if (result) {
-      const user = result.data;
-      dispatch(setAuthenticated(true));
-      dispatch(setUser(user));
-      dispatch(setSelectedTeamId(user.teamIds?.[0] || null));
-      setTeamHeader(user.teamIds?.[0] || null);
-      navigate("/");
-    } else {
+
+    if (!result) {
       dispatch(setAuthenticated(false));
+      navigate("/login");
     }
+
+    const user = result?.data;
   };
 
   return (

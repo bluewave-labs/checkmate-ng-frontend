@@ -145,7 +145,7 @@ export const MonitorTable = ({
       headers={headers}
       data={monitors}
       onRowClick={(row) => {
-        navigate(row._id);
+        navigate(`/uptime/${row._id}`);
       }}
     />
   );

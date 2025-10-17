@@ -3,7 +3,7 @@ import useSWR from "swr";
 import type { SWRConfiguration } from "swr";
 import type { AxiosRequestConfig } from "axios";
 import { get, post, patch } from "@/utils/ApiClient";
-
+import { useAppSelector } from "@/hooks/AppHooks";
 export type ApiResponse = {
   message: string;
   data: any;
@@ -17,11 +17,23 @@ const fetcher = async <T,>(url: string, config?: AxiosRequestConfig) => {
 export const useGet = <T,>(
   url: string,
   axiosConfig?: AxiosRequestConfig,
-  swrConfig?: SWRConfiguration<T, Error>
+  swrConfig?: SWRConfiguration<T, Error>,
+  keyOnTeamId: boolean = false
 ) => {
+  const currentTeamId = useAppSelector((state) => state.auth.selectedTeamId);
+  console.log(currentTeamId);
   const { data, error, isLoading, isValidating, mutate } = useSWR<T>(
-    url,
-    (url) => fetcher<T>(url, axiosConfig),
+    keyOnTeamId && currentTeamId ? [url, currentTeamId] : url,
+    (key) => {
+      const targetUrl = Array.isArray(key) ? key[0] : key;
+      return fetcher<T>(targetUrl, {
+        ...axiosConfig,
+        headers: {
+          ...axiosConfig?.headers,
+          ...(currentTeamId ? { "x-team-id": currentTeamId } : {}),
+        },
+      });
+    },
     swrConfig
   );
 

@@ -24,7 +24,7 @@ export const LanguageSelector = () => {
     vi: "vn",
   };
 
-  const handleChange = (event: SelectChangeEvent<string>) => {
+  const handleChange = (event: any) => {
     const newLang = event.target.value;
     dispatch(setLanguage(newLang));
   };

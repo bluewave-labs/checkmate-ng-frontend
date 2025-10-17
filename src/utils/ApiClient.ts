@@ -8,11 +8,11 @@ const api = axios.create({
 });
 
 export const setTeamHeader = (teamId: string | null) => {
-  if (teamId) {
-    api.defaults.headers.common["x-team-id"] = teamId;
-  } else {
-    delete api.defaults.headers.common["x-team-id"];
-  }
+  // if (teamId) {
+  //   api.defaults.headers.common["x-team-id"] = teamId;
+  // } else {
+  //   delete api.defaults.headers.common["x-team-id"];
+  // }
 };
 
 export const get = <T>(

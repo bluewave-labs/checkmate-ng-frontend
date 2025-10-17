@@ -7,16 +7,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { usePost } from "@/hooks/UseApi";
 import { useNavigate } from "react-router";
 import { useTheme } from "@mui/material/styles";
-import { useAppDispatch, useAppSelector } from "@/hooks/AppHooks";
-import { setTeamHeader } from "@/utils/ApiClient";
+import { useAppDispatch } from "@/hooks/AppHooks";
 import { useTranslation } from "react-i18next";
 import {
   setAuthenticated,
-  setSelectedTeamId,
   setUser,
+  setSelectedTeamId,
 } from "@/features/authSlice";
-import { set, z } from "zod";
+import { z } from "zod";
 import { useForm, Controller } from "react-hook-form";
+import { setTeamHeader } from "@/utils/ApiClient";
 
 const schema = z.object({
   email: z.email("Invalid email address"),
@@ -47,16 +47,23 @@ const Login = () => {
   const onSubmit = async (data: FormData) => {
     const result = await post("/auth/login", data);
 
-    if (result) {
-      const user = result.data;
-      dispatch(setAuthenticated(true));
-      dispatch(setUser(user));
-      dispatch(setSelectedTeamId(user.teamIds?.[0] || null));
-      setTeamHeader(user.teamIds?.[0] || null);
-      navigate("/");
-    } else {
+    if (!result) {
       dispatch(setAuthenticated(false));
+      navigate("/login");
     }
+
+    const user = result?.data || null;
+    if (!user) {
+      dispatch(setAuthenticated(false));
+      navigate("/login");
+      return;
+    }
+
+    dispatch(setAuthenticated(true));
+    dispatch(setUser(user));
+    dispatch(setSelectedTeamId(user.teamIds?.[0] || null));
+    setTeamHeader(user.teamIds?.[0] || null);
+    navigate("/");
   };
 
   return (

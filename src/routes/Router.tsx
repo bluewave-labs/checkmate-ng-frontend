@@ -13,7 +13,7 @@ const Router = () => {
       <Route path="login" element={<AuthLogin />} />
       <Route path="register" element={<AuthRegister />} />
       <Route path="/" element={<RootLayout />}>
-        <Route index element={<Navigate to="/uptime" replace />} />
+        <Route index element={<UptimeMonitorsPage />} />
         <Route
           path="uptime"
           element={
