@@ -4,10 +4,15 @@ import type { SWRConfiguration } from "swr";
 import type { AxiosRequestConfig } from "axios";
 import { get, post, patch } from "@/utils/ApiClient";
 import { useAppSelector } from "@/hooks/AppHooks";
+
 export type ApiResponse = {
   message: string;
   data: any;
 };
+
+export interface IExtraConfig {
+  useTeamIdAsKey?: boolean;
+}
 
 // Generic fetcher for GET requests
 const fetcher = async <T,>(url: string, config?: AxiosRequestConfig) => {
@@ -18,22 +23,26 @@ export const useGet = <T,>(
   url: string,
   axiosConfig?: AxiosRequestConfig,
   swrConfig?: SWRConfiguration<T, Error>,
-  keyOnTeamId: boolean = false
+  extraConfig?: IExtraConfig
 ) => {
   const currentTeamId = useAppSelector((state) => state.auth.selectedTeamId);
-  console.log(currentTeamId);
+
   const { data, error, isLoading, isValidating, mutate } = useSWR<T>(
-    keyOnTeamId && currentTeamId ? [url, currentTeamId] : url,
+    // Key
+    extraConfig?.useTeamIdAsKey && currentTeamId ? [url, currentTeamId] : url,
+    // Fetcher
     (key) => {
+      // Fetcher receives the key as an argument
       const targetUrl = Array.isArray(key) ? key[0] : key;
       return fetcher<T>(targetUrl, {
         ...axiosConfig,
         headers: {
           ...axiosConfig?.headers,
-          ...(currentTeamId ? { "x-team-id": currentTeamId } : {}),
+          "x-team-id": currentTeamId,
         },
       });
     },
+    // Config
     swrConfig
   );
 

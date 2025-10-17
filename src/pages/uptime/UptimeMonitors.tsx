@@ -17,7 +17,6 @@ import { useMediaQuery } from "@mui/material";
 const GLOBAL_REFRESH = import.meta.env.VITE_APP_GLOBAL_REFRESH;
 
 const UptimeMonitors = () => {
-  console.log("thing");
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -30,7 +29,9 @@ const UptimeMonitors = () => {
         keepPreviousData: true,
         dedupingInterval: 0,
       },
-      true
+      {
+        useTeamIdAsKey: true,
+      }
     );
   const monitors: IMonitor[] = response?.data ?? ([] as IMonitor[]);
 

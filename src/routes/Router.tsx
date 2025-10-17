@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router";
+import { Routes, Route } from "react-router";
 import AuthLogin from "@/pages/auth/Login";
 import AuthRegister from "@/pages/auth/Register";
 import UptimeMonitorsPage from "@/pages/uptime/UptimeMonitors";
@@ -12,16 +12,16 @@ const Router = () => {
     <Routes>
       <Route path="login" element={<AuthLogin />} />
       <Route path="register" element={<AuthRegister />} />
-      <Route path="/" element={<RootLayout />}>
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <RootLayout />
+          </ProtectedRoute>
+        }
+      >
         <Route index element={<UptimeMonitorsPage />} />
-        <Route
-          path="uptime"
-          element={
-            <ProtectedRoute>
-              <UptimeMonitorsPage />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="uptime" element={<UptimeMonitorsPage />} />
         <Route path="uptime/:id" element={<UptimeDetailsPage />} />
         <Route path="uptime/create" element={<UptimeCreatePage />} />
       </Route>

@@ -1,36 +1,18 @@
-import { useNavigate } from "react-router";
-import { useGet } from "@/hooks/UseApi";
-import type { ApiResponse } from "@/hooks/UseApi";
-import { setUser, setSelectedTeamId } from "@/features/authSlice";
-import { useAppDispatch } from "@/hooks/AppHooks";
+import { useAppSelector } from "@/hooks/AppHooks";
+import { Navigate } from "react-router";
 
 export const ProtectedRoute: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
-  // const navigate = useNavigate();
-  // const dispatch = useAppDispatch();
-  // const { response, isValidating, error } = useGet<ApiResponse>(
-  //   "/auth/me",
-  //   {},
-  //   {
-  //     shouldRetryOnError: false,
-  //     revalidateOnFocus: false,
-  //     dedupingInterval: 600000,
-  //   }
-  // );
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
-  // if (isValidating) {
-  //   return null;
-  // }
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
 
-  // if (error) {
-  //   navigate("/login");
-  //   return null;
-  // }
+  if (!isAuthenticated) {
+    return null;
+  }
 
-  // if (response && response.message === "OK") {
-  //   dispatch(setUser(response.data));
-  //   dispatch(setSelectedTeamId(response.data.teamIds?.[0] || null));
-  // }
   return <>{children}</>;
 };

@@ -4,7 +4,11 @@ import { Button } from "@/components/inputs";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 
-import { setAuthenticated } from "@/features/authSlice";
+import {
+  setAuthenticated,
+  setUser,
+  setSelectedTeamId,
+} from "@/features/authSlice";
 import { useAppDispatch } from "@/hooks/AppHooks";
 import type { ApiResponse } from "@/hooks/UseApi";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,7 +18,6 @@ import { useForm, Controller } from "react-hook-form";
 import { useTheme } from "@mui/material/styles";
 import { usePost } from "@/hooks/UseApi";
 import { useNavigate } from "react-router";
-import { setTeamHeader } from "@/utils/ApiClient";
 
 const schema = z
   .object({
@@ -64,6 +67,17 @@ const Register = () => {
     }
 
     const user = result?.data;
+
+    if (!user) {
+      dispatch(setAuthenticated(false));
+      navigate("/login");
+      return;
+    }
+
+    dispatch(setAuthenticated(true));
+    dispatch(setUser(user));
+    dispatch(setSelectedTeamId(user.teamIds?.[0] || null));
+    navigate("/");
   };
 
   return (

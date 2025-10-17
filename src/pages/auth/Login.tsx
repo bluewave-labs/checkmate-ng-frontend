@@ -16,7 +16,6 @@ import {
 } from "@/features/authSlice";
 import { z } from "zod";
 import { useForm, Controller } from "react-hook-form";
-import { setTeamHeader } from "@/utils/ApiClient";
 
 const schema = z.object({
   email: z.email("Invalid email address"),
@@ -62,7 +61,6 @@ const Login = () => {
     dispatch(setAuthenticated(true));
     dispatch(setUser(user));
     dispatch(setSelectedTeamId(user.teamIds?.[0] || null));
-    setTeamHeader(user.teamIds?.[0] || null);
     navigate("/");
   };
 
