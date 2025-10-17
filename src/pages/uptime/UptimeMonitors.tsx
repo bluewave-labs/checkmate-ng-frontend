@@ -59,7 +59,7 @@ const UptimeMonitors = () => {
       error={error}
       items={monitors}
       page="uptime"
-      actionLink="create"
+      actionLink="/uptime/create"
     >
       <HeaderCreate isLoading={loading} path="/uptime/create" />
       <Stack direction={isSmall ? "column" : "row"} gap={theme.spacing(8)}>
