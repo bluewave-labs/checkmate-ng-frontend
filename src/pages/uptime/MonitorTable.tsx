@@ -18,9 +18,11 @@ import type { ActionMenuItem } from "@/components/actions-menu";
 export const MonitorTable = ({
   monitors,
   refetch,
+  setSelectedMonitor,
 }: {
   monitors: IMonitor[];
   refetch: Function;
+  setSelectedMonitor: Function;
 }) => {
   const { t } = useTranslation();
   const theme = useTheme();
@@ -83,7 +85,7 @@ export const MonitorTable = ({
         id: 7,
         label: <Typography color={theme.palette.error.main}>Remove</Typography>,
         action: () => {
-          console.log("Open delete");
+          setSelectedMonitor(monitor);
         },
         closeMenu: true,
       },

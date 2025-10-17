@@ -2,7 +2,7 @@ import { useState } from "react";
 import useSWR from "swr";
 import type { SWRConfiguration } from "swr";
 import type { AxiosRequestConfig } from "axios";
-import { get, post, patch } from "@/utils/ApiClient";
+import { get, post, patch, deleteOp } from "@/utils/ApiClient";
 import { useAppSelector } from "@/hooks/AppHooks";
 
 export type ApiResponse = {
@@ -123,4 +123,37 @@ export const usePatch = <B = any, R = any>() => {
   };
 
   return { patch: patchFn, loading, error };
+};
+export const useDelete = <R = any,>() => {
+  const currentTeamId = useAppSelector((state) => state.auth.selectedTeamId);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const deleteFn = async (
+    endpoint: string,
+    config?: AxiosRequestConfig
+  ): Promise<R | null> => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const res = await deleteOp<R>(endpoint, {
+        ...config,
+        headers: {
+          ...config?.headers,
+          "x-team-id": currentTeamId,
+        },
+      });
+      return res.data;
+    } catch (err: any) {
+      const errMsg =
+        err?.response?.data?.msg || err.message || "An error occurred";
+      setError(errMsg);
+      return null;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { deleteFn, loading, error };
 };

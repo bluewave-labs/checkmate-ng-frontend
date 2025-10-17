@@ -10,3 +10,4 @@ export { AutoCompleteInput as AutoComplete } from "./AutoComplete";
 export { RadioInput as Radio, RadioWithDescription } from "./RadioInput";
 export { TeamSwitch } from "./SwitchTeam";
 export { LogoutSwitch } from "./SwitchLogout";
+export { DialogInput as Dialog } from "./Dialog";

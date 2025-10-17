@@ -35,4 +35,9 @@ export const patch = <T>(
   config: AxiosRequestConfig = {}
 ): Promise<AxiosResponse<T>> => api.patch<T>(url, data, config);
 
+export const deleteOp = <T>(
+  url: string,
+  config: AxiosRequestConfig = {}
+): Promise<AxiosResponse<T>> => api.delete<T>(url, config);
+
 export default api;
