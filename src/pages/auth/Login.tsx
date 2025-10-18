@@ -13,6 +13,7 @@ import {
   setAuthenticated,
   setUser,
   setSelectedTeamId,
+  logout,
 } from "@/features/authSlice";
 import { z } from "zod";
 import { useForm, Controller } from "react-hook-form";
@@ -30,7 +31,6 @@ const Login = () => {
   const theme = useTheme();
   const { post, loading } = usePost<FormData, ApiResponse>();
   const navigate = useNavigate();
-  const selectedTeamId = useAppSelector((state) => state.auth.selectedTeamId);
 
   const {
     handleSubmit,
@@ -48,22 +48,19 @@ const Login = () => {
     const result = await post("/auth/login", data);
 
     if (!result) {
-      dispatch(setAuthenticated(false));
+      dispatch(logout());
       navigate("/login");
     }
 
     const user = result?.data || null;
     if (!user) {
-      dispatch(setAuthenticated(false));
       navigate("/login");
       return;
     }
 
     dispatch(setAuthenticated(true));
     dispatch(setUser(user));
-    if (!selectedTeamId || !user.teamIds.some((id) => id === selectedTeamId)) {
-      dispatch(setSelectedTeamId(user.teamIds[0]));
-    }
+    dispatch(setSelectedTeamId(user.teams[0]?._id || null));
     navigate("/");
   };
 

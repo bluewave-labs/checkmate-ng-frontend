@@ -15,25 +15,12 @@ function App() {
       <CssBaseline />
       <I18nLoader />
       <BrowserRouter>
-        <AppWithAuth />
+        <AuthVerifier>
+          <AppRoutes />
+        </AuthVerifier>
       </BrowserRouter>
     </ThemeProvider>
   );
 }
-
-const AppWithAuth = () => {
-  const location = useLocation();
-  const isAuthRoute = ["/login", "/register"].includes(location.pathname);
-
-  if (isAuthRoute) {
-    return <AppRoutes />;
-  }
-
-  return (
-    <AuthVerifier>
-      <AppRoutes />
-    </AuthVerifier>
-  );
-};
 
 export default App;

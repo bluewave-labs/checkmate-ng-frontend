@@ -1,4 +1,3 @@
-import { useGet } from "@/hooks/UseApi";
 import { useAppDispatch } from "@/hooks/AppHooks";
 import type { ApiResponse } from "@/hooks/UseApi";
 import type { IUser } from "@/types/user";
@@ -11,42 +10,42 @@ import {
 import { useEffect, useState } from "react";
 import { useAppSelector } from "@/hooks/AppHooks";
 import type { ReactNode } from "react";
-
+import { get } from "@/utils/ApiClient";
+import { useLocation } from "react-router-dom";
 export const AuthVerifier = ({ children }: { children: ReactNode }) => {
-  const [isVerifying, setIsVerifying] = useState(true);
-  const selectedTeamId = useAppSelector((state) => state.auth.selectedTeamId);
-  const dispatch = useAppDispatch();
+  const location = useLocation();
+  const isAuthRoute = ["/login", "/register"].includes(location.pathname);
 
-  const { response, error, loading, isValidating } =
-    useGet<ApiResponse>("/auth/me");
+  const [isVerifying, setIsVerifying] = useState(true);
+  const dispatch = useAppDispatch();
+  const selectedTeamId = useAppSelector((state) => state.auth.selectedTeamId);
 
   useEffect(() => {
-    if (response) {
-      const user: IUser = response.data;
-
-      dispatch(setAuthenticated(true));
-      dispatch(setUser(response.data));
-
-      if (
-        !selectedTeamId ||
-        !user.teamIds.some((id) => id === selectedTeamId)
-      ) {
-        dispatch(setSelectedTeamId(user.teamIds[0]));
-      }
+    if (isAuthRoute) {
       setIsVerifying(false);
-    } else if (error) {
-      dispatch(logout());
-      setIsVerifying(false);
+      return;
     }
-  }, [response, error, dispatch, selectedTeamId]);
+    const verify = async () => {
+      try {
+        const res = await get<ApiResponse>("/auth/me");
+        const user: IUser = res.data.data;
+        dispatch(setAuthenticated(true));
+        dispatch(setUser(user));
 
-  if (isVerifying) {
-    return null;
-  }
+        if (!selectedTeamId || !user.teamIds.includes(selectedTeamId)) {
+          dispatch(setSelectedTeamId(user.teamIds[0]));
+        }
+      } catch (error) {
+        console.error(error);
+        dispatch(logout());
+      } finally {
+        setIsVerifying(false);
+      }
+    };
+    verify();
+  }, [dispatch]);
 
-  if ((loading || isValidating) && !response && !error) {
-    return null;
-  }
+  if (isVerifying) return null;
 
   return <>{children}</>;
 };

@@ -4,6 +4,7 @@ import { useTheme } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "@/hooks/AppHooks";
+import { mutate } from "swr";
 
 import { CollapseButton } from "@/components/layouts/sidebar/CollapseButton";
 import Stack from "@mui/material/Stack";
@@ -14,6 +15,7 @@ import { getMenu, getBottomMenu } from "@/components/layouts/sidebar/Menu";
 import { NavItem } from "@/components/layouts/sidebar/NavItem";
 import { BottomControls } from "@/components/layouts/sidebar/BottomControls";
 import { setSidebarOpen } from "@/features/uiSlice";
+import { usePost } from "@/hooks/UseApi";
 
 export const COLLAPSED_WIDTH = 64;
 export const EXPANDED_WIDTH = 250;
@@ -28,7 +30,7 @@ export const SideBar = () => {
   const menu = getMenu(t);
   const bottomMenu = getBottomMenu(t);
   const dispatch = useAppDispatch();
-
+  const { post } = usePost();
   useEffect(() => {
     dispatch(setSidebarOpen(!isSmall));
   }, [isSmall, dispatch]);
@@ -88,12 +90,17 @@ export const SideBar = () => {
               item={item}
               sidebarOpen={sideBarOpen}
               selected={selected}
-              onClick={() => {
-                if (item.url) {
-                  window.open(item.url, "_blank", "noreferrer");
-                } else {
-                  navigate(`/${item.path}`);
-                }
+              onClick={async () => {
+                await post("/teams", {
+                  name: Math.random().toString(36).substring(2, 7),
+                  roleId: "68f147153ff26f100d4ccba2",
+                });
+                mutate("/teams");
+                // if (item.url) {
+                //   window.open(item.url, "_blank", "noreferrer");
+                // } else {
+                //   navigate(`/${item.path}`);
+                // }
               }}
             />
           );
