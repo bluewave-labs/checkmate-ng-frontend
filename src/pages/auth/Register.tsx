@@ -76,7 +76,7 @@ const Register = () => {
 
     dispatch(setAuthenticated(true));
     dispatch(setUser(user));
-    dispatch(setSelectedTeamId(user.teamIds?.[0] || null));
+    dispatch(setSelectedTeamId(user.teams[0]?.id || null));
     navigate("/");
   };
 
