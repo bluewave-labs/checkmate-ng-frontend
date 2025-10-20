@@ -4,15 +4,17 @@ import { HeaderCreate } from "@/components/teams/HeaderCreate";
 import { ActionsMenu } from "@/components/actions-menu";
 import { Dialog } from "@/components/inputs";
 
+import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import type { ActionMenuItem } from "@/components/actions-menu";
 import type { Header } from "@/components/design-elements/Table";
 import type { ApiResponse } from "@/hooks/UseApi";
 import { useGet, useDelete } from "@/hooks/UseApi";
 import type { ITeam } from "@/types/team";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const TeamsPage = () => {
+  const navigate = useNavigate();
   const [selectedTeam, setSelectedTeam] = useState<ITeam | null>(null);
   const isDialogOpen = Boolean(selectedTeam);
   const { t } = useTranslation();
@@ -33,6 +35,14 @@ const TeamsPage = () => {
     return [
       {
         id: 1,
+        label: "Configure",
+        action: () => {
+          navigate(`/teams/${team._id}/configure`);
+        },
+        closeMenu: true,
+      },
+      {
+        id: 2,
         label: "Delete",
         action: () => {
           setSelectedTeam(team);
@@ -59,7 +69,7 @@ const TeamsPage = () => {
         },
       },
       {
-        id: "description",
+        id: "actions",
         content: "Team description",
         render: (row) => {
           return <ActionsMenu items={getActions(row)} />;

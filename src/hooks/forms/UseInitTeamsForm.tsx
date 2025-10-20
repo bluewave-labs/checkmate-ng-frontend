@@ -11,6 +11,7 @@ export const useInitForm = ({
     const defaults: z.infer<typeof teamSchema> = {
       name: initialData?.name || "",
       description: initialData?.description || "",
+      roleId: initialData?.roleId || "",
     };
     return { defaults };
   }, [initialData]);

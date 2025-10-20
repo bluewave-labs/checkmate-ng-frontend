@@ -23,7 +23,7 @@ import {
   type SubmitHandler,
 } from "react-hook-form";
 import { useTheme } from "@mui/material/styles";
-import { useInitForm } from "@/hooks/UseInitMonitorFrom";
+import { useInitForm } from "@/hooks/forms/UseInitMonitorFrom";
 
 type FormValues = z.infer<typeof monitorSchema>;
 

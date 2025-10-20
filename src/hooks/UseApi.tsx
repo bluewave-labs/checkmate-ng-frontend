@@ -80,6 +80,7 @@ export const usePost = <B = any, R = any>() => {
     } catch (err: any) {
       const errMsg =
         err?.response?.data?.msg || err.message || "An error occurred";
+      alert(errMsg);
       setError(errMsg);
       return null;
     } finally {
@@ -115,6 +116,7 @@ export const usePatch = <B = any, R = any>() => {
     } catch (err: any) {
       const errMsg =
         err?.response?.data?.msg || err.message || "An error occurred";
+      alert(errMsg);
       setError(errMsg);
       return null;
     } finally {
@@ -124,6 +126,7 @@ export const usePatch = <B = any, R = any>() => {
 
   return { patch: patchFn, loading, error };
 };
+
 export const useDelete = <R = any,>() => {
   const currentTeamId = useAppSelector((state) => state.auth.selectedTeamId);
   const [loading, setLoading] = useState(false);
@@ -148,6 +151,7 @@ export const useDelete = <R = any,>() => {
     } catch (err: any) {
       const errMsg =
         err?.response?.data?.msg || err.message || "An error occurred";
+      alert(errMsg);
       setError(errMsg);
       return null;
     } finally {
