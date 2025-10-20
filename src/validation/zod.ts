@@ -34,3 +34,8 @@ export const monitorSchema = z.object({
   name: z.string().min(1, "Display name is required"),
   interval: durationSchema,
 });
+
+export const teamSchema = z.object({
+  name: z.string().min(1, "Team name is required"),
+  description: z.string().optional(),
+});
