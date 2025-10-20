@@ -18,6 +18,7 @@ import type { TablePaginationProps } from "@mui/material/TablePagination";
 
 import { useTheme } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
+
 export type Header<T> = {
   id: number | string;
   content: React.ReactNode;

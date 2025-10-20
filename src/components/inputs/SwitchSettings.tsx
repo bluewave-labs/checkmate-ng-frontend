@@ -4,10 +4,12 @@ import Typography from "@mui/material/Typography";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import IconButton from "@mui/material/IconButton";
 
+import { useNavigate } from "react-router";
 import { useAppSelector } from "@/hooks/AppHooks";
 import { useState } from "react";
 
 export const SettingsSwitch = () => {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -17,6 +19,11 @@ export const SettingsSwitch = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleClick = (path: string) => {
+    navigate(path);
+    handleClose();
   };
 
   const user = useAppSelector((state) => state.auth.user);
@@ -49,11 +56,11 @@ export const SettingsSwitch = () => {
           horizontal: "right",
         }}
       >
-        <MenuItem>
+        <MenuItem onClick={() => handleClick("settings")}>
           <Typography>General settings</Typography>
         </MenuItem>
         {hasTeamEdit && (
-          <MenuItem>
+          <MenuItem onClick={() => handleClick("teams")}>
             <Typography>Teams</Typography>
           </MenuItem>
         )}

@@ -1,4 +1,4 @@
-import type { Check } from "@/Types/Check";
+import type { Check } from "@/types/check";
 export type MonitorStatus = "up" | "down" | "initializing";
 
 export interface IMonitor {
