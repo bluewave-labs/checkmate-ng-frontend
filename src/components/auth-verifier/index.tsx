@@ -27,13 +27,18 @@ export const AuthVerifier = ({ children }: { children: ReactNode }) => {
     }
     const verify = async () => {
       try {
+        console.log("wtf");
         const res = await get<ApiResponse>("/auth/me");
+        console.log({ res });
         const user: IUser = res.data.data;
         dispatch(setAuthenticated(true));
         dispatch(setUser(user));
 
-        if (!selectedTeamId || !user.teamIds.includes(selectedTeamId)) {
-          dispatch(setSelectedTeamId(user.teamIds[0]));
+        if (
+          !selectedTeamId ||
+          !user.teams.find((t) => t.id === selectedTeamId)
+        ) {
+          dispatch(setSelectedTeamId(user.teams[0].id));
         }
       } catch (error) {
         console.error(error);

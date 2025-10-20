@@ -1,9 +1,15 @@
 export interface IUser {
-  sub: string;
+  id: string;
   email: string;
-  exp: number;
-  iat: number;
-  orgId: string;
-  teamIds: string[];
-  teams: { _id: string; name: string }[];
+  firstName: string;
+  lastName: string;
+  org: {
+    name: string;
+    permissions: string[];
+  };
+  teams: {
+    id: string;
+    name: string;
+    permissions: string;
+  }[];
 }

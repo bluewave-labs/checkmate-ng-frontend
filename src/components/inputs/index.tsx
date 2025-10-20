@@ -4,6 +4,7 @@ export { TextInput } from "./TextInput";
 export { SelectInput as Select } from "./Select";
 export { LanguageSelector } from "./LanguageSelector";
 export { ThemeSwitch } from "./SwitchTheme";
+export { SettingsSwitch } from "./SwitchSettings";
 export { TextLink } from "./TextLink";
 export { CheckboxInput as Checkbox } from "./Checkbox";
 export { AutoCompleteInput as AutoComplete } from "./AutoComplete";

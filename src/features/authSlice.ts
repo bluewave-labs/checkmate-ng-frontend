@@ -1,17 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-export interface User {
-  sub: string;
-  email: string;
-  exp: number;
-  iat: number;
-  orgId: string;
-  teamIds: string[];
-  teams: { _id: string; name: string }[];
-}
+import type { IUser } from "@/types/user";
 interface AuthState {
   isAuthenticated: boolean;
-  user: User | null;
+  user: IUser | null;
   selectedTeamId: string | null;
 }
 
@@ -28,7 +20,7 @@ export const authSlice = createSlice({
     setAuthenticated: (state, action: PayloadAction<boolean>) => {
       state.isAuthenticated = action.payload;
     },
-    setUser: (state, action: PayloadAction<User | null>) => {
+    setUser: (state, action: PayloadAction<IUser | null>) => {
       state.user = action.payload;
     },
     setSelectedTeamId: (state, action: PayloadAction<string | null>) => {
