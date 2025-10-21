@@ -29,18 +29,10 @@ export const SettingsSwitch = () => {
   const user = useAppSelector((state) => state.auth.user);
 
   const orgPermissions = user?.org?.permissions || [];
-  const hasOrgLevelTeamEdit =
+  const hasTeamEdit =
     orgPermissions.includes("teams.*") ||
     orgPermissions.includes("teams.write") ||
     orgPermissions.includes("*");
-
-  const hasTeamLevelTeamEdit = user?.teams.some((team) => {
-    const hasAllTeamPermissions = team?.permissions?.includes("teams.*");
-    const hasTeamEditPermission = team?.permissions?.includes("teams.write");
-    return hasAllTeamPermissions || hasTeamEditPermission;
-  });
-
-  const hasTeamEdit = hasOrgLevelTeamEdit || hasTeamLevelTeamEdit;
 
   return (
     <>

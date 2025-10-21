@@ -91,16 +91,11 @@ export const SideBar = () => {
               sidebarOpen={sideBarOpen}
               selected={selected}
               onClick={async () => {
-                await post("/teams", {
-                  name: Math.random().toString(36).substring(2, 7),
-                  roleId: "68f147153ff26f100d4ccba2",
-                });
-                mutate("/teams");
-                // if (item.url) {
-                //   window.open(item.url, "_blank", "noreferrer");
-                // } else {
-                //   navigate(`/${item.path}`);
-                // }
+                if (item.url) {
+                  window.open(item.url, "_blank", "noreferrer");
+                } else {
+                  navigate(`/${item.path}`);
+                }
               }}
             />
           );

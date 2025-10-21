@@ -13,7 +13,7 @@ import { useGet } from "@/hooks/UseApi";
 import type { ApiResponse } from "@/hooks/UseApi";
 
 export const TeamSwitch = () => {
-  const { response } = useGet<ApiResponse>("/teams");
+  const { response } = useGet<ApiResponse>("/teams/joined");
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

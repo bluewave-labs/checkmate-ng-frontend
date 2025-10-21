@@ -5,6 +5,8 @@ import { z } from "zod";
 import { teamSchema } from "@/validation/zod";
 import { useGet, usePost } from "@/hooks/UseApi";
 import type { ApiResponse } from "@/hooks/UseApi";
+import { mutate } from "swr";
+
 const TeamsCreatePage = () => {
   type FormValues = z.infer<typeof teamSchema>;
   const { response } = useGet<ApiResponse>("/roles?type=team");
@@ -13,6 +15,7 @@ const TeamsCreatePage = () => {
 
   const onSubmit = async (data: FormValues) => {
     await post("/teams", data);
+    mutate("/teams/joined");
     navigate("/teams");
   };
 

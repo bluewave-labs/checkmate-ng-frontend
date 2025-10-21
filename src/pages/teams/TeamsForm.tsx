@@ -47,7 +47,6 @@ export const TeamsForm = ({
 
   useEffect(() => {
     reset(defaults);
-    console.log(initialData, defaults);
   }, [initialData, reset, defaults]);
 
   useEffect(() => {

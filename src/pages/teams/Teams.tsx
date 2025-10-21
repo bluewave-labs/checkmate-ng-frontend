@@ -12,6 +12,7 @@ import type { ApiResponse } from "@/hooks/UseApi";
 import { useGet, useDelete } from "@/hooks/UseApi";
 import type { ITeam } from "@/types/team";
 import { useState } from "react";
+import { mutate } from "swr";
 
 const TeamsPage = () => {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ const TeamsPage = () => {
     await deleteFn(`/teams/${selectedTeam?._id}`);
     setSelectedTeam(null);
     refetch();
+    mutate("/teams/joined");
   };
   const handleCancel = () => {
     setSelectedTeam(null);
@@ -83,8 +85,18 @@ const TeamsPage = () => {
 
   return (
     <BasePage>
-      <HeaderCreate isLoading={loading} path="/teams/create" />
-      <Table headers={headers} data={teams} />
+      <HeaderCreate
+        label="Create new team"
+        isLoading={loading}
+        path="/teams/create"
+      />
+      <Table
+        headers={headers}
+        data={teams}
+        onRowClick={(row) => {
+          navigate(`/teams/${row._id}`);
+        }}
+      />
       <Dialog
         open={isDialogOpen}
         title={t("deleteDialogTitle")}
