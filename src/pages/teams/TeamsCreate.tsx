@@ -12,7 +12,6 @@ const TeamsCreatePage = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data: FormValues) => {
-    console.log(data);
     await post("/teams", data);
     navigate("/teams");
   };
