@@ -46,3 +46,9 @@ export const teamMemberSchema = z.object({
   roleId: z.string().min(1, "Role is required"),
   teamId: z.string().min(1, "Team is required"),
 });
+
+export const inviteSchema = z.object({
+  email: z.email("Invalid email address"),
+  teamId: z.string().min(1, "Team is required"),
+  teamRoleId: z.string().min(1, "Role is required"),
+});

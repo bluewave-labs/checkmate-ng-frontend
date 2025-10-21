@@ -34,6 +34,11 @@ export const SettingsSwitch = () => {
     orgPermissions.includes("teams.write") ||
     orgPermissions.includes("*");
 
+  const hasInvite =
+    orgPermissions.includes("invite.*") ||
+    orgPermissions.includes("invite.write") ||
+    orgPermissions.includes("*");
+
   return (
     <>
       <IconButton onClick={handleOpen}>
@@ -54,6 +59,11 @@ export const SettingsSwitch = () => {
         {hasTeamEdit && (
           <MenuItem onClick={() => handleClick("teams")}>
             <Typography>Teams</Typography>
+          </MenuItem>
+        )}
+        {hasInvite && (
+          <MenuItem onClick={() => handleClick("invite")}>
+            <Typography>Invite</Typography>
           </MenuItem>
         )}
       </Menu>

@@ -12,6 +12,7 @@ import TeamsConfigPage from "@/pages/teams/TeamsConfig";
 import TeamDetailsPage from "@/pages/teams/TeamDetails";
 import TeamMemberConfigPage from "@/pages/teams/TeamMemberConfig";
 import TeamMemberCreatePage from "@/pages/teams/TeamMemberCreate";
+import InvitePage from "@/pages/auth/Invite";
 import RootLayout from "@/components/layouts/RootLayout";
 import { ProtectedRoute } from "@/components/protected-route";
 
@@ -46,6 +47,7 @@ const Router = () => {
           path="team-members/:id/configure"
           element={<TeamMemberConfigPage />}
         />
+        <Route path="invite" element={<InvitePage />} />
       </Route>
     </Routes>
   );
