@@ -13,11 +13,19 @@ import { useGet } from "@/hooks/UseApi";
 import type { ApiResponse } from "@/hooks/UseApi";
 
 export const TeamSwitch = () => {
-  const { response } = useGet<ApiResponse>("/teams/joined");
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const { response } = useGet<ApiResponse>("/teams/joined");
+  const selectedTeamId = useAppSelector((state) => state.auth.selectedTeamId);
+  const teams = response?.data || [];
+
+  // If the selected team is not in the list of joined teams, reset it
+  // This can happen if a user is on a team and it is deleted or they are removed from it
+  if (teams.length > 0 && !teams.find((t: any) => t._id === selectedTeamId)) {
+    dispatch(setSelectedTeamId(teams[0]._id));
+  }
 
   const handleMenu = (teamId: string) => {
     dispatch(setSelectedTeamId(teamId));
@@ -47,7 +55,7 @@ export const TeamSwitch = () => {
           horizontal: "right",
         }}
       >
-        {response?.data.map((t: any) => {
+        {teams.map((t: any) => {
           return (
             <MenuItem key={t._id} onClick={() => handleMenu(t._id)}>
               <Typography>{t.name}</Typography>

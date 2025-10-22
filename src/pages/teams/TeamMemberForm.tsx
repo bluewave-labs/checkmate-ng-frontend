@@ -31,7 +31,7 @@ export const TeamMemberForm = ({
   roles: any[];
   onSubmit: SubmitHandler<FormValues>;
   loading: boolean;
-  deleteButton: React.ReactNode;
+  deleteButton?: React.ReactNode;
 }) => {
   const { t } = useTranslation();
   const theme = useTheme();

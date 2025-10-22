@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router";
 import AuthLogin from "@/pages/auth/Login";
 import AuthRegister from "@/pages/auth/Register";
+import AuthRegisterInvite from "@/pages/auth/RegisterInvite";
 import UptimeMonitorsPage from "@/pages/uptime/UptimeMonitors";
 import UptimeCreatePage from "@/pages/uptime/Create";
 import UptimeDetailsPage from "@/pages/uptime/UptimeDetails";
@@ -20,6 +21,7 @@ const Router = () => {
   return (
     <Routes>
       <Route path="login" element={<AuthLogin />} />
+      <Route path="register/:id" element={<AuthRegisterInvite />} />
       <Route path="register" element={<AuthRegister />} />
       <Route
         path="/"

@@ -14,17 +14,27 @@ import { usePost } from "@/hooks/UseApi";
 import { useNavigate } from "react-router";
 import { z } from "zod";
 import { registerSchema } from "@/validation/zod";
+import { useGet } from "@/hooks/UseApi";
+import { useParams } from "react-router";
 
 type FormData = z.infer<typeof registerSchema>;
-const Register = () => {
+const RegisterInvite = () => {
+  const { id: token } = useParams();
+
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { post, loading, error } = usePost<FormData, ApiResponse>();
-
+  const {
+    response,
+    loading: loadingInvite,
+    error: errorInvite,
+  } = useGet<ApiResponse>(`/invite/${token}`);
+  const { user, invite } = response?.data || {};
+  const hasUser = Boolean(user);
   const dispatch = useAppDispatch();
 
   const onSubmit = async (data: FormData) => {
-    const result = await post("/auth/register", data);
+    const result = await post(`/auth/register/invite/${token}`, data);
 
     if (!result) {
       dispatch(setAuthenticated(false));
@@ -45,16 +55,29 @@ const Register = () => {
     navigate("/");
   };
 
+  if (errorInvite) {
+    return "No invite found";
+  }
+
   return (
     <AuthBasePage
       title={t("auth.registration.welcome")}
       subtitle={t("auth.registration.heading.user")}
     >
       <Stack alignItems={"center"} width={"100%"}>
-        <RegisterForm onSubmit={onSubmit} loading={loading} error={error} />
+        <RegisterForm
+          mode="invite"
+          hasUser={hasUser}
+          initialData={{
+            email: invite?.email || "",
+          }}
+          onSubmit={onSubmit}
+          loading={loading}
+          error={error}
+        />
       </Stack>
     </AuthBasePage>
   );
 };
 
-export default Register;
+export default RegisterInvite;
