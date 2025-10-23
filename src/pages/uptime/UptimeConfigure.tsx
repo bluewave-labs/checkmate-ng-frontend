@@ -21,12 +21,20 @@ const UptimeConfigurePage = () => {
   const monitor = monitorResponse?.data || null;
   const notificationOptions = response?.data ?? [];
 
-  const { patch, loading, error } = usePatch<SubmitValues, ApiResponse>();
+  const { patch, loading, error } = usePatch<
+    Partial<SubmitValues>,
+    ApiResponse
+  >();
 
   const onSubmit = async (data: FormValues) => {
     let interval = humanInterval(data.interval);
     if (!interval) interval = 60000;
-    const submitData = { ...data, interval };
+    const submitData = {
+      name: data.name,
+      n: data.n,
+      notificationChannels: data.notificationChannels,
+      interval,
+    };
     const result = await patch(`/monitors/${id}`, submitData);
     if (result) {
       navigate(`/uptime/${id}`);
