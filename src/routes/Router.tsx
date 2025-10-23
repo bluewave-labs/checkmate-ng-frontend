@@ -3,7 +3,7 @@ import AuthLogin from "@/pages/auth/Login";
 import AuthRegister from "@/pages/auth/Register";
 import AuthRegisterInvite from "@/pages/auth/RegisterInvite";
 import UptimeMonitorsPage from "@/pages/uptime/UptimeMonitors";
-import UptimeCreatePage from "@/pages/uptime/Create";
+import UptimeCreatePage from "@/pages/uptime/UptimeCreate";
 import UptimeDetailsPage from "@/pages/uptime/UptimeDetails";
 import UptimeConfigurePage from "@/pages/uptime/UptimeConfigure";
 import SettingsPage from "@/pages/settings/Settings";

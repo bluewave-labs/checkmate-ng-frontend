@@ -11,7 +11,7 @@ import FormControl from "@mui/material/FormControl";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import { Typography } from "@mui/material";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { monitorSchema } from "@/validation/zod";
 import { z } from "zod";
@@ -28,11 +28,13 @@ import { useInitForm } from "@/hooks/forms/UseInitMonitorFrom";
 type FormValues = z.infer<typeof monitorSchema>;
 
 export const UptimeForm = ({
+  mode = "create",
   initialData,
   onSubmit,
   notificationOptions,
   loading,
 }: {
+  mode?: "create" | "configure";
   initialData?: Partial<FormValues>;
   onSubmit: SubmitHandler<FormValues>;
   notificationOptions: any[];
@@ -41,6 +43,7 @@ export const UptimeForm = ({
   const { t } = useTranslation();
   const theme = useTheme();
   const { defaults } = useInitForm({ initialData: initialData });
+  const urlInputRef = useRef<HTMLInputElement>(null);
 
   const {
     handleSubmit,
@@ -62,58 +65,107 @@ export const UptimeForm = ({
     control,
     name: "type",
   });
+  const url = useWatch({ control, name: "url" });
+
   const notificationChannels = useWatch({
     control,
     name: "notificationChannels",
   });
 
+  useEffect(() => {
+    if (!selectedType) return;
+
+    if (selectedType !== "http" && selectedType !== "https") {
+      setValue("url", "");
+      return;
+    }
+
+    if (selectedType !== "http" && selectedType !== "https") return;
+
+    if (!url) {
+      setValue("url", `${selectedType}://`);
+      return;
+    }
+
+    const hasProtocol = /^(http|https):\/\//i.test(url);
+
+    if (hasProtocol) {
+      const newUrl = url.replace(/^(http|https):\/\//i, `${selectedType}://`);
+      if (newUrl !== url) setValue("url", newUrl);
+    } else {
+      setValue("url", `${selectedType}://${url}`);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedType, setValue]);
+
+  useEffect(() => {
+    const input = urlInputRef.current;
+    if (input) {
+      const len = input.value.length;
+      input.setSelectionRange(len, len);
+    }
+  }, [selectedType]);
+
   return (
     <BasePage component={"form"} onSubmit={handleSubmit(onSubmit)}>
-      <ConfigBox
-        title={t("distributedUptimeCreateChecks")}
-        subtitle={t("distributedUptimeCreateChecksDescription")}
-        rightContent={
-          <Controller
-            name="type"
-            control={control}
-            render={({ field }) => (
-              <FormControl error={!!errors.type}>
-                <RadioGroup {...field} sx={{ gap: theme.spacing(6) }}>
-                  <RadioWithDescription
-                    value="http"
-                    label={"HTTP"}
-                    description={
-                      "Use HTTP to monitor your website or API endpoint."
-                    }
-                  />
-                  <RadioWithDescription
-                    value="https"
-                    label="HTTPS"
-                    description="Use HTTPS to monitor your website or API endpoint.
+      {mode === "create" && (
+        <ConfigBox
+          title={t("distributedUptimeCreateChecks")}
+          subtitle={t("distributedUptimeCreateChecksDescription")}
+          rightContent={
+            <Controller
+              name="type"
+              control={control}
+              render={({ field }) => (
+                <FormControl error={!!errors.type}>
+                  <RadioGroup {...field} sx={{ gap: theme.spacing(6) }}>
+                    <RadioWithDescription
+                      value="http"
+                      label={"HTTP"}
+                      description={
+                        "Use HTTP to monitor your website or API endpoint."
+                      }
+                    />
+                    <RadioWithDescription
+                      value="https"
+                      label="HTTPS"
+                      description="Use HTTPS to monitor your website or API endpoint.
 "
-                  />
-                  <RadioWithDescription
-                    value="ping"
-                    label={t("pingMonitoring")}
-                    description={t("pingMonitoringDescription")}
-                  />
-                </RadioGroup>
-              </FormControl>
-            )}
-          />
-        }
-      />
+                    />
+                    <RadioWithDescription
+                      value="ping"
+                      label={t("pingMonitoring")}
+                      description={t("pingMonitoringDescription")}
+                    />
+                  </RadioGroup>
+                </FormControl>
+              )}
+            />
+          }
+        />
+      )}
       <ConfigBox
         title={t("settingsGeneralSettings")}
         subtitle={t(`uptimeGeneralInstructions.${selectedType}`)}
         rightContent={
           <Stack gap={theme.spacing(8)}>
             <Controller
+              disabled={mode === "configure"}
               name="url"
               control={control}
               render={({ field }) => (
                 <TextInput
+                  inputRef={urlInputRef}
                   {...field}
+                  onFocus={(e) => {
+                    const input = e.target;
+                    setTimeout(() => {
+                      input.setSelectionRange(
+                        input.value.length,
+                        input.value.length
+                      );
+                    }, 0);
+                  }}
                   type="text"
                   label={t("url")}
                   fullWidth
@@ -171,7 +223,7 @@ export const UptimeForm = ({
             <Controller
               name="notificationChannels"
               control={control}
-              defaultValue={[]} // important!
+              defaultValue={[]}
               render={({ field }) => (
                 <AutoComplete
                   multiple

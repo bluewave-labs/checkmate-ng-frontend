@@ -36,6 +36,7 @@ const UptimeConfigurePage = () => {
   };
   return (
     <UptimeForm
+      mode="configure"
       initialData={{
         ...monitor,
       }}
