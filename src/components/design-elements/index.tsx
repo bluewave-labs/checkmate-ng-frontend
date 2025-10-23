@@ -1,5 +1,9 @@
 export { SplitBox as HorizontalSplitBox, ConfigBox } from "./SplitBox";
-export { BasePage, BasePageWithStates } from "./BasePage";
+export {
+  BasePage,
+  MonitorBasePageWithStates,
+  BasePageWithStates,
+} from "./BasePage";
 export {
   BGBox,
   UpStatusBox,
@@ -10,7 +14,12 @@ export { DataTable as Table, Pagination } from "./Table";
 export { GradientBox, StatBox } from "./StatBox";
 export { BaseBox } from "./BaseBox";
 export { StatusLabel } from "./StatusLabel";
-export { BaseFallback, ErrorFallback, EmptyFallback } from "./Fallback";
+export {
+  BaseFallback,
+  ErrorFallback,
+  EmptyFallback,
+  EmptyMonitorFallback,
+} from "./Fallback";
 export { BulletPointCheck } from "./BulletPointCheck";
 export { PulseDot } from "./PulseDot";
 export { Dot } from "./Dot";

@@ -1,5 +1,5 @@
 import {
-  BasePageWithStates,
+  MonitorBasePageWithStates,
   UpStatusBox,
   DownStatusBox,
   PausedStatusBox,
@@ -71,7 +71,7 @@ const UptimeMonitors = () => {
   };
 
   return (
-    <BasePageWithStates
+    <MonitorBasePageWithStates
       loading={isValidating}
       error={error}
       items={monitors}
@@ -96,7 +96,7 @@ const UptimeMonitors = () => {
         onConfirm={handleConfirm}
         onCancel={handleCancel}
       />
-    </BasePageWithStates>
+    </MonitorBasePageWithStates>
   );
 };
 

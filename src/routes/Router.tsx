@@ -14,6 +14,7 @@ import TeamDetailsPage from "@/pages/teams/TeamDetails";
 import TeamMemberConfigPage from "@/pages/teams/TeamMemberConfig";
 import TeamMemberCreatePage from "@/pages/teams/TeamMemberCreate";
 import InvitePage from "@/pages/auth/Invite";
+import NotificationChannelsPage from "@/pages/notification-channels/NotificationChannels";
 import RootLayout from "@/components/layouts/RootLayout";
 import { ProtectedRoute } from "@/components/protected-route";
 
@@ -50,6 +51,10 @@ const Router = () => {
           element={<TeamMemberConfigPage />}
         />
         <Route path="invite" element={<InvitePage />} />
+        <Route
+          path="notification-channels"
+          element={<NotificationChannelsPage />}
+        />
       </Route>
     </Routes>
   );

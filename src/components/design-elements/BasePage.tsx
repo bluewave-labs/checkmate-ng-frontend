@@ -1,5 +1,5 @@
 import Stack from "@mui/material/Stack";
-import { ErrorFallback, EmptyFallback } from "./Fallback";
+import { ErrorFallback, EmptyFallback, EmptyMonitorFallback } from "./Fallback";
 
 import type { StackProps } from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
@@ -26,6 +26,57 @@ interface BasePageWithStatesProps extends StackProps {
   loading: boolean;
   error: any;
   items: any[];
+  bullets: string[];
+  page: string;
+  actionButtonText: string;
+  actionLink: string;
+  children: React.ReactNode;
+}
+
+export const BasePageWithStates: React.FC<BasePageWithStatesProps> = ({
+  loading,
+  error,
+  items,
+  page,
+  bullets,
+  actionButtonText,
+  actionLink,
+  children,
+  ...props
+}: BasePageWithStatesProps) => {
+  const showLoading = loading && (!items || items.length === 0);
+
+  if (showLoading) {
+    return null;
+  }
+
+  if (error) {
+    return (
+      <ErrorFallback
+        title="Something went wrong..."
+        subtitle="Please try again later"
+      />
+    );
+  }
+
+  if (isEmpty(items)) {
+    return (
+      <EmptyFallback
+        bullets={bullets}
+        title={page}
+        actionButtonText={actionButtonText}
+        actionLink={actionLink}
+      />
+    );
+  }
+
+  return <BasePage {...props}>{children}</BasePage>;
+};
+
+interface MonitorBasePageWithStatesProps extends StackProps {
+  loading: boolean;
+  error: any;
+  items: any[];
   page: string;
   actionLink?: string;
   children: React.ReactNode;
@@ -37,7 +88,9 @@ const isEmpty = (items: any[]) => {
   return false;
 };
 
-export const BasePageWithStates: React.FC<BasePageWithStatesProps> = ({
+export const MonitorBasePageWithStates: React.FC<
+  MonitorBasePageWithStatesProps
+> = ({
   loading,
   error,
   items,
@@ -45,7 +98,7 @@ export const BasePageWithStates: React.FC<BasePageWithStatesProps> = ({
   actionLink,
   children,
   ...props
-}: BasePageWithStatesProps) => {
+}: MonitorBasePageWithStatesProps) => {
   const { t } = useTranslation();
 
   const showLoading = loading && (!items || items.length === 0);
@@ -65,7 +118,7 @@ export const BasePageWithStates: React.FC<BasePageWithStatesProps> = ({
 
   if (isEmpty(items)) {
     return (
-      <EmptyFallback
+      <EmptyMonitorFallback
         page={page}
         title={t(`${page}Monitor.fallback.title`)}
         bullets={t(`${page}Monitor.fallback.checks`, { returnObjects: true })}

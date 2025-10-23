@@ -1,4 +1,4 @@
-// import Notifications from "@/assets/icons/notifications.svg?react";
+import Notifications from "@/assets/icons/notifications.svg?react";
 import Monitors from "@/assets/icons/monitors.svg?react";
 // import PageSpeed from "@/assets/icons/page-speed.svg?react";
 // import Integrations from "@/assets/icons/integrations.svg?react";
@@ -17,11 +17,11 @@ export const getMenu = (t: Function) => [
   // { name: t("menu.pagespeed"), path: "pagespeed", icon: <PageSpeed /> },
 
   // { name: t("menu.infrastructure"), path: "infrastructure", icon: <Integrations /> },
-  // {
-  // 	name: t("menu.notifications"),
-  // 	path: "notifications",
-  // 	icon: <Notifications />,
-  // },
+  {
+    name: t("menu.notifications"),
+    path: "notification-channels",
+    icon: <Notifications />,
+  },
   // { name: t("menu.incidents"), path: "incidents", icon: <Incidents /> },
 
   // { name: t("menu.statusPages"), path: "status", icon: <StatusPages /> },

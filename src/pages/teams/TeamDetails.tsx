@@ -3,6 +3,7 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import { Table } from "@/components/design-elements";
 import { HeaderCreate } from "@/components/teams/HeaderCreate";
+import type { Header } from "@/components/design-elements/Table";
 
 import { useNavigate } from "react-router";
 import { useTheme } from "@mui/material/styles";
@@ -10,7 +11,6 @@ import { useParams } from "react-router";
 import { useGet } from "@/hooks/UseApi";
 import type { ApiResponse } from "@/hooks/UseApi";
 import type { ITeamMember } from "@/types/team-member";
-import type { Header } from "@/components/design-elements/Table";
 
 const TeamDetailsPage = () => {
   const theme = useTheme();

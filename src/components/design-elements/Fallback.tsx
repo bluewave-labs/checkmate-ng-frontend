@@ -105,6 +105,53 @@ export const ErrorFallback = ({
 };
 
 export const EmptyFallback = ({
+  title,
+  bullets,
+  actionButtonText,
+  actionLink,
+}: {
+  title: string;
+  bullets: any;
+  actionButtonText: string;
+  actionLink: string;
+}) => {
+  const theme = useTheme();
+  const navigate = useNavigate();
+  return (
+    <BaseFallback>
+      <Stack gap={theme.spacing(10)} zIndex={1} alignItems="center">
+        <Typography component="h1" color={theme.palette.primary.contrastText}>
+          {title}
+        </Typography>
+        <Stack
+          sx={{
+            flexWrap: "wrap",
+            gap: theme.spacing(2),
+            maxWidth: { xs: "90%", md: "80%", lg: "75%" },
+          }}
+        >
+          {bullets?.map((bullet: string) => (
+            <BulletPointCheck
+              text={bullet}
+              key={`${bullet}-${Math.random()}`}
+            />
+          ))}
+        </Stack>
+        <Stack>
+          <Button
+            variant="contained"
+            color="accent"
+            onClick={() => navigate(actionLink)}
+          >
+            {actionButtonText}
+          </Button>
+        </Stack>
+      </Stack>
+    </BaseFallback>
+  );
+};
+
+export const EmptyMonitorFallback = ({
   page,
   title,
   bullets,
