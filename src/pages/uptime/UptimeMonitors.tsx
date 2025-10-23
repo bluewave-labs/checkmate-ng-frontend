@@ -26,7 +26,7 @@ const UptimeMonitors = () => {
   const isSmall = useMediaQuery(theme.breakpoints.down("md"));
   const [selectedMonitor, setSelectedMonitor] = useState<IMonitor | null>(null);
   const isDialogOpen = Boolean(selectedMonitor);
-  const { deleteFn, loading: deleting, error: deleteError } = useDelete();
+  const { deleteFn } = useDelete();
   const { response, loading, isValidating, error, refetch } =
     useGet<ApiResponse>(
       "/monitors?embedChecks=true",

@@ -10,7 +10,7 @@ const TeamsConfigPage = () => {
   type FormValues = Omit<z.infer<typeof teamSchema>, "roleId">;
   const navigate = useNavigate();
   const { response } = useGet<ApiResponse>("/roles?type=team");
-  const { patch, loading, error } = usePatch<FormValues, ApiResponse>();
+  const { patch, loading } = usePatch<FormValues, ApiResponse>();
 
   const { id } = useParams();
   const { response: teamResponse } = useGet<ApiResponse>(`/teams/${id}`);

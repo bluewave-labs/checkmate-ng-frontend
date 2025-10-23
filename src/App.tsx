@@ -5,7 +5,6 @@ import { lightTheme, darkTheme } from "@/theme/theme";
 import { I18nLoader } from "@/components/i18nLoader";
 import { useAppSelector } from "./hooks/AppHooks";
 import { BrowserRouter } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import { AuthVerifier } from "@/components/auth-verifier";
 function App() {
   const mode = useAppSelector((state) => state.ui.mode);

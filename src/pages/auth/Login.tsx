@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { usePost } from "@/hooks/UseApi";
 import { useNavigate } from "react-router";
 import { useTheme } from "@mui/material/styles";
-import { useAppDispatch, useAppSelector } from "@/hooks/AppHooks";
+import { useAppDispatch } from "@/hooks/AppHooks";
 import { useTranslation } from "react-i18next";
 import {
   setAuthenticated,

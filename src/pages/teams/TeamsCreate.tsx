@@ -10,7 +10,7 @@ import { mutate } from "swr";
 const TeamsCreatePage = () => {
   type FormValues = z.infer<typeof teamSchema>;
   const { response } = useGet<ApiResponse>("/roles?type=team");
-  const { post, loading, error } = usePost<FormValues>();
+  const { post, loading } = usePost<FormValues>();
   const navigate = useNavigate();
 
   const onSubmit = async (data: FormValues) => {

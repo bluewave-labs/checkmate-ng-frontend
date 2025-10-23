@@ -9,7 +9,6 @@ import { useTheme } from "@mui/material/styles";
 import { useAppDispatch } from "@/hooks/AppHooks";
 import { useSelector } from "react-redux";
 import { setLanguage } from "@/features/uiSlice";
-import type { SelectChangeEvent } from "@mui/material/Select";
 
 export const LanguageSelector = () => {
   const { i18n } = useTranslation();

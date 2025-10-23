@@ -5,10 +5,10 @@ import { z } from "zod";
 export const useInitForm = ({
   initialData,
 }: {
-  initialData: Partial<z.infer<ReturnType<typeof registerSchema>>> | undefined;
+  initialData: Partial<z.infer<typeof registerSchema>> | undefined;
 }) => {
   return useMemo(() => {
-    const defaults: z.infer<ReturnType<typeof registerSchema>> = {
+    const defaults: z.infer<typeof registerSchema> = {
       email: initialData?.email || "",
       password: initialData?.password || "",
       firstName: initialData?.firstName || "",

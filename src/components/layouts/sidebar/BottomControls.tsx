@@ -7,12 +7,10 @@ import {
 } from "@/components/inputs";
 import { useTheme } from "@mui/material/styles";
 import { useAppSelector } from "@/hooks/AppHooks";
-import { useNavigate } from "react-router";
 
 export const BottomControls = () => {
   const theme = useTheme();
   const sidebarOpen = useAppSelector((state) => state.ui.sidebarOpen);
-  const navigate = useNavigate();
   return (
     <Stack
       alignItems={sidebarOpen ? "flex-start" : "center"}

@@ -24,11 +24,9 @@ const RegisterInvite = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { post, loading, error } = usePost<FormData, ApiResponse>();
-  const {
-    response,
-    loading: loadingInvite,
-    error: errorInvite,
-  } = useGet<ApiResponse>(`/invite/${token}`);
+  const { response, error: errorInvite } = useGet<ApiResponse>(
+    `/invite/${token}`
+  );
   const { user, invite } = response?.data || {};
   const hasUser = Boolean(user);
   const dispatch = useAppDispatch();

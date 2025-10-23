@@ -1,11 +1,10 @@
-import Stack from "@mui/material/Stack";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Typography from "@mui/material/Typography";
 import Groups2OutlinedIcon from "@mui/icons-material/Groups2Outlined";
 import IconButton from "@mui/material/IconButton";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAppSelector, useAppDispatch } from "@/hooks/AppHooks";
 import { setSelectedTeamId } from "@/features/authSlice";
 import { useNavigate } from "react-router";
