@@ -32,7 +32,13 @@ const RegisterInvite = () => {
   const dispatch = useAppDispatch();
 
   const onSubmit = async (data: FormData) => {
-    const result = await post(`/auth/register/invite/${token}`, data);
+    const submit = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      password: data.password,
+      confirmPassword: data.confirmPassword,
+    };
+    const result = await post(`/auth/register/invite/${token}`, submit);
 
     if (!result) {
       dispatch(setAuthenticated(false));
