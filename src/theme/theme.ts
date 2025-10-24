@@ -15,6 +15,15 @@ const shadow =
 
 export const theme = (mode: string, palette: any) =>
   createTheme({
+    breakpoints: {
+      values: {
+        xs: 300,
+        sm: 600,
+        md: 900,
+        lg: 1200,
+        xl: 1536,
+      },
+    },
     spacing: 2,
     palette: {
       mode: mode,

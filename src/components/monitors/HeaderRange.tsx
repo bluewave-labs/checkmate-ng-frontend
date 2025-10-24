@@ -2,7 +2,7 @@ import Stack from "@mui/material/Stack";
 import { ButtonGroup, Button } from "@/components/inputs";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import { useMediaQuery } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
 export const HeaderRange = ({
   range,
   setRange,

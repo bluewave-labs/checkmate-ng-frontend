@@ -12,12 +12,10 @@ import { setSelectedTeamId } from "@/features/authSlice";
 import { useNavigate } from "react-router";
 import { useGet } from "@/hooks/UseApi";
 import type { ApiResponse } from "@/hooks/UseApi";
-import { useTheme } from "@mui/material/styles";
 
 export const TeamSwitch = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const { response } = useGet<ApiResponse>("/teams/joined");
@@ -59,9 +57,6 @@ export const TeamSwitch = () => {
         }}
       >
         {teams.map((t: any) => {
-          if (selectedTeamId === t._id) {
-            console.log("yay");
-          }
           return (
             <MenuItem key={t._id} onClick={() => handleMenu(t._id)}>
               <Stack

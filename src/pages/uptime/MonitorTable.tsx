@@ -6,7 +6,7 @@ import type { Header } from "@/components/design-elements/Table";
 import { ActionsMenu } from "@/components/actions-menu";
 
 import { useTranslation } from "react-i18next";
-import { useMediaQuery } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { usePatch } from "@/hooks/UseApi";

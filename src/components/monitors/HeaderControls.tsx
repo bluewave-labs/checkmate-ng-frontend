@@ -7,7 +7,7 @@ import PlayArrowOutlinedIcon from "@mui/icons-material/PlayArrowOutlined";
 import EmailIcon from "@mui/icons-material/Email";
 import BugReportOutlinedIcon from "@mui/icons-material/BugReportOutlined";
 
-import { useMediaQuery } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router";

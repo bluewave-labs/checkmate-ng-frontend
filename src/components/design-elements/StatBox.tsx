@@ -1,7 +1,7 @@
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
-import { useMediaQuery } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import type { PaletteKey } from "@/theme/theme";
 import { BaseBox } from "@/components/design-elements";
 

@@ -7,7 +7,7 @@ import { BulletPointCheck } from "@/components/design-elements";
 import { Button } from "@/components/inputs";
 
 import { useNavigate } from "react-router";
-import { useMediaQuery } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { useSelector } from "react-redux";
 

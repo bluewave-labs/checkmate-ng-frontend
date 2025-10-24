@@ -14,7 +14,7 @@ import { useTheme } from "@mui/material/styles";
 import { useGet } from "@/hooks/UseApi";
 import type { ApiResponse } from "@/hooks/UseApi";
 import type { IMonitor } from "@/types/monitor";
-import { useMediaQuery } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { useState } from "react";
 import { useDelete } from "@/hooks/UseApi";
 

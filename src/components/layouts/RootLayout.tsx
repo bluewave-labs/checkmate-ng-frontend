@@ -7,7 +7,7 @@ const RootLayout = () => {
   return (
     <Stack direction="row" minHeight="100vh">
       <SideBar />
-      <Stack flex={1} padding={theme.spacing(12)}>
+      <Stack flex={1} padding={theme.spacing(12)} overflow={"hidden"}>
         <Outlet />
       </Stack>
     </Stack>

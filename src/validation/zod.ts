@@ -1,5 +1,6 @@
 import { z } from "zod";
 import humanInterval from "human-interval";
+import { ChannelTypes } from "@/types/notification-channel";
 
 export const registerSchema = z
   .object({
@@ -19,7 +20,7 @@ export const registerSchema = z
   });
 
 const urlRegex =
-  /^(https?:\/\/)?([a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|(\d{1,3}\.){3}\d{1,3})(:\d{1,5})?(\/.*)?$/;
+  /^(https?:\/\/)?(localhost|[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|(\d{1,3}\.){3}\d{1,3})(:\d{1,5})?(\/.*)?$/;
 
 const durationSchema = z
   .string()
@@ -71,3 +72,44 @@ export const inviteSchema = z.object({
   teamRoleId: z.string().min(1, "Role is required"),
   orgRoleId: z.string().optional(),
 });
+
+export const notificationChannelSchema = z
+  .object({
+    name: z.string().min(1, "Channel name is required"),
+    type: z.enum(ChannelTypes, { error: "Invalid channel type" }),
+    config: z.object({
+      url: z
+        .string()
+        .regex(urlRegex, "Invalid URL")
+        .or(z.literal(""))
+        .optional(),
+      emailAddress: z
+        .email("Invalid email address")
+        .or(z.literal(""))
+        .optional(),
+    }),
+  })
+  .superRefine((data, ctx) => {
+    const { type, config } = data;
+    if (!config.url && !config.emailAddress) {
+      ctx.addIssue({
+        code: "custom",
+        message: "Either a URL or an email address must be provided.",
+        path: ["config"],
+      });
+    }
+
+    if (type === "email" && !config.emailAddress) {
+      ctx.addIssue({
+        code: "custom",
+        message: "Email address is required for email-type channels.",
+        path: ["config", "emailAddress"],
+      });
+    } else if (type !== "email" && !config.url) {
+      ctx.addIssue({
+        code: "custom",
+        message: "URL is required for non-email-type channels.",
+        path: ["config", "url"],
+      });
+    }
+  });

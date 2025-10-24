@@ -67,7 +67,7 @@ export const HistogramResponseTime = ({ checks }: { checks: Check[] }) => {
                   width="100%"
                   height={`${check.normalResponseTime}%`}
                   bgcolor={
-                    check.status
+                    check.status === "up"
                       ? theme.palette.success.lowContrast
                       : theme.palette.error.lowContrast
                   }

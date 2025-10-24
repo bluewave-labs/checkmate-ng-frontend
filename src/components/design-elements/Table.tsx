@@ -17,7 +17,7 @@ import TablePagination from "@mui/material/TablePagination";
 import type { TablePaginationProps } from "@mui/material/TablePagination";
 
 import { useTheme } from "@mui/material/styles";
-import { useMediaQuery } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 export type Header<T> = {
   id: number | string;
@@ -44,76 +44,79 @@ export function DataTable<
   }
 >({ headers, data, onRowClick }: DataTableProps<T>) {
   const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down("xs"));
+
   if (data.length === 0 || headers.length === 0) return <div>No data</div>;
   return (
-    <TableContainer component={Paper}>
-      <Table
-        stickyHeader
-        sx={{
-          "&.MuiTable-root  :is(.MuiTableHead-root, .MuiTableBody-root) :is(th, td)":
-            {
-              paddingLeft: theme.spacing(8),
+    <div style={{ display: isSmall ? "grid" : "inherit" }}>
+      <TableContainer component={Paper}>
+        <Table
+          sx={{
+            "&.MuiTable-root  :is(.MuiTableHead-root, .MuiTableBody-root) :is(th, td)":
+              {
+                paddingLeft: theme.spacing(8),
+              },
+            "& :is(th)": {
+              backgroundColor: theme.palette.secondary.main,
+              color: theme.palette.secondary.contrastText,
+              fontWeight: 600,
             },
-          "& :is(th)": {
-            backgroundColor: theme.palette.secondary.main,
-            color: theme.palette.secondary.contrastText,
-            fontWeight: 600,
-          },
-          "& :is(td)": {
-            backgroundColor: theme.palette.primary.main,
-            color: theme.palette.primary.contrastTextSecondary,
-          },
-          "& .MuiTableBody-root .MuiTableRow-root:last-child .MuiTableCell-root":
-            {
-              borderBottom: "none",
+            "& :is(td)": {
+              backgroundColor: theme.palette.primary.main,
+              color: theme.palette.primary.contrastTextSecondary,
             },
-        }}
-      >
-        <TableHead>
-          <TableRow>
-            {headers.map((header, idx) => {
+            "& .MuiTableBody-root .MuiTableRow-root:last-child .MuiTableCell-root":
+              {
+                borderBottom: "none",
+              },
+          }}
+        >
+          <TableHead>
+            <TableRow>
+              {headers.map((header, idx) => {
+                return (
+                  <TableCell
+                    align={idx === 0 ? "left" : "center"}
+                    key={header.id}
+                  >
+                    {header.content}
+                  </TableCell>
+                );
+              })}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.map((row) => {
+              const key = row.id || row._id || Math.random();
+
               return (
-                <TableCell
-                  align={idx === 0 ? "left" : "center"}
-                  key={header.id}
+                <TableRow
+                  key={key}
+                  sx={{ cursor: onRowClick ? "pointer" : "default" }}
+                  onClick={() => (onRowClick ? onRowClick(row) : null)}
                 >
-                  {header.content}
-                </TableCell>
+                  {headers.map((header, index) => {
+                    return (
+                      <TableCell
+                        align={index === 0 ? "left" : "center"}
+                        key={header.id}
+                        onClick={
+                          header.onClick
+                            ? (e) => header.onClick!(e, row)
+                            : undefined
+                        }
+                      >
+                        {header.render(row)}
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
               );
             })}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((row) => {
-            const key = row.id || row._id || Math.random();
-
-            return (
-              <TableRow
-                key={key}
-                sx={{ cursor: onRowClick ? "pointer" : "default" }}
-                onClick={() => (onRowClick ? onRowClick(row) : null)}
-              >
-                {headers.map((header, index) => {
-                  return (
-                    <TableCell
-                      align={index === 0 ? "left" : "center"}
-                      key={header.id}
-                      onClick={
-                        header.onClick
-                          ? (e) => header.onClick!(e, row)
-                          : undefined
-                      }
-                    >
-                      {header.render(row)}
-                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 }
 

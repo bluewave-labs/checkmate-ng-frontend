@@ -10,7 +10,7 @@ import Stack from "@mui/material/Stack";
 import { CheckTable } from "@/pages/uptime/CheckTable";
 
 import type { IMonitor } from "@/types/monitor";
-import { useMediaQuery } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { useParams } from "react-router";
 import { useGet, usePatch, type ApiResponse } from "@/hooks/UseApi";

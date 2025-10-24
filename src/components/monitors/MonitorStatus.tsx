@@ -6,7 +6,7 @@ import { getStatusColor, formatUrl } from "@/utils/MonitorUtils";
 import { useTheme } from "@mui/material/styles";
 import prettyMilliseconds from "pretty-ms";
 import { typographyLevels } from "@/theme/palette";
-import { useMediaQuery } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
 export const MonitorStatus = ({ monitor }: { monitor: IMonitor }) => {
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("md"));

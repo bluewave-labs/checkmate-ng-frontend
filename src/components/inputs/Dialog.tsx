@@ -30,7 +30,7 @@ export const DialogInput = ({
       </DialogContent>
       <DialogActions>
         <Button variant="contained" color={confirmColor} onClick={onConfirm}>
-          Agree
+          Confirm
         </Button>
         <Button variant="contained" color={cancelColor} onClick={onCancel}>
           Cancel
