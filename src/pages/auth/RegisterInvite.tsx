@@ -23,7 +23,7 @@ const RegisterInvite = () => {
 
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { post, loading, error } = usePost<FormData, ApiResponse>();
+  const { post, loading, error } = usePost<Partial<FormData>, ApiResponse>();
   const { response, error: errorInvite } = useGet<ApiResponse>(
     `/invite/${token}`
   );
@@ -33,10 +33,10 @@ const RegisterInvite = () => {
 
   const onSubmit = async (data: FormData) => {
     const submit = {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      password: data.password,
-      confirmPassword: data.confirmPassword,
+      ...(data.firstName && { firstName: data.firstName }),
+      ...(data.lastName && { lastName: data.lastName }),
+      ...(data.password && { password: data.password }),
+      ...(data.confirmPassword && { confirmPassword: data.confirmPassword }),
     };
     const result = await post(`/auth/register/invite/${token}`, submit);
 
