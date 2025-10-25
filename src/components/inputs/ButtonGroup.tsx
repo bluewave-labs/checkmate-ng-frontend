@@ -4,5 +4,11 @@ export const ButtonGroupInput: React.FC<ButtonGroupProps> = ({
   orientation,
   ...props
 }) => {
-  return <ButtonGroup orientation={orientation} {...props} />;
+  return (
+    <ButtonGroup
+      orientation={orientation}
+      {...props}
+      sx={{ height: orientation === "horizontal" ? 34 : "auto" }}
+    />
+  );
 };
