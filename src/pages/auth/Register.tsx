@@ -6,6 +6,7 @@ import {
   setAuthenticated,
   setUser,
   setSelectedTeamId,
+  logout,
 } from "@/features/authSlice";
 import { useAppDispatch } from "@/hooks/AppHooks";
 import type { ApiResponse } from "@/hooks/UseApi";
@@ -19,22 +20,27 @@ type FormData = z.infer<typeof registerSchema>;
 const Register = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { post, loading, error } = usePost<FormData, ApiResponse>();
+  const { post, loading, error } = usePost<Partial<FormData>, ApiResponse>();
 
   const dispatch = useAppDispatch();
 
   const onSubmit = async (data: FormData) => {
-    const result = await post("/auth/register", data);
+    const submit = {
+      email: data.email,
+      password: data.password,
+      firstName: data.firstName,
+      lastName: data.lastName,
+    };
+    const result = await post("/auth/register", submit);
 
     if (!result) {
-      dispatch(setAuthenticated(false));
+      dispatch(logout());
       navigate("/login");
     }
 
-    const user = result?.data;
-
+    const user = result?.data || null;
     if (!user) {
-      dispatch(setAuthenticated(false));
+      dispatch(logout());
       navigate("/login");
       return;
     }

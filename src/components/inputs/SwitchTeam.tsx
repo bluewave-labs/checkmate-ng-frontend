@@ -6,7 +6,7 @@ import CheckOutlined from "@/assets/icons/check-outlined.svg?react";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/hooks/AppHooks";
 import { setSelectedTeamId } from "@/features/authSlice";
 import { useNavigate } from "react-router";
@@ -20,13 +20,16 @@ export const TeamSwitch = () => {
   const open = Boolean(anchorEl);
   const { response } = useGet<ApiResponse>("/teams/joined");
   const selectedTeamId = useAppSelector((state) => state.auth.selectedTeamId);
+  const user = useAppSelector((state) => state.auth.user);
   const teams = response?.data || [];
 
   // If the selected team is not in the list of joined teams, reset it
   // This can happen if a user is on a team and it is deleted or they are removed from it
-  if (teams.length > 0 && !teams.find((t: any) => t._id === selectedTeamId)) {
-    dispatch(setSelectedTeamId(teams[0]._id));
-  }
+  useEffect(() => {
+    if (teams.length > 0 && !teams.find((t: any) => t._id === selectedTeamId)) {
+      dispatch(setSelectedTeamId(user?.teams[0]?.id || null));
+    }
+  }, [teams, selectedTeamId, dispatch]);
 
   const handleMenu = (teamId: string) => {
     dispatch(setSelectedTeamId(teamId));

@@ -54,6 +54,7 @@ const Login = () => {
 
     const user = result?.data || null;
     if (!user) {
+      dispatch(logout());
       navigate("/login");
       return;
     }

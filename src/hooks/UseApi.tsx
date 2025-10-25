@@ -26,7 +26,6 @@ export const useGet = <T,>(
   extraConfig?: IExtraConfig
 ) => {
   const currentTeamId = useAppSelector((state) => state.auth.selectedTeamId);
-
   const { data, error, isLoading, isValidating, mutate } = useSWR<T>(
     // Key
     extraConfig?.useTeamIdAsKey && currentTeamId ? [url, currentTeamId] : url,
