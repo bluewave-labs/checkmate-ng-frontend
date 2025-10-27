@@ -1,11 +1,12 @@
 import Select from "@mui/material/Select";
-import type { SelectProps } from "@mui/material/Select";
 import { useTheme } from "@mui/material/styles";
+import type { SelectProps } from "@mui/material/Select";
 
-export const SelectInput: React.FC<SelectProps> = ({ ...props }) => {
+export const SelectInput = <T,>(props: SelectProps<T>) => {
   const theme = useTheme();
+
   return (
-    <Select
+    <Select<T>
       {...props}
       sx={{
         height: "34px",

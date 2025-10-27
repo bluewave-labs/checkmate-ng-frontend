@@ -22,8 +22,32 @@ export interface CheckTimings {
 
 export interface Check {
   _id: string;
-  monitorId: string;
-  type: string;
+  metadata: {
+    monitorId: string;
+    type: string;
+    teamId: string;
+  };
+  status: string;
+  message: string;
+  responseTime: number;
+  normalResponseTime?: number;
+  httpStatusCode: number;
+  ack: boolean;
+  expiry: string;
+  createdAt: string;
+  updatedAt: string;
+  timings: CheckTimings;
+}
+export interface CheckWithMonitor {
+  _id: string;
+  metadata: {
+    monitorId: {
+      _id: string;
+      name: string;
+    };
+    type: string;
+    teamId: string;
+  };
   status: string;
   message: string;
   responseTime: number;

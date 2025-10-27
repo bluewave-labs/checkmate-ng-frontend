@@ -17,6 +17,7 @@ import InvitePage from "@/pages/auth/Invite";
 import NotificationChannelsPage from "@/pages/notification-channels/NotificationChannels";
 import NotificationChannelsCreatePage from "@/pages/notification-channels/NotificationChannelsCreate";
 import NotificationChannelsConfigPage from "@/pages/notification-channels/NotificationChannelsConfig";
+import IncidentsPage from "@/pages/incidents/IncidentsPage";
 import RootLayout from "@/components/layouts/RootLayout";
 import { ProtectedRoute } from "@/components/protected-route";
 
@@ -65,6 +66,7 @@ const Router = () => {
           path="notification-channels"
           element={<NotificationChannelsPage />}
         />
+        <Route path="incidents" element={<IncidentsPage />} />
       </Route>
     </Routes>
   );

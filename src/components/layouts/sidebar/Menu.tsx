@@ -2,7 +2,7 @@ import Notifications from "@/assets/icons/notifications.svg?react";
 import Monitors from "@/assets/icons/monitors.svg?react";
 // import PageSpeed from "@/assets/icons/page-speed.svg?react";
 // import Integrations from "@/assets/icons/integrations.svg?react";
-// import Incidents from "@/assets/icons/incidents.svg?react";
+import Incidents from "@/assets/icons/incidents.svg?react";
 // import StatusPages from "@/assets/icons/status-pages.svg?react";
 // import Maintenance from "@/assets/icons/maintenance.svg?react";
 // import Logs from "@/assets/icons/logs.svg?react";
@@ -22,7 +22,7 @@ export const getMenu = (t: Function) => [
     path: "notification-channels",
     icon: <Notifications />,
   },
-  // { name: t("menu.incidents"), path: "incidents", icon: <Incidents /> },
+  { name: t("menu.incidents"), path: "incidents", icon: <Incidents /> },
 
   // { name: t("menu.statusPages"), path: "status", icon: <StatusPages /> },
   // { name: t("menu.maintenance"), path: "maintenance", icon: <Maintenance /> },

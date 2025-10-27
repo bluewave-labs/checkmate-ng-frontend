@@ -1,0 +1,72 @@
+import Stack from "@mui/material/Stack";
+import MenuItem from "@mui/material/MenuItem";
+import { Select } from "@/components/inputs";
+import { BasePage } from "@/components/design-elements";
+import { CheckTable } from "@/pages/incidents/CheckTable";
+import { HeaderRange } from "@/components/common/HeaderRange";
+
+import type { IMonitor } from "@/types/monitor";
+import { useState } from "react";
+import { useGet } from "@/hooks/UseApi";
+import type { ApiResponse } from "@/hooks/UseApi";
+import type { SelectChangeEvent } from "@mui/material/Select";
+
+const IncidentsPage = () => {
+  const [selectedMonitorId, setSelectedMonitorId] = useState<string>("all");
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [range, setRange] = useState("2h");
+
+  const { response, isValidating } = useGet<ApiResponse>(
+    `/checks?status=down&page=${page}&rowsPerPage=${rowsPerPage}&range=${range}${
+      selectedMonitorId && selectedMonitorId !== "all"
+        ? `&monitorId=${selectedMonitorId}`
+        : ""
+    }`,
+    {},
+    { keepPreviousData: true },
+    { useTeamIdAsKey: true }
+  );
+
+  const { response: monitorResponse } = useGet<ApiResponse>(
+    `/monitors`,
+    {},
+    { keepPreviousData: true }
+  );
+
+  const monitors: IMonitor[] = monitorResponse?.data || [];
+
+  const checks = response?.data?.checks || [];
+  const count = response?.data?.count || 0;
+
+  return (
+    <BasePage>
+      <Stack direction={"row"} justifyContent={"space-between"}>
+        <Select<string>
+          onChange={(e: SelectChangeEvent<string>) => {
+            setSelectedMonitorId(e.target.value);
+          }}
+          value={selectedMonitorId}
+        >
+          <MenuItem value="all">All monitors</MenuItem>
+          {monitors.map((monitor) => (
+            <MenuItem key={monitor._id} value={monitor._id}>
+              {monitor.name}
+            </MenuItem>
+          ))}
+        </Select>
+        <HeaderRange range={range} setRange={setRange} loading={isValidating} />
+      </Stack>
+      <CheckTable
+        checks={checks}
+        count={count}
+        page={page}
+        setPage={setPage}
+        rowsPerPage={rowsPerPage}
+        setRowsPerPage={setRowsPerPage}
+      />
+    </BasePage>
+  );
+};
+
+export default IncidentsPage;
