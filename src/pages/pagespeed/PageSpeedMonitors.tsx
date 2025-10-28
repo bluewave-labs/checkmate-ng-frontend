@@ -26,10 +26,12 @@ const PageSpeedMonitorsPage = () => {
   const isSmall = useMediaQuery(theme.breakpoints.down("md"));
   const [selectedMonitor, setSelectedMonitor] = useState<IMonitor | null>(null);
   const isDialogOpen = Boolean(selectedMonitor);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const { deleteFn } = useDelete();
   const { response, loading, isValidating, error, refetch } =
     useGet<ApiResponse>(
-      "/monitors?embedChecks=true&type=pagespeed",
+      `/monitors?embedChecks=true&type=pagespeed&page=${page}&rowsPerPage=${rowsPerPage}`,
       {},
       {
         refreshInterval: GLOBAL_REFRESH,
@@ -40,25 +42,11 @@ const PageSpeedMonitorsPage = () => {
         useTeamIdAsKey: true,
       }
     );
-  const monitors: IMonitor[] = response?.data ?? ([] as IMonitor[]);
-
-  const monitorStatuses = monitors.reduce(
-    (acc, monitor) => {
-      if (monitor.status === "up") {
-        acc.up += 1;
-      } else if (monitor.status === "down") {
-        acc.down += 1;
-      } else if (monitor.isActive === false) {
-        acc.paused += 1;
-      }
-      return acc;
-    },
-    {
-      up: 0,
-      down: 0,
-      paused: 0,
-    }
-  );
+  const monitors: IMonitor[] = response?.data?.monitors ?? ([] as IMonitor[]);
+  const count = response?.data?.count || 0;
+  const upCount = response?.data?.upCount || 0;
+  const downCount = response?.data?.downCount || 0;
+  const pausedCount = response?.data?.pausedCount || 0;
 
   const handleConfirm = async () => {
     await deleteFn(`/monitors/${selectedMonitor?._id}`);
@@ -80,14 +68,19 @@ const PageSpeedMonitorsPage = () => {
     >
       <HeaderCreate isLoading={loading} path="/pagespeed/create" />
       <Stack direction={isSmall ? "column" : "row"} gap={theme.spacing(8)}>
-        <UpStatusBox n={monitorStatuses.up} />
-        <DownStatusBox n={monitorStatuses.down} />
-        <PausedStatusBox n={monitorStatuses.paused} />
+        <UpStatusBox n={upCount} />
+        <DownStatusBox n={downCount} />
+        <PausedStatusBox n={pausedCount} />
       </Stack>
       <PageSpeedMonitorTable
         monitors={monitors}
         refetch={refetch}
         setSelectedMonitor={setSelectedMonitor}
+        count={count}
+        page={page}
+        setPage={setPage}
+        rowsPerPage={rowsPerPage}
+        setRowsPerPage={setRowsPerPage}
       />
       <Dialog
         open={isDialogOpen}

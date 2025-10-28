@@ -1,6 +1,7 @@
 import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { Table, StatusLabel } from "@/components/design-elements";
+import { Table, Pagination, StatusLabel } from "@/components/design-elements";
 import { HistogramResponseTime } from "@/components/monitors";
 import type { Header } from "@/components/design-elements/Table";
 import { ActionsMenu } from "@/components/actions-menu";
@@ -19,10 +20,20 @@ export const MonitorTable = ({
   monitors,
   refetch,
   setSelectedMonitor,
+  count,
+  page,
+  setPage,
+  rowsPerPage,
+  setRowsPerPage,
 }: {
   monitors: IMonitor[];
   refetch: Function;
   setSelectedMonitor: Function;
+  count: number;
+  page: number;
+  setPage: (page: number) => void;
+  rowsPerPage: number;
+  setRowsPerPage: (rowsPerPage: number) => void;
 }) => {
   const { t } = useTranslation();
   const theme = useTheme();
@@ -33,6 +44,21 @@ export const MonitorTable = ({
     // loading: isPatching,
     // error: postError,
   } = usePatch<ApiResponse>();
+
+  const handlePageChange = (
+    _e: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number
+  ) => {
+    setPage(newPage);
+  };
+
+  const handleRowsPerPageChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const value = Number(e.target.value);
+    setPage(0);
+    setRowsPerPage(value);
+  };
 
   const getActions = (monitor: IMonitor): ActionMenuItem[] => {
     return [
@@ -143,12 +169,22 @@ export const MonitorTable = ({
     headers = headers.filter((h) => h.id !== "histogram");
   }
   return (
-    <Table
-      headers={headers}
-      data={monitors}
-      onRowClick={(row) => {
-        navigate(`/uptime/${row._id}`);
-      }}
-    />
+    <Box>
+      <Table
+        headers={headers}
+        data={monitors}
+        onRowClick={(row) => {
+          navigate(`/uptime/${row._id}`);
+        }}
+      />
+      <Pagination
+        component="div"
+        count={count}
+        page={page}
+        rowsPerPage={rowsPerPage}
+        onPageChange={handlePageChange}
+        onRowsPerPageChange={handleRowsPerPageChange}
+      />
+    </Box>
   );
 };

@@ -14,7 +14,6 @@ import { useNavigate } from "react-router";
 import type { IMonitor } from "@/types/monitor";
 import { usePost } from "@/hooks/UseApi";
 import type { ApiResponse } from "@/hooks/UseApi";
-import { is } from "zod/v4/locales";
 
 export const HeaderControls = ({
   monitor,
