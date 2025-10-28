@@ -1,13 +1,13 @@
-import type { Check } from "@/types/check";
+import type { ICheck } from "@/types/check";
 export type MonitorStatus = "up" | "down" | "initializing";
 
 export interface IMonitor {
-  checks: Check[];
+  checks: ICheck[];
   createdAt: string;
   createdBy: string;
   interval: number;
   isActive: boolean;
-  latestChecks: Check[];
+  latestChecks: ICheck[];
   n: number;
   name: string;
   status: MonitorStatus;

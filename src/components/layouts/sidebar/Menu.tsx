@@ -1,6 +1,6 @@
 import Notifications from "@/assets/icons/notifications.svg?react";
 import Monitors from "@/assets/icons/monitors.svg?react";
-// import PageSpeed from "@/assets/icons/page-speed.svg?react";
+import PageSpeed from "@/assets/icons/page-speed.svg?react";
 // import Integrations from "@/assets/icons/integrations.svg?react";
 import Incidents from "@/assets/icons/incidents.svg?react";
 // import StatusPages from "@/assets/icons/status-pages.svg?react";
@@ -14,7 +14,7 @@ import ChangeLog from "@/assets/icons/changeLog.svg?react";
 
 export const getMenu = (t: Function) => [
   { name: t("menu.uptime"), path: "uptime", icon: <Monitors /> },
-  // { name: t("menu.pagespeed"), path: "pagespeed", icon: <PageSpeed /> },
+  { name: t("menu.pagespeed"), path: "pagespeed", icon: <PageSpeed /> },
 
   // { name: t("menu.infrastructure"), path: "infrastructure", icon: <Integrations /> },
   {

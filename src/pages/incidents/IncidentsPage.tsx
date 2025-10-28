@@ -5,14 +5,17 @@ import { BasePage } from "@/components/design-elements";
 import { CheckTable } from "@/pages/incidents/CheckTable";
 import { HeaderRange } from "@/components/common/HeaderRange";
 
+import { useParams } from "react-router";
 import type { IMonitor } from "@/types/monitor";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useGet } from "@/hooks/UseApi";
 import type { ApiResponse } from "@/hooks/UseApi";
 import type { SelectChangeEvent } from "@mui/material/Select";
 
 const IncidentsPage = () => {
   const [selectedMonitorId, setSelectedMonitorId] = useState<string>("all");
+  const { id } = useParams<{ id: string }>();
+
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [range, setRange] = useState("2h");
@@ -38,6 +41,12 @@ const IncidentsPage = () => {
 
   const checks = response?.data?.checks || [];
   const count = response?.data?.count || 0;
+
+  useEffect(() => {
+    if (id) {
+      setSelectedMonitorId(id);
+    }
+  }, [id]);
 
   return (
     <BasePage>

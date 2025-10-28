@@ -2,7 +2,7 @@ import { Table, Pagination, StatusLabel } from "@/components/design-elements";
 import Box from "@mui/material/Box";
 
 import type { Header } from "@/components/design-elements/Table";
-import type { Check } from "@/types/check";
+import type { ICheck } from "@/types/check";
 import type { ApiResponse } from "@/hooks/UseApi";
 import type { MonitorStatus } from "@/types/monitor";
 
@@ -13,7 +13,7 @@ import { formatDateWithTz } from "@/utils/TimeUtils";
 import { useSelector } from "react-redux";
 
 const getHeaders = (t: Function, uiTimezone: string) => {
-  const headers: Header<Check>[] = [
+  const headers: Header<ICheck>[] = [
     {
       id: "status",
       content: t("status"),

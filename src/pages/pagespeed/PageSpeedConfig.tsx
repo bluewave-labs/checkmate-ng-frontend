@@ -1,6 +1,6 @@
-import { monitorSchema } from "@/validation/zod";
+import { monitorSchemaPageSpeed } from "@/validation/zod";
 import { useGet, usePatch } from "@/hooks/UseApi";
-import { UptimeForm } from "@/pages/uptime/UptimeForm";
+import { PageSpeedForm } from "@/pages/pagespeed/PageSpeedForm";
 
 import { useParams } from "react-router";
 import type { ApiResponse } from "@/hooks/UseApi";
@@ -8,8 +8,8 @@ import humanInterval from "human-interval";
 import { z } from "zod";
 import { useNavigate } from "react-router";
 
-const UptimeConfigurePage = () => {
-  type FormValues = z.infer<typeof monitorSchema>;
+const PageSpeedConfigurePage = () => {
+  type FormValues = z.infer<typeof monitorSchemaPageSpeed>;
   type SubmitValues = Omit<FormValues, "interval"> & {
     interval: number | undefined;
   };
@@ -28,23 +28,23 @@ const UptimeConfigurePage = () => {
 
   const onSubmit = async (data: FormValues) => {
     let interval = humanInterval(data.interval);
-    if (!interval) interval = 60000;
+    if (!interval) interval = 180000;
     const submitData = {
       type: data.type,
       name: data.name,
-      n: data.n,
       notificationChannels: data.notificationChannels,
       interval,
     };
+    console.log(submitData);
     const result = await patch(`/monitors/${id}`, submitData);
     if (result) {
-      navigate(`/uptime/${id}`);
+      navigate(`/pagespeed/${id}`);
     } else {
       console.error(error);
     }
   };
   return (
-    <UptimeForm
+    <PageSpeedForm
       mode="configure"
       initialData={{
         ...monitor,
@@ -56,4 +56,4 @@ const UptimeConfigurePage = () => {
   );
 };
 
-export default UptimeConfigurePage;
+export default PageSpeedConfigurePage;

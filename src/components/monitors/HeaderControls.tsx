@@ -48,7 +48,12 @@ export const HeaderControls = ({
           <Button startIcon={<EmailIcon />}>
             {t("sendTestNotifications")}
           </Button>
-          <Button startIcon={<BugReportOutlinedIcon />}>
+          <Button
+            startIcon={<BugReportOutlinedIcon />}
+            onClick={() => {
+              navigate(`/incidents/${monitor._id}`);
+            }}
+          >
             {t("menu.incidents")}
           </Button>
           <Button

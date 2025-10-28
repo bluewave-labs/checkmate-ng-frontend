@@ -1,4 +1,4 @@
-import { BaseChart } from "./HistogramStatus";
+import { BaseChart } from "@/components/monitors/Chart";
 import { BaseBox } from "@/components/design-elements";
 import ResponseTimeIcon from "@/assets/icons/response-time-icon.svg?react";
 import { normalizeResponseTimes } from "@/utils/DataUtils";

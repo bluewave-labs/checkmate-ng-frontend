@@ -1,11 +1,11 @@
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
-import type { Check } from "@/types/check";
+import type { ICheck } from "@/types/check";
 import { HistogramResponseTimeTooltip } from "@/components/monitors/HistogramResponseTimeTooltip";
 import { normalizeResponseTimes } from "@/utils/DataUtils";
 
-export const HistogramResponseTime = ({ checks }: { checks: Check[] }) => {
+export const HistogramResponseTime = ({ checks }: { checks: ICheck[] }) => {
   const theme = useTheme();
   const normalChecks = normalizeResponseTimes(checks, "responseTime");
   let data = Array<any>();

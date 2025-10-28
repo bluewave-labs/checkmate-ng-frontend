@@ -8,7 +8,10 @@ export const ButtonGroupInput: React.FC<ButtonGroupProps> = ({
     <ButtonGroup
       orientation={orientation}
       {...props}
-      sx={{ height: orientation === "horizontal" ? 34 : "auto" }}
+      sx={{
+        height: orientation === "horizontal" ? 34 : "auto",
+        boxShadow: "none",
+      }}
     />
   );
 };

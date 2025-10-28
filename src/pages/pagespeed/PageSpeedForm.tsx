@@ -2,18 +2,18 @@ import Stack from "@mui/material/Stack";
 import {
   TextInput,
   Button,
-  AutoComplete,
   RadioWithDescription,
+  AutoComplete,
 } from "@/components/inputs";
-import { ConfigBox, BasePage } from "@/components/design-elements";
 import RadioGroup from "@mui/material/RadioGroup";
-import FormControl from "@mui/material/FormControl";
+
+import { ConfigBox, BasePage } from "@/components/design-elements";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import { Typography } from "@mui/material";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { monitorSchema } from "@/validation/zod";
+import { monitorSchemaPageSpeed } from "@/validation/zod";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -23,11 +23,11 @@ import {
   type SubmitHandler,
 } from "react-hook-form";
 import { useTheme } from "@mui/material/styles";
-import { useInitForm } from "@/hooks/forms/UseInitMonitorFrom";
+import { useInitForm } from "@/hooks/forms/UseInitPageSpeedForm";
 
-type FormValues = z.infer<typeof monitorSchema>;
+type FormValues = z.infer<typeof monitorSchemaPageSpeed>;
 
-export const UptimeForm = ({
+export const PageSpeedForm = ({
   mode = "create",
   initialData,
   onSubmit,
@@ -44,6 +44,7 @@ export const UptimeForm = ({
   const theme = useTheme();
   const { defaults } = useInitForm({ initialData: initialData });
   const urlInputRef = useRef<HTMLInputElement>(null);
+  const [selectedProtocol, setSelectedProtocol] = useState<string>("https");
 
   const {
     handleSubmit,
@@ -52,51 +53,33 @@ export const UptimeForm = ({
     reset,
     formState: { errors },
   } = useForm<FormValues>({
-    resolver: zodResolver(monitorSchema) as any,
+    resolver: zodResolver(monitorSchemaPageSpeed) as any,
     defaultValues: defaults,
     mode: "onChange",
   });
+
+  const url = useWatch({ control, name: "url" });
 
   useEffect(() => {
     reset(defaults);
   }, [initialData, reset, defaults]);
 
-  const selectedType = useWatch({
-    control,
-    name: "type",
-  });
-  const url = useWatch({ control, name: "url" });
-
-  const notificationChannels = useWatch({
-    control,
-    name: "notificationChannels",
-  });
-
   useEffect(() => {
-    if (!selectedType) return;
-
-    if (selectedType !== "http" && selectedType !== "https") {
-      setValue("url", "");
-      return;
-    }
-
-    if (selectedType !== "http" && selectedType !== "https") return;
-
     if (!url) {
-      setValue("url", `${selectedType}://`);
-      return;
+      setValue("url", `${selectedProtocol}://`);
     }
 
     const hasProtocol = /^(http|https):\/\//i.test(url);
-
     if (hasProtocol) {
-      const newUrl = url.replace(/^(http|https):\/\//i, `${selectedType}://`);
+      const newUrl = url.replace(
+        /^(http|https):\/\//i,
+        `${selectedProtocol}://`
+      );
       if (newUrl !== url) setValue("url", newUrl);
     } else {
-      setValue("url", `${selectedType}://${url}`);
+      setValue("url", `${selectedProtocol}://${url}`);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedType, setValue]);
+  }, [selectedProtocol, setValue, url]);
 
   useEffect(() => {
     const input = urlInputRef.current;
@@ -104,51 +87,38 @@ export const UptimeForm = ({
       const len = input.value.length;
       input.setSelectionRange(len, len);
     }
-  }, [selectedType]);
+  }, [selectedProtocol]);
+
+  const notificationChannels = useWatch({
+    control,
+    name: "notificationChannels",
+  });
 
   return (
     <BasePage component={"form"} onSubmit={handleSubmit(onSubmit)}>
-      {mode === "create" && (
-        <ConfigBox
-          title={t("distributedUptimeCreateChecks")}
-          subtitle={t("distributedUptimeCreateChecksDescription")}
-          rightContent={
-            <Controller
-              name="type"
-              control={control}
-              render={({ field }) => (
-                <FormControl error={!!errors.type}>
-                  <RadioGroup {...field} sx={{ gap: theme.spacing(6) }}>
-                    <RadioWithDescription
-                      value="https"
-                      label="HTTPS"
-                      description="Use HTTPS to monitor your website or API endpoint.
-"
-                    />
-                    <RadioWithDescription
-                      value="http"
-                      label={"HTTP"}
-                      description={
-                        "Use HTTP to monitor your website or API endpoint."
-                      }
-                    />
-                    <RadioWithDescription
-                      value="ping"
-                      label={t("pingMonitoring")}
-                      description={t("pingMonitoringDescription")}
-                    />
-                  </RadioGroup>
-                </FormControl>
-              )}
-            />
-          }
-        />
-      )}
       <ConfigBox
         title={t("settingsGeneralSettings")}
-        subtitle={t(`uptimeGeneralInstructions.${selectedType}`)}
+        subtitle={t(`pageSpeedConfigureSettingsDescription`)}
         rightContent={
           <Stack gap={theme.spacing(8)}>
+            <RadioGroup
+              value={selectedProtocol}
+              sx={{ gap: theme.spacing(6) }}
+              onChange={(e) => {
+                setSelectedProtocol(e.target.value);
+              }}
+            >
+              <RadioWithDescription
+                value="https"
+                label="HTTPS"
+                description=""
+              />
+              <RadioWithDescription
+                value="http"
+                label={"HTTP"}
+                description={""}
+              />
+            </RadioGroup>
             <Controller
               disabled={mode === "configure"}
               name="url"
@@ -174,6 +144,7 @@ export const UptimeForm = ({
                 />
               )}
             />
+
             <Controller
               name="name"
               control={control}

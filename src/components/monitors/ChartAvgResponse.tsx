@@ -1,4 +1,4 @@
-import { BaseChart } from "./HistogramStatus";
+import { BaseChart } from "@/components/monitors/Chart";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import AverageResponseIcon from "@/assets/icons/average-response-icon.svg?react";

@@ -20,7 +20,29 @@ export interface CheckTimings {
   phases: CheckTimingPhases;
 }
 
-export interface Check {
+export interface ILighthouseAudit {
+  id?: string;
+  title?: string;
+  score?: number | null;
+  displayValue?: string;
+  numericValue?: number;
+  numericUnit?: string;
+}
+
+export interface ICheckLighthouseFields {
+  accessibility: number;
+  bestPractices: number;
+  seo: number;
+  performance: number;
+  audits: {
+    cls: ILighthouseAudit;
+    si: ILighthouseAudit;
+    fcp: ILighthouseAudit;
+    lcp: ILighthouseAudit;
+    tbt: ILighthouseAudit;
+  };
+}
+export interface ICheck {
   _id: string;
   metadata: {
     monitorId: string;
@@ -37,6 +59,7 @@ export interface Check {
   createdAt: string;
   updatedAt: string;
   timings: CheckTimings;
+  lighthouse?: ICheckLighthouseFields;
 }
 export interface CheckWithMonitor {
   _id: string;

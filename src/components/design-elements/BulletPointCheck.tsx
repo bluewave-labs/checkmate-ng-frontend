@@ -25,7 +25,13 @@ export const BulletPointCheck = ({
       gap={theme.spacing(6)}
       alignItems="center"
     >
-      <CheckOutlined />
+      <CheckOutlined
+        height={16}
+        width={16}
+        style={{
+          flexShrink: 0,
+        }}
+      />
       <Typography
         component="span"
         color={

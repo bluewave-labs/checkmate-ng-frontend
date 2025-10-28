@@ -1,4 +1,4 @@
-import { monitorSchema } from "@/validation/zod";
+import { monitorSchemaPageSpeed } from "@/validation/zod";
 import ms from "ms";
 import { useMemo } from "react";
 
@@ -6,10 +6,10 @@ import { z } from "zod";
 export const useInitForm = ({
   initialData,
 }: {
-  initialData: Partial<z.infer<typeof monitorSchema>> | undefined;
+  initialData: Partial<z.infer<typeof monitorSchemaPageSpeed>> | undefined;
 }) => {
   return useMemo(() => {
-    let humanInterval = "1 minute";
+    let humanInterval = "3 minutes";
     if (initialData?.interval) {
       const parsed = Number(initialData.interval);
       if (!isNaN(parsed)) {
@@ -17,8 +17,8 @@ export const useInitForm = ({
       }
     }
 
-    const defaults: z.infer<typeof monitorSchema> = {
-      type: initialData?.type || "https",
+    const defaults: z.infer<typeof monitorSchemaPageSpeed> = {
+      type: "pagespeed",
       url: initialData?.url || "",
       n: initialData?.n || 3,
       notificationChannels: initialData?.notificationChannels || [],

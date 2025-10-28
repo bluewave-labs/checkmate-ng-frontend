@@ -28,6 +28,12 @@ export const getResponseTimeColor = (responseTime: number): PaletteKey => {
   }
 };
 
+export const getPageSpeedPalette = (score: number): PaletteKey => {
+  if (score >= 90) return "success";
+  else if (score >= 50) return "warning";
+  else return "error";
+};
+
 export const formatUrl = (url: string, maxLength: number = 55) => {
   if (!url) return "";
 
