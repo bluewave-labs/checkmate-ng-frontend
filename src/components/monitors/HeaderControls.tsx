@@ -12,6 +12,9 @@ import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router";
 import type { IMonitor } from "@/types/monitor";
+import { usePost } from "@/hooks/UseApi";
+import type { ApiResponse } from "@/hooks/UseApi";
+import { is } from "zod/v4/locales";
 
 export const HeaderControls = ({
   monitor,
@@ -30,7 +33,7 @@ export const HeaderControls = ({
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("md"));
   const navigate = useNavigate();
-
+  const { post, loading: isPosting } = usePost<any, ApiResponse>();
   return (
     <Stack
       direction={isSmall ? "column" : "row"}
@@ -45,7 +48,16 @@ export const HeaderControls = ({
           variant="contained"
           color="secondary"
         >
-          <Button startIcon={<EmailIcon />}>
+          <Button
+            loading={isPosting || isPatching}
+            startIcon={<EmailIcon />}
+            onClick={async () => {
+              const res = await post(
+                `/monitors/${monitor._id}/notifications/test`,
+                {}
+              );
+            }}
+          >
             {t("sendTestNotifications")}
           </Button>
           <Button
@@ -57,7 +69,7 @@ export const HeaderControls = ({
             {t("menu.incidents")}
           </Button>
           <Button
-            loading={isPatching}
+            loading={isPatching || isPosting}
             onClick={async () => {
               await patch(`/monitors/${monitor._id}/active`);
               refetch();
