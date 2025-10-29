@@ -29,7 +29,7 @@ type XTickProps = {
   range: string;
 };
 
-const XTick: React.FC<XTickProps> = ({ x, y, payload, range }) => {
+export const XTick: React.FC<XTickProps> = ({ x, y, payload, range }) => {
   const format = tickDateFormatLookup(range);
   const theme = useTheme();
   const uiTimezone = useSelector((state: any) => state.ui.timezone);

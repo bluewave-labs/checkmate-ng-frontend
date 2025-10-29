@@ -42,6 +42,65 @@ export interface ICheckLighthouseFields {
     tbt: ILighthouseAudit;
   };
 }
+
+export interface ISystemInfo {
+  cpu: ICpuInfo;
+  memory: IMemoryInfo;
+  disk: IDiskInfo[];
+  host: IHostInfo;
+  net: INetInfo[];
+}
+export interface ICpuInfo {
+  physical_core: number;
+  logical_core: number;
+  frequency: number;
+  current_frequency: number;
+  temperature: number[]; // per-core temps
+  free_percent: number;
+  usage_percent: number;
+}
+
+export interface IMemoryInfo {
+  total_bytes: number;
+  available_bytes: number;
+  used_bytes: number;
+  usage_percent: number;
+}
+
+export interface IHostInfo {
+  os?: string;
+  platform?: string;
+  kernel_version?: string;
+  pretty_name?: string;
+}
+export interface IDiskInfo {
+  device: string;
+  total_bytes: number;
+  free_bytes: number;
+  used_bytes: number;
+  usage_percent: number;
+  total_inodes?: number;
+  free_inodes?: number;
+  used_inodes?: number;
+  inodes_usage_percent?: number;
+  read_bytes?: number;
+  write_bytes?: number;
+  read_time?: number;
+  write_time?: number;
+}
+export interface INetInfo {
+  name: string;
+  bytes_sent: number;
+  bytes_recv: number;
+  packets_sent: number;
+  packets_recv: number;
+  err_in: number;
+  err_out: number;
+  drop_in: number;
+  drop_out: number;
+  fifo_in: number;
+  fifo_out: number;
+}
 export interface ICheck {
   _id: string;
   metadata: {
@@ -60,6 +119,7 @@ export interface ICheck {
   updatedAt: string;
   timings: CheckTimings;
   lighthouse?: ICheckLighthouseFields;
+  system?: ISystemInfo;
 }
 export interface CheckWithMonitor {
   _id: string;
@@ -94,4 +154,15 @@ export interface LatestCheck {
   responseTime: number;
   checkedAt: string;
   _id: string;
+}
+
+export interface IInfraCheck {
+  _id: string;
+  avgResponseTime: number;
+  count: 9;
+  cpu: ICpuInfo;
+  memory: IMemoryInfo;
+  disk: IDiskInfo[];
+  host: IHostInfo;
+  net: INetInfo[];
 }

@@ -22,6 +22,12 @@ import PageSpeedMonitorsPage from "@/pages/pagespeed/PageSpeedMonitors";
 import PageSpeedDetailsPage from "@/pages/pagespeed/PageSpeedDetails";
 import PageSpeedConfigurePage from "@/pages/pagespeed/PageSpeedConfig";
 import PageSpeedCreatePage from "@/pages/pagespeed/PageSpeedCreate";
+
+import InfraMonitorsPage from "@/pages/infrastructure/InfraMonitors";
+import InfraDetailsPage from "@/pages/infrastructure/InfraDetails";
+import InfraConfigurePage from "@/pages/infrastructure/InfraConfig";
+import InfraCreatePage from "@/pages/infrastructure/InfraCreate";
+
 import RootLayout from "@/components/layouts/RootLayout";
 import { ProtectedRoute } from "@/components/protected-route";
 
@@ -79,6 +85,13 @@ const Router = () => {
         />
         <Route path="pagespeed/:id" element={<PageSpeedDetailsPage />} />
         <Route path="pagespeed" element={<PageSpeedMonitorsPage />} />
+        <Route path="infrastructure/create" element={<InfraCreatePage />} />
+        <Route
+          path="infrastructure/:id/configure"
+          element={<InfraConfigurePage />}
+        />
+        <Route path="infrastructure/:id" element={<InfraDetailsPage />} />
+        <Route path="infrastructure" element={<InfraMonitorsPage />} />
       </Route>
     </Routes>
   );

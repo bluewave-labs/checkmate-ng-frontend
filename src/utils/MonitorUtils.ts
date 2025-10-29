@@ -28,6 +28,16 @@ export const getResponseTimeColor = (responseTime: number): PaletteKey => {
   }
 };
 
+export const getInfraGaugeColor = (val: number, theme: any) => {
+  if (val < 50) {
+    return theme.palette.success.main;
+  } else if (val < 80) {
+    return theme.palette.warning.lowContrast;
+  } else {
+    return theme.palette.error.lowContrast;
+  }
+};
+
 export const getPageSpeedPalette = (score: number): PaletteKey => {
   if (score >= 90) return "success";
   else if (score >= 50) return "warning";

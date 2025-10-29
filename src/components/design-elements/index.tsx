@@ -23,3 +23,4 @@ export {
 export { BulletPointCheck } from "./BulletPointCheck";
 export { PulseDot } from "./PulseDot";
 export { Dot } from "./Dot";
+export { Gauge } from "./Gauge";
