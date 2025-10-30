@@ -20,10 +20,11 @@ export const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({
   ...props
 }) => {
   const theme = useTheme();
+  const multiple = props.multiple;
   return (
     <Autocomplete
       {...props}
-      disableCloseOnSelect
+      disableCloseOnSelect={!!multiple}
       renderInput={(params) => (
         <TextInput {...params} placeholder="Type to search" />
       )}
@@ -33,7 +34,7 @@ export const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({
         const { key, ...optionProps } = props;
         return (
           <ListItem key={key} {...optionProps}>
-            <Checkbox checked={selected} />
+            {multiple && <Checkbox checked={selected} />}
             {option.name}
           </ListItem>
         );

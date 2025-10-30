@@ -23,7 +23,6 @@ export const formatDateWithTz = (
   if (!timestamp) {
     return "Unknown time";
   }
-
   const formattedDate = dayjs(timestamp).tz(timezone).format(format);
   return formattedDate;
 };

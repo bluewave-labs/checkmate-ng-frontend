@@ -1,4 +1,3 @@
-import Box from "@mui/material/Box";
 import { BaseChart } from "@/components/monitors/Chart";
 import {
   AreaChart,
@@ -6,7 +5,6 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  Tooltip,
   ResponsiveContainer,
 } from "recharts";
 import { Fragment, useId } from "react";
@@ -92,7 +90,6 @@ export const HistogramInfrastructure = ({
   idx,
   checks,
   xKey,
-  yKey,
   yDomain,
   dataKeys,
   gradient = false,
@@ -107,7 +104,6 @@ export const HistogramInfrastructure = ({
   idx: number | null;
   checks: IInfraCheck[];
   xKey: string;
-  yKey: string;
   yDomain?: number[];
   dataKeys: string[];
   gradient?: boolean;

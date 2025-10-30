@@ -51,6 +51,10 @@ export const Gauge = ({
 
   const fillColor = getInfraGaugeColor(progressWithinRange, theme);
 
+  if (isLoading) {
+    return;
+  }
+
   return (
     <Box
       display={"inline-block"}

@@ -1,17 +1,14 @@
-import Typography from "@mui/material/Typography";
 import { BasePage, StatBox } from "@/components/design-elements";
 import { HeaderControls, HeaderRange } from "@/components/monitors";
 import Stack from "@mui/material/Stack";
 import prettyMilliseconds from "pretty-ms";
 import { getStatusPalette } from "@/utils/MonitorUtils";
 import { InfraDetailsGraphs } from "@/pages/infrastructure/InfraDetailsGraphs";
-import { InfraDetailsNetGraphs } from "@/pages/infrastructure/InfraDetailsNetGraphs";
 
 import { useGet, usePatch } from "@/hooks/UseApi";
 import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { useParams } from "react-router";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import type { ApiResponse } from "@/hooks/UseApi";
 import type { IMonitor } from "@/types/monitor";
 import type { IInfraCheck } from "@/types/check";
@@ -30,7 +27,6 @@ const GLOBAL_REFRESH = import.meta.env.VITE_APP_GLOBAL_REFRESH;
 const InfraDetailsPage = () => {
   const theme = useTheme();
   const { id } = useParams();
-  const isSmall = useMediaQuery(theme.breakpoints.down("md"));
   const [range, setRange] = useState("2h");
 
   const { response, isValidating, refetch } = useGet<ApiResponse>(

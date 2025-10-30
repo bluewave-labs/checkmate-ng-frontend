@@ -20,7 +20,7 @@ import {
 } from "@/utils/TimeUtils";
 import { useTheme } from "@mui/material/styles";
 import type { GroupedCheck } from "@/types/check";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "@/hooks/AppHooks";
 
 type XTickProps = {
   x: number;
@@ -32,7 +32,7 @@ type XTickProps = {
 export const XTick: React.FC<XTickProps> = ({ x, y, payload, range }) => {
   const format = tickDateFormatLookup(range);
   const theme = useTheme();
-  const uiTimezone = useSelector((state: any) => state.ui.timezone);
+  const uiTimezone = useAppSelector((state: any) => state.ui.timezone);
   return (
     <Text
       x={x}
@@ -88,7 +88,9 @@ export const ChartResponseTime = ({
   range: string;
 }) => {
   const theme = useTheme();
-  const uiTimezone = useSelector((state: any) => state.ui.timezone);
+  const uiTimezone = useAppSelector((state: any) => state.ui.timezone);
+  const state = useAppSelector((state) => state);
+  console.log(state);
   const normalized = normalizeResponseTimes<GroupedCheck, "avgResponseTime">(
     checks,
     "avgResponseTime"

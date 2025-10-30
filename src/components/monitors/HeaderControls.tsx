@@ -51,10 +51,7 @@ export const HeaderControls = ({
             loading={isPosting || isPatching}
             startIcon={<EmailIcon />}
             onClick={async () => {
-              const res = await post(
-                `/monitors/${monitor._id}/notifications/test`,
-                {}
-              );
+              await post(`/monitors/${monitor._id}/notifications/test`, {});
             }}
           >
             {t("sendTestNotifications")}

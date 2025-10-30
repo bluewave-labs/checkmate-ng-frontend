@@ -10,7 +10,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useGet } from "@/hooks/UseApi";
 import { formatDateWithTz } from "@/utils/TimeUtils";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "@/hooks/AppHooks";
 
 const getHeaders = (t: Function, uiTimezone: string) => {
   const headers: Header<ICheck>[] = [
@@ -47,7 +47,7 @@ export const CheckTable = ({ monitorId }: { monitorId: string }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const { t } = useTranslation();
-  const uiTimezone = useSelector((state: any) => state.ui.timezone);
+  const uiTimezone = useAppSelector((state: any) => state.ui.timezone);
   const headers = getHeaders(t, uiTimezone);
 
   const { response, error } = useGet<ApiResponse>(

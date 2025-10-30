@@ -7,7 +7,7 @@ import type { MonitorStatus } from "@/types/monitor";
 
 import { useTranslation } from "react-i18next";
 import { formatDateWithTz } from "@/utils/TimeUtils";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "@/hooks/AppHooks";
 
 const getHeaders = (t: Function, uiTimezone: string) => {
   const headers: Header<CheckWithMonitor>[] = [
@@ -63,7 +63,7 @@ export const CheckTable = ({
   setRowsPerPage: (rowsPerPage: number) => void;
 }) => {
   const { t } = useTranslation();
-  const uiTimezone = useSelector((state: any) => state.ui.timezone);
+  const uiTimezone = useAppSelector((state: any) => state.ui.timezone);
   const headers = getHeaders(t, uiTimezone);
 
   const handlePageChange = (

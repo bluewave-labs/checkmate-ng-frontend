@@ -1,4 +1,3 @@
-import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Table, Pagination, StatusLabel } from "@/components/design-elements";
@@ -88,7 +87,7 @@ export const InfraMonitorsTable = ({
         id: 4,
         label: "Configure",
         action: () => {
-          navigate(`/pagespeed/${monitor._id}/configure`);
+          navigate(`/infrastructure/${monitor._id}/configure`);
         },
       },
       // {
@@ -139,7 +138,7 @@ export const InfraMonitorsTable = ({
         content: t("cpu"),
         render: (row) => {
           const cpuUsage =
-            (row.latestChecks?.[0].system?.cpu?.usage_percent || 0) * 100;
+            (row.latestChecks?.[0]?.system?.cpu?.usage_percent || 0) * 100;
           return <Gauge progress={cpuUsage} />;
         },
       },
@@ -148,7 +147,7 @@ export const InfraMonitorsTable = ({
         content: t("memory"),
         render: (row) => {
           const memoryUsage =
-            (row.latestChecks?.[0].system?.memory?.usage_percent || 0) * 100;
+            (row.latestChecks?.[0]?.system?.memory?.usage_percent || 0) * 100;
           return <Gauge progress={memoryUsage} />;
         },
       },
@@ -156,11 +155,11 @@ export const InfraMonitorsTable = ({
         id: "disk",
         content: t("disk"),
         render: (row) => {
-          const totalDiskUsage = row.latestChecks?.[0].system?.disk.reduce(
+          const totalDiskUsage = row.latestChecks?.[0]?.system?.disk.reduce(
             (acc, disk) => acc + disk.usage_percent,
             0
           );
-          const diskCount = row.latestChecks?.[0].system?.disk.length || 1;
+          const diskCount = row.latestChecks?.[0]?.system?.disk.length || 1;
           const diskUsage = ((totalDiskUsage || 0) / diskCount) * 100;
           return <Gauge progress={diskUsage} />;
         },

@@ -7,7 +7,6 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 const getChartConfigs = (theme: any, checks: IInfraCheck[]) => {
-  console.log(checks);
   return [
     {
       type: "memory",
@@ -72,7 +71,6 @@ export const InfraDetailsGraphs = ({
               key={`${config.type}-${config.idx ?? ""}`}
               checks={checks}
               xKey="_id"
-              yKey=""
               yDomain={config.yDomain}
               dataKeys={config.dataKeys}
               gradient={true}

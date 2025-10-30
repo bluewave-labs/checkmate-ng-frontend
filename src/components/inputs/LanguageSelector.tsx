@@ -6,15 +6,14 @@ import Typography from "@mui/material/Typography";
 
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
-import { useAppDispatch } from "@/hooks/AppHooks";
-import { useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/AppHooks";
 import { setLanguage } from "@/features/uiSlice";
 
 export const LanguageSelector = () => {
   const { i18n } = useTranslation();
   const theme = useTheme();
   const dispatch = useAppDispatch();
-  const language = useSelector((state: any) => state.ui.language);
+  const language = useAppSelector((state: any) => state.ui.language);
   const languages = Object.keys(i18n.options.resources || {});
   const languageMap: Record<string, string> = {
     cs: "cz",

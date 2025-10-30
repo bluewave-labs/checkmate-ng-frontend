@@ -62,6 +62,9 @@ export const PageSpeedForm = ({
 
   useEffect(() => {
     reset(defaults);
+    if (defaults.url.startsWith("http://")) {
+      setSelectedProtocol("http");
+    }
   }, [initialData, reset, defaults]);
 
   useEffect(() => {

@@ -9,10 +9,8 @@ import { Button } from "@/components/inputs";
 import { useNavigate } from "react-router";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
-import { useSelector } from "react-redux";
-
 import type { BoxProps } from "@mui/material";
-
+import { useAppSelector } from "@/hooks/AppHooks";
 interface BaseFallbackProps extends BoxProps {
   children: React.ReactNode;
 }
@@ -22,7 +20,7 @@ export const BaseFallback: React.FC<BaseFallbackProps> = ({
   ...props
 }) => {
   const theme = useTheme();
-  const mode = useSelector((state: any) => state.ui.mode);
+  const mode = useAppSelector((state: any) => state.ui.mode);
   const isSmall = useMediaQuery(theme.breakpoints.down("md"));
 
   return (

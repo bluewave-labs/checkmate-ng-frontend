@@ -66,9 +66,10 @@ export const InfraDetailsGauges = ({ checks }: { checks: IInfraCheck[] }) => {
         lowerLabel="Max Frequency"
         lowerValue={getFrequency(checks[0]?.cpu.frequency)}
       />
-      {...checks[0]?.disk?.map((disk, idx) => {
+      {checks[0]?.disk?.map((disk, idx) => {
         return (
           <InfraDetailGauge
+            key={disk.device + idx}
             title={`Disk ${idx} usage`}
             progress={(disk.usage_percent || 0) * 100}
             upperLabel="Used"

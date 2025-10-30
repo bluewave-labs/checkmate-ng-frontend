@@ -60,6 +60,25 @@ const durationSchemaPageSpeed = z
       });
     }
   });
+const durationSchemaInfra = z
+  .string()
+  .optional()
+  .superRefine((val, ctx) => {
+    if (!val || val.trim() === "") return;
+    const ms = humanInterval(val);
+
+    if (!ms || isNaN(ms)) {
+      ctx.addIssue({
+        code: "custom",
+        message: "Invalid duration format",
+      });
+    } else if (ms < 60000) {
+      ctx.addIssue({
+        code: "custom",
+        message: "Minimum duration is 1 minute",
+      });
+    }
+  });
 
 export const monitorSchema = z.object({
   type: z.string().min(1, "You must select an option"),
@@ -83,6 +102,18 @@ export const monitorSchemaPageSpeed = z.object({
   notificationChannels: z.array(z.string()).optional().default([]),
   name: z.string().min(1, "Display name is required"),
   interval: durationSchemaPageSpeed,
+});
+export const monitorSchemaInfra = z.object({
+  type: z.string().min(1, "You must select an option"),
+  url: z.string().min(1, "URL is required").regex(urlRegex, "Invalid URL"),
+  secret: z.string().min(1, "Secret is required"),
+  n: z.coerce
+    .number({ message: "Number required" })
+    .min(1, "Minimum value is 1")
+    .max(25, "Maximum value is 25"),
+  notificationChannels: z.array(z.string()).optional().default([]),
+  name: z.string().min(1, "Display name is required"),
+  interval: durationSchemaInfra,
 });
 
 export const teamSchema = z.object({

@@ -108,7 +108,6 @@ export const InfraDetailsNetGraphs = ({
                 key={`${config.type}-${config.idx ?? ""}`}
                 checks={checks}
                 xKey="_id"
-                yKey=""
                 yDomain={config.yDomain}
                 dataKeys={config.dataKeys}
                 gradient={true}

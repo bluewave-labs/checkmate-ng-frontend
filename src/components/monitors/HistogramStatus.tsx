@@ -11,7 +11,7 @@ import type { MonitorStatus } from "@/types/monitor";
 import { normalizeResponseTimes } from "@/utils/DataUtils";
 import { useState } from "react";
 import { formatDateWithTz } from "@/utils/TimeUtils";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "@/hooks/AppHooks";
 import { useTheme } from "@mui/material/styles";
 import { getResponseTimeColor } from "@/utils/MonitorUtils";
 
@@ -25,7 +25,7 @@ const XLabel = ({
   range: string;
 }) => {
   const theme = useTheme();
-  const uiTimezone = useSelector((state: any) => state.ui.timezone);
+  const uiTimezone = useAppSelector((state: any) => state.ui.timezone);
   const dateFormat = range === "day" ? "MMM D, h:mm A" : "MMM D";
   return (
     <>
@@ -64,7 +64,7 @@ export const HistogramStatus = ({
   range: string;
   title: string;
 }) => {
-  const uiTimezone = useSelector((state: any) => state.ui.timezone);
+  const uiTimezone = useAppSelector((state: any) => state.ui.timezone);
 
   const icon = status === "up" ? <UptimeIcon /> : <IncidentsIcon />;
   const theme = useTheme();

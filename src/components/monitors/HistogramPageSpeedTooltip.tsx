@@ -1,14 +1,14 @@
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { formatDateWithTz } from "@/utils/TimeUtils";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "@/hooks/AppHooks";
 import type { TooltipProps } from "recharts";
 import { useTheme } from "@mui/material/styles";
 
 export const HistogramPageSpeedTooltip = ({
   payload,
 }: TooltipProps<string | number, string>) => {
-  const uiTimezone = useSelector((state: any) => state.ui.timezone);
+  const uiTimezone = useAppSelector((state: any) => state.ui.timezone);
   const theme = useTheme();
   return (
     <Stack
