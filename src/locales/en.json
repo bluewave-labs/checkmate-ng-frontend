@@ -244,6 +244,20 @@
   "createA": "Create a",
   "createMaintenance": "Create maintenance",
   "createMaintenanceWindow": "Create maintenance window",
+  "createMaintenanceWindowPage": {
+    "generalSettingsTitle": "General settings",
+    "generalSettingsDescription": "General maintenance window settings",
+    "generalSettingsName": "Name",
+    "generalSettingsNamePlaceholder": "Maintenance at __ : __ for ___ minutes",
+    "generalSettingsRepeat": "Repeat period",
+    "timingSettingsTitle": "Start & end times",
+    "timingSettingsDescription": "Set the start time (UTC) and end time (UTC) of the maintenance window",
+
+    "durationTitle": "Duration",
+    "durationDescription": "Set the duration of the maintenance window",
+    "monitorsTitle": "Monitors",
+    "monitorsDescription": "Select the monitors you want to apply this maintenance window to"
+  },
   "createMonitor": "Create monitor",
   "createMonitorPage": {
     "incidentConfigDescription": "A sliding window is used to determine when a monitor goes down.  The status of a monitor will only change when the percentage of checks in the sliding window meet the specified value.",

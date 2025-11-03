@@ -1,6 +1,7 @@
 import { z } from "zod";
 import humanInterval from "human-interval";
 import { ChannelTypes } from "@/types/notification-channel";
+import { MaintenanceRepeats } from "@/types/maintenance";
 
 export const registerSchema = z
   .object({
@@ -172,6 +173,32 @@ export const notificationChannelSchema = z
         code: "custom",
         message: "URL is required for non-email-type channels.",
         path: ["config", "url"],
+      });
+    }
+  });
+
+export const maintenanceSchema = z
+  .object({
+    name: z.string().min(1, "Maintenance name is required"),
+    repeat: z.enum(MaintenanceRepeats),
+    startTime: z.date().min(new Date(), "Start time must be in the future"),
+    endTime: z.date().min(new Date(), "End time must be in the future"),
+    monitors: z.array(z.string()),
+  })
+  .superRefine((data, ctx) => {
+    if (data.endTime <= data.startTime) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["endTime"],
+        message: "End time must be after start time",
+      });
+    }
+
+    if (data.startTime === data.endTime) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["endTime"],
+        message: "Start time and end time cannot be the same",
       });
     }
   });

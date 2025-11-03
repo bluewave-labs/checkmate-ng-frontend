@@ -28,6 +28,10 @@ import InfraDetailsPage from "@/pages/infrastructure/InfraDetails";
 import InfraConfigurePage from "@/pages/infrastructure/InfraConfig";
 import InfraCreatePage from "@/pages/infrastructure/InfraCreate";
 
+import MaintenancePage from "@/pages/maintenance/Maintenance";
+import MaintenanceConfigPage from "@/pages/maintenance/MaintenanceConfig";
+import MaintenanceCreatePage from "@/pages/maintenance/MaintenanceCreate";
+
 import RootLayout from "@/components/layouts/RootLayout";
 import { ProtectedRoute } from "@/components/protected-route";
 
@@ -92,6 +96,13 @@ const Router = () => {
         />
         <Route path="infrastructure/:id" element={<InfraDetailsPage />} />
         <Route path="infrastructure" element={<InfraMonitorsPage />} />
+
+        <Route path="maintenance" element={<MaintenancePage />} />
+        <Route path="maintenance/create" element={<MaintenanceCreatePage />} />
+        <Route
+          path="maintenance/:id/configure"
+          element={<MaintenanceConfigPage />}
+        />
       </Route>
     </Routes>
   );

@@ -26,7 +26,8 @@ interface BasePageWithStatesProps extends StackProps {
   loading: boolean;
   error: any;
   items: any[];
-  bullets: string[];
+  bullets: string[] | unknown;
+
   page: string;
   actionButtonText: string;
   actionLink: string;
