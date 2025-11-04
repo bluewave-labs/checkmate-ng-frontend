@@ -3,8 +3,8 @@ import Monitors from "@/assets/icons/monitors.svg?react";
 import PageSpeed from "@/assets/icons/page-speed.svg?react";
 import Integrations from "@/assets/icons/integrations.svg?react";
 import Incidents from "@/assets/icons/incidents.svg?react";
-// import StatusPages from "@/assets/icons/status-pages.svg?react";
-// import Maintenance from "@/assets/icons/maintenance.svg?react";
+import StatusPages from "@/assets/icons/status-pages.svg?react";
+import Maintenance from "@/assets/icons/maintenance.svg?react";
 // import Logs from "@/assets/icons/logs.svg?react";
 // import Settings from "@/assets/icons/settings.svg?react";
 import Support from "@/assets/icons/support.svg?react";
@@ -28,8 +28,8 @@ export const getMenu = (t: Function) => [
   },
   { name: t("menu.incidents"), path: "incidents", icon: <Incidents /> },
 
-  // { name: t("menu.statusPages"), path: "status", icon: <StatusPages /> },
-  // { name: t("menu.maintenance"), path: "maintenance", icon: <Maintenance /> },
+  { name: t("menu.statusPages"), path: "status-pages", icon: <StatusPages /> },
+  { name: t("menu.maintenance"), path: "maintenance", icon: <Maintenance /> },
   // { name: t("menu.logs"), path: "logs", icon: <Logs /> },
 
   // {

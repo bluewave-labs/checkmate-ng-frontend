@@ -13,3 +13,4 @@ export { TeamSwitch } from "./SwitchTeam";
 export { LogoutSwitch } from "./SwitchLogout";
 export { DialogInput as Dialog } from "./Dialog";
 export { DateTimePicker } from "./DateTimePicker";
+export { FormControlLabel } from "./FormControlLabel";

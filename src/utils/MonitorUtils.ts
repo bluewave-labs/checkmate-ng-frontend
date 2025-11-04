@@ -1,4 +1,5 @@
 import type { MonitorStatus } from "@/types/monitor";
+import type { IMonitor } from "@/types/monitor";
 import type { PaletteKey } from "@/theme/theme";
 export const getStatusPalette = (status: MonitorStatus): PaletteKey => {
   const paletteMap: Record<MonitorStatus, PaletteKey> = {
@@ -51,4 +52,27 @@ export const formatUrl = (url: string, maxLength: number = 55) => {
   return strippedUrl.length > maxLength
     ? `${strippedUrl.slice(0, maxLength)}…`
     : strippedUrl;
+};
+
+export interface IStatusPageHeaderConfig {
+  paletteKey: PaletteKey;
+  message: string;
+}
+export const getStatusPageHeaderConfig = (
+  monitors: IMonitor[]
+): IStatusPageHeaderConfig => {
+  if (!monitors || monitors.length === 0) {
+    return { paletteKey: "error", message: "No monitors available" };
+  }
+
+  const allUp = monitors.every((monitor) => monitor.status === "up");
+  const anyDown = monitors.some((monitor) => monitor.status === "down");
+  const allDown = monitors.every((monitor) => monitor.status === "down");
+
+  if (allUp)
+    return { paletteKey: "success", message: "All systems operational" };
+  if (allDown) return { paletteKey: "error", message: "All systems down" };
+  if (anyDown)
+    return { paletteKey: "warning", message: "Partial system outage" };
+  return { paletteKey: "warning", message: "Partial system outage" };
 };

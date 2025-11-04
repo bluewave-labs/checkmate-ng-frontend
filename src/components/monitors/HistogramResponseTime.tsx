@@ -54,7 +54,7 @@ export const HistogramResponseTime = ({ checks }: { checks: ICheck[] }) => {
             >
               <Box
                 position="relative"
-                width="9px"
+                width={theme.spacing(4.5)}
                 height="100%"
                 bgcolor={theme.palette.primary.lowContrast}
                 sx={{

@@ -32,6 +32,12 @@ import MaintenancePage from "@/pages/maintenance/Maintenance";
 import MaintenanceConfigPage from "@/pages/maintenance/MaintenanceConfig";
 import MaintenanceCreatePage from "@/pages/maintenance/MaintenanceCreate";
 
+import StatusPages from "@/pages/status-page/StatusPages";
+import StatusDetailsPages from "@/pages/status-page/StatusPageDetails";
+import StatusPublicPage from "@/pages/status-page/StatusPagePublic";
+import StatusCreatePage from "@/pages/status-page/StatusPageCreate";
+import StatusConfigPage from "@/pages/status-page/StatusPageConfig";
+
 import RootLayout from "@/components/layouts/RootLayout";
 import { ProtectedRoute } from "@/components/protected-route";
 
@@ -41,6 +47,7 @@ const Router = () => {
       <Route path="login" element={<AuthLogin />} />
       <Route path="register/:id" element={<AuthRegisterInvite />} />
       <Route path="register" element={<AuthRegister />} />
+      <Route path="status-pages/public/:url/" element={<StatusPublicPage />} />
       <Route
         path="/"
         element={
@@ -102,6 +109,13 @@ const Router = () => {
         <Route
           path="maintenance/:id/configure"
           element={<MaintenanceConfigPage />}
+        />
+        <Route path="status-pages/:id" element={<StatusDetailsPages />} />
+        <Route path="status-pages" element={<StatusPages />} />
+        <Route path="status-pages/create" element={<StatusCreatePage />} />
+        <Route
+          path="status-pages/:id/configure"
+          element={<StatusConfigPage />}
         />
       </Route>
     </Routes>

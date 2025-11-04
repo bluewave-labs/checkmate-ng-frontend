@@ -1,3 +1,4 @@
+import { HeaderCreate } from "@/components/notification-channels/HeaderCreate";
 import { BasePageWithStates } from "@/components/design-elements";
 import { ActionsMenu } from "@/components/actions-menu";
 import { Table } from "@/components/design-elements";
@@ -21,13 +22,13 @@ const MaintenancePage = () => {
     useState<IMaintenance | null>(null);
   const open = Boolean(selectedMaintenance);
 
-  const { patch } = usePatch<{}, ApiResponse>();
+  const { patch, loading: isPausing } = usePatch<{}, ApiResponse>();
   const { response, isValidating, refetch } = useGet<ApiResponse>(
     "/maintenance",
     {},
     {}
   );
-  const { deleteFn } = useDelete<ApiResponse>();
+  const { deleteFn, loading: isDeleting } = useDelete<ApiResponse>();
 
   const maintenance = response?.data || [];
   const navigate = useNavigate();
@@ -125,6 +126,11 @@ const MaintenancePage = () => {
       actionLink="/maintenance/create"
       actionButtonText={t("createMaintenanceWindow")}
     >
+      <HeaderCreate
+        label={"Create a new maintenance window"}
+        isLoading={isValidating || isPausing || isDeleting}
+        path="/maintenance/create"
+      />
       <Table
         headers={headers}
         data={maintenance}

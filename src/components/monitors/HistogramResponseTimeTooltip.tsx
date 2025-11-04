@@ -12,6 +12,10 @@ export const HistogramResponseTimeTooltip: React.FC<{
 }> = ({ children, check }) => {
   const uiTimezone = useAppSelector((state: any) => state.ui.timezone);
   const theme = useTheme();
+
+  if (check.status === "placeholder") {
+    return children;
+  }
   return (
     <Tooltip
       slotProps={{

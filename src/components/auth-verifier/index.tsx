@@ -15,13 +15,14 @@ import { useLocation } from "react-router-dom";
 export const AuthVerifier = ({ children }: { children: ReactNode }) => {
   const location = useLocation();
   const isAuthRoute = ["/login", "/register"].includes(location.pathname);
+  const isPublicRoute = location.pathname.startsWith("/status-pages/public");
 
   const [isVerifying, setIsVerifying] = useState(true);
   const dispatch = useAppDispatch();
   const selectedTeamId = useAppSelector((state) => state.auth.selectedTeamId);
 
   useEffect(() => {
-    if (isAuthRoute) {
+    if (isAuthRoute || isPublicRoute) {
       setIsVerifying(false);
       return;
     }

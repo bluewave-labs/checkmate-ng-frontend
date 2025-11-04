@@ -14,8 +14,10 @@ const MaintenanceConfigPage = () => {
   const navigate = useNavigate();
   const { patch, loading: isPatching } = usePatch<FormValues, ApiResponse>();
   const { response, loading } = useGet<ApiResponse>(`/maintenance/${id}`);
+  const { response: monitorsResponse, loading: monitorsLoading } =
+    useGet<ApiResponse>("/monitors");
   const maintenance = response?.data;
-
+  const monitors = monitorsResponse?.data || [];
   const onSubmit = async (data: FormValues) => {
     const res = await patch(`/maintenance/${id}`, data);
     if (res) {
@@ -24,9 +26,10 @@ const MaintenanceConfigPage = () => {
   };
   return (
     <MaintenanceForm
+      monitorOptions={monitors}
       initialData={maintenance}
       onSubmit={onSubmit}
-      loading={loading || isPatching}
+      loading={loading || isPatching || monitorsLoading}
     />
   );
 };
