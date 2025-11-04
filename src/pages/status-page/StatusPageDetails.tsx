@@ -14,7 +14,7 @@ const GLOBAL_REFRESH = import.meta.env.VITE_APP_GLOBAL_REFRESH;
 const StatusPages = () => {
   const theme = useTheme();
   const { id } = useParams();
-  const { response, isValidating, error } = useGet<ApiResponse>(
+  const { response } = useGet<ApiResponse>(
     `/status-pages/${id}`,
     {},
     { refreshInterval: GLOBAL_REFRESH, keepPreviousData: true }
