@@ -38,6 +38,9 @@ import StatusPublicPage from "@/pages/status-page/StatusPagePublic";
 import StatusCreatePage from "@/pages/status-page/StatusPageCreate";
 import StatusConfigPage from "@/pages/status-page/StatusPageConfig";
 
+import DiagnosticPage from "@/pages/diagnostic/DiagnosticPage";
+import DiagnosticLogDetailsPage from "@/pages/diagnostic/DiagnosticLogDetails";
+
 import RootLayout from "@/components/layouts/RootLayout";
 import { ProtectedRoute } from "@/components/protected-route";
 
@@ -117,6 +120,9 @@ const Router = () => {
           path="status-pages/:id/configure"
           element={<StatusConfigPage />}
         />
+
+        <Route path="diagnostics" element={<DiagnosticPage />} />
+        <Route path="diagnostics/log" element={<DiagnosticLogDetailsPage />} />
       </Route>
     </Routes>
   );

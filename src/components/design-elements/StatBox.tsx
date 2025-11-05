@@ -4,10 +4,18 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import type { PaletteKey } from "@/theme/theme";
 import { BaseBox } from "@/components/design-elements";
+import type { SxProps } from "@mui/material";
 
-type GradientBox = React.PropsWithChildren<{ palette?: PaletteKey }>;
+type GradientBox = React.PropsWithChildren<{
+  palette?: PaletteKey;
+  sx?: SxProps;
+}>;
 
-export const GradientBox: React.FC<GradientBox> = ({ children, palette }) => {
+export const GradientBox: React.FC<GradientBox> = ({
+  children,
+  palette,
+  sx,
+}) => {
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("md"));
   const bg = palette
@@ -23,6 +31,7 @@ export const GradientBox: React.FC<GradientBox> = ({ children, palette }) => {
           : `calc(25% - (3 * ${theme.spacing(8)} / 4))`,
 
         background: bg,
+        ...sx,
       }}
     >
       {children}
@@ -34,6 +43,7 @@ type StatBoxProps = React.PropsWithChildren<{
   title: string;
   subtitle: string;
   palette?: PaletteKey;
+  sx?: SxProps;
 }>;
 
 export const StatBox: React.FC<StatBoxProps> = ({
@@ -41,12 +51,13 @@ export const StatBox: React.FC<StatBoxProps> = ({
   subtitle,
   palette,
   children,
+  sx,
 }) => {
   const theme = useTheme();
   const textColor = palette ? theme.palette[palette].contrastText : "inherit";
 
   return (
-    <GradientBox palette={palette}>
+    <GradientBox palette={palette} sx={sx}>
       <Stack>
         <Typography color={textColor}>{title}</Typography>
         <Typography color={textColor}>{subtitle}</Typography>
