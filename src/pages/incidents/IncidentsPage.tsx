@@ -5,6 +5,7 @@ import { BasePage } from "@/components/design-elements";
 import { CheckTable } from "@/pages/incidents/CheckTable";
 import { HeaderRange } from "@/components/common/HeaderRange";
 
+import { useTheme } from "@mui/material/styles";
 import { useParams } from "react-router";
 import type { IMonitor } from "@/types/monitor";
 import { useState, useEffect } from "react";
@@ -13,6 +14,7 @@ import type { ApiResponse } from "@/hooks/UseApi";
 import type { SelectChangeEvent } from "@mui/material/Select";
 
 const IncidentsPage = () => {
+  const theme = useTheme();
   const [selectedMonitorId, setSelectedMonitorId] = useState<string>("all");
   const { id } = useParams<{ id: string }>();
 
@@ -50,7 +52,11 @@ const IncidentsPage = () => {
 
   return (
     <BasePage>
-      <Stack direction={"row"} justifyContent={"space-between"}>
+      <Stack
+        direction={{ xs: "column", md: "row" }}
+        spacing={theme.spacing(8)}
+        justifyContent={"space-between"}
+      >
         <Select<string>
           onChange={(e: SelectChangeEvent<string>) => {
             setSelectedMonitorId(e.target.value);

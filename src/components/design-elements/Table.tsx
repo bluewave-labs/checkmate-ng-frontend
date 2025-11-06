@@ -1,7 +1,7 @@
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-
+import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -37,6 +37,7 @@ type DataTableProps<T extends { id?: string | number; _id?: string | number }> =
     headers: Header<T>[];
     data: T[];
     onRowClick?: (row: T) => void;
+    cardsOnSmallScreens?: boolean;
   };
 
 export function DataTable<
@@ -45,11 +46,17 @@ export function DataTable<
     _id?: string | number;
     onRowClick?: (row: T) => void;
   }
->({ headers, data, onRowClick }: DataTableProps<T>) {
+>({
+  headers,
+  data,
+  onRowClick,
+  cardsOnSmallScreens = true,
+}: DataTableProps<T>) {
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("md"));
 
-  if (isSmall) {
+  // Return stack of cards for small screens
+  if (isSmall && cardsOnSmallScreens) {
     return (
       <Stack spacing={theme.spacing(4)}>
         {data.map((row) => {
@@ -71,7 +78,9 @@ export function DataTable<
                 return (
                   <Grid container>
                     <Grid size={3} display={"flex"} alignItems={"center"}>
-                      {header.content}
+                      <Typography color={theme.palette.text.primary}>
+                        {header.content}
+                      </Typography>
                     </Grid>
                     <Grid size={9} display="flex" alignItems={"center"}>
                       {header.render(row)}{" "}
