@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
 import type { ButtonProps } from "@mui/material/Button";
 
-export const ButtonInput: React.FC<ButtonProps> = ({ sx, ...props }) => {
+export const ButtonInput = ({ sx, ...props }: ButtonProps) => {
   return (
     <Button
       {...props}

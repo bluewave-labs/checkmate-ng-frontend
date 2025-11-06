@@ -1,3 +1,7 @@
+import Stack from "@mui/material/Stack";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -12,7 +16,6 @@ import FirstPageIcon from "@mui/icons-material/FirstPage";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 
-import Box from "@mui/material/Box";
 import TablePagination from "@mui/material/TablePagination";
 import type { TablePaginationProps } from "@mui/material/TablePagination";
 
@@ -44,79 +47,114 @@ export function DataTable<
   }
 >({ headers, data, onRowClick }: DataTableProps<T>) {
   const theme = useTheme();
-  const isSmall = useMediaQuery(theme.breakpoints.down("xs"));
+  const isSmall = useMediaQuery(theme.breakpoints.down("md"));
+
+  if (isSmall) {
+    return (
+      <Stack spacing={theme.spacing(4)}>
+        {data.map((row) => {
+          return (
+            <Stack
+              onClick={() => (onRowClick ? onRowClick(row) : null)}
+              spacing={theme.spacing(4)}
+              sx={{
+                borderStyle: "solid",
+                borderWidth: 1,
+                borderColor: theme.palette.primary.lowContrast,
+                borderRadius: theme.shape.borderRadius,
+                padding: theme.spacing(4),
+                cursor: onRowClick ? "pointer" : "default",
+              }}
+              key={row.id || row._id || Math.random()}
+            >
+              {headers.map((header) => {
+                return (
+                  <Grid container>
+                    <Grid size={3} display={"flex"} alignItems={"center"}>
+                      {header.content}
+                    </Grid>
+                    <Grid size={9} display="flex" alignItems={"center"}>
+                      {header.render(row)}{" "}
+                    </Grid>
+                  </Grid>
+                );
+              })}
+            </Stack>
+          );
+        })}
+      </Stack>
+    );
+  }
 
   if (data.length === 0 || headers.length === 0) return <div>No data</div>;
   return (
-    <div style={{ display: isSmall ? "grid" : "inherit" }}>
-      <TableContainer component={Paper}>
-        <Table
-          sx={{
-            "&.MuiTable-root  :is(.MuiTableHead-root, .MuiTableBody-root) :is(th, td)":
-              {
-                paddingLeft: theme.spacing(8),
-              },
-            "& :is(th)": {
-              backgroundColor: theme.palette.secondary.main,
-              color: theme.palette.secondary.contrastText,
-              fontWeight: 600,
+    <TableContainer component={Paper}>
+      <Table
+        sx={{
+          "&.MuiTable-root  :is(.MuiTableHead-root, .MuiTableBody-root) :is(th, td)":
+            {
+              paddingLeft: theme.spacing(8),
             },
-            "& :is(td)": {
-              backgroundColor: theme.palette.primary.main,
-              color: theme.palette.primary.contrastTextSecondary,
+          "& :is(th)": {
+            backgroundColor: theme.palette.secondary.main,
+            color: theme.palette.secondary.contrastText,
+            fontWeight: 600,
+          },
+          "& :is(td)": {
+            backgroundColor: theme.palette.primary.main,
+            color: theme.palette.primary.contrastTextSecondary,
+          },
+          "& .MuiTableBody-root .MuiTableRow-root:last-child .MuiTableCell-root":
+            {
+              borderBottom: "none",
             },
-            "& .MuiTableBody-root .MuiTableRow-root:last-child .MuiTableCell-root":
-              {
-                borderBottom: "none",
-              },
-          }}
-        >
-          <TableHead>
-            <TableRow>
-              {headers.map((header, idx) => {
-                return (
-                  <TableCell
-                    align={idx === 0 ? "left" : "center"}
-                    key={header.id}
-                  >
-                    {header.content}
-                  </TableCell>
-                );
-              })}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((row) => {
-              const key = row.id || row._id || Math.random();
-
+        }}
+      >
+        <TableHead>
+          <TableRow>
+            {headers.map((header, idx) => {
               return (
-                <TableRow
-                  key={key}
-                  sx={{ cursor: onRowClick ? "pointer" : "default" }}
-                  onClick={() => (onRowClick ? onRowClick(row) : null)}
+                <TableCell
+                  align={idx === 0 ? "left" : "center"}
+                  key={header.id}
                 >
-                  {headers.map((header, index) => {
-                    return (
-                      <TableCell
-                        align={index === 0 ? "left" : "center"}
-                        key={header.id}
-                        onClick={
-                          header.onClick
-                            ? (e) => header.onClick!(e, row)
-                            : undefined
-                        }
-                      >
-                        {header.render(row)}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
+                  {header.content}
+                </TableCell>
               );
             })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.map((row) => {
+            const key = row.id || row._id || Math.random();
+
+            return (
+              <TableRow
+                key={key}
+                sx={{ cursor: onRowClick ? "pointer" : "default" }}
+                onClick={() => (onRowClick ? onRowClick(row) : null)}
+              >
+                {headers.map((header, index) => {
+                  return (
+                    <TableCell
+                      align={index === 0 ? "left" : "center"}
+                      key={header.id}
+                      onClick={
+                        header.onClick
+                          ? (e) => header.onClick!(e, row)
+                          : undefined
+                      }
+                    >
+                      {header.render(row)}
+                    </TableCell>
+                  );
+                })}
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
 

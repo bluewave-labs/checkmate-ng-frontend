@@ -139,7 +139,7 @@ export const MonitorTable = ({
         content: t("responseTime"),
         render: (row) => {
           return (
-            <Stack alignItems={"center"}>
+            <Stack alignItems={{ xs: "flex-start", md: "center" }}>
               <HistogramResponseTime checks={row.latestChecks} />
             </Stack>
           );
@@ -163,11 +163,8 @@ export const MonitorTable = ({
     return headers;
   };
 
-  let headers = getHeaders();
+  const headers = getHeaders();
 
-  if (isSmall) {
-    headers = headers.filter((h) => h.id !== "histogram");
-  }
   return (
     <Box>
       <Table

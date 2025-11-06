@@ -8,6 +8,7 @@ import { normalizeResponseTimes } from "@/utils/DataUtils";
 export const HistogramResponseTime = ({ checks }: { checks: ICheck[] }) => {
   const theme = useTheme();
   const normalChecks = normalizeResponseTimes(checks, "responseTime");
+  const BAR_WIDTH = { xs: theme.spacing(2.5), md: theme.spacing(4.5) };
   let data = Array<any>();
 
   if (!normalChecks || normalChecks.length === 0) {
@@ -38,7 +39,7 @@ export const HistogramResponseTime = ({ checks }: { checks: ICheck[] }) => {
             <Box
               key={`${check}-${index}`}
               position="relative"
-              width={theme.spacing(4.5)}
+              width={BAR_WIDTH}
               height="100%"
               bgcolor={theme.palette.primary.lowContrast}
               sx={{
@@ -54,9 +55,9 @@ export const HistogramResponseTime = ({ checks }: { checks: ICheck[] }) => {
             >
               <Box
                 position="relative"
-                width={theme.spacing(4.5)}
                 height="100%"
                 bgcolor={theme.palette.primary.lowContrast}
+                width={BAR_WIDTH}
                 sx={{
                   borderRadius: theme.spacing(1.5),
                 }}

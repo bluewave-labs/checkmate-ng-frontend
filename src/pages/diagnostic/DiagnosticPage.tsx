@@ -4,7 +4,7 @@ import { DiagnosticsQueueTab } from "@/pages/diagnostic/DiagnosticsQueueTab";
 import { useState } from "react";
 
 const DiagnosticPage = () => {
-  const [tabValue, setTabValue] = useState("jobs");
+  const [tabValue, setTabValue] = useState("logs");
 
   const handleTabChange = (_: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
