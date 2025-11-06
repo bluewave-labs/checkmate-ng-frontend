@@ -7,11 +7,9 @@ import type { Header } from "@/components/design-elements/Table";
 import { ActionsMenu } from "@/components/actions-menu";
 
 import { useTranslation } from "react-i18next";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { usePatch } from "@/hooks/UseApi";
-import type { ApiResponse } from "@/hooks/UseApi";
 
 import type { IMonitor } from "@/types/monitor";
 import type { ActionMenuItem } from "@/components/actions-menu";
@@ -37,13 +35,12 @@ export const MonitorTable = ({
 }) => {
   const { t } = useTranslation();
   const theme = useTheme();
-  const isSmall = useMediaQuery(theme.breakpoints.down("md"));
   const navigate = useNavigate();
   const {
     patch,
     // loading: isPatching,
     // error: postError,
-  } = usePatch<ApiResponse>();
+  } = usePatch<any, IMonitor>();
 
   const handlePageChange = (
     _e: React.MouseEvent<HTMLButtonElement> | null,

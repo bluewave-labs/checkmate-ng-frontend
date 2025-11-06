@@ -23,15 +23,13 @@ const StatusPages = () => {
     useState<IStatusPage | null>(null);
   const open = Boolean(selectedStatusPage);
 
-  const { response, isValidating, error, refetch } = useGet<ApiResponse>(
-    "/status-pages",
-    {},
-    {}
-  );
+  const { response, isValidating, error, refetch } = useGet<
+    ApiResponse<IStatusPage[]>
+  >("/status-pages", {}, {});
 
   const statusPages = response?.data || [];
 
-  const { deleteFn, loading: deleting } = useDelete<ApiResponse>();
+  const { deleteFn, loading: deleting } = useDelete<any>();
 
   const getActions = (statusPage: IStatusPage): ActionMenuItem[] => {
     return [

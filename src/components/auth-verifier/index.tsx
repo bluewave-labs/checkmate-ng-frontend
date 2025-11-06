@@ -28,7 +28,7 @@ export const AuthVerifier = ({ children }: { children: ReactNode }) => {
     }
     const verify = async () => {
       try {
-        const res = await get<ApiResponse>("/auth/me");
+        const res = await get<ApiResponse<IUser>>("/auth/me");
         const user: IUser = res.data.data;
         dispatch(setAuthenticated(true));
         dispatch(setUser(user));

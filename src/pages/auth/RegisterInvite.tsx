@@ -16,6 +16,7 @@ import { z } from "zod";
 import { registerSchema } from "@/validation/zod";
 import { useGet } from "@/hooks/UseApi";
 import { useParams } from "react-router";
+import type { IUser } from "@/types/user";
 
 type FormData = z.infer<typeof registerSchema>;
 const RegisterInvite = () => {
@@ -23,8 +24,8 @@ const RegisterInvite = () => {
 
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { post, loading, error } = usePost<Partial<FormData>, ApiResponse>();
-  const { response, error: errorInvite } = useGet<ApiResponse>(
+  const { post, loading, error } = usePost<Partial<FormData>, IUser>();
+  const { response, error: errorInvite } = useGet<ApiResponse<any>>(
     `/invite/${token}`
   );
   const { user, invite } = response?.data || {};
@@ -43,9 +44,10 @@ const RegisterInvite = () => {
     if (!result) {
       dispatch(setAuthenticated(false));
       navigate("/login");
+      return;
     }
 
-    const user = result?.data;
+    const user: IUser = result.data;
 
     if (!user) {
       dispatch(setAuthenticated(false));

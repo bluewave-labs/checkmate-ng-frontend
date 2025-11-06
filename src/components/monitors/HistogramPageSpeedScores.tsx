@@ -10,7 +10,7 @@ import {
 import { HistogramPageSpeedScoresTooltip } from "./HistogramPageSpeedScoresTooltip";
 
 import { useTheme } from "@mui/material/styles";
-import type { ICheck } from "@/types/check";
+import type { GroupedCheck } from "@/types/check";
 import type { Palette } from "@mui/material/styles";
 type PaletteColorKey = Extract<
   keyof Palette,
@@ -46,7 +46,11 @@ const config: Record<string, ConfigItem> = {
   },
 };
 
-export const HistogramPageSpeedScores = ({ checks }: { checks: ICheck[] }) => {
+export const HistogramPageSpeedScores = ({
+  checks,
+}: {
+  checks: GroupedCheck[];
+}) => {
   const theme = useTheme();
   return (
     <BaseChart icon={<ScoreIcon />} title="Score history">

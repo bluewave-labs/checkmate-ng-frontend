@@ -22,13 +22,13 @@ const MaintenancePage = () => {
     useState<IMaintenance | null>(null);
   const open = Boolean(selectedMaintenance);
 
-  const { patch, loading: isPausing } = usePatch<{}, ApiResponse>();
-  const { response, isValidating, refetch } = useGet<ApiResponse>(
+  const { patch, loading: isPausing } = usePatch<{}, any>();
+  const { response, isValidating, refetch } = useGet<ApiResponse<any>>(
     "/maintenance",
     {},
     {}
   );
-  const { deleteFn, loading: isDeleting } = useDelete<ApiResponse>();
+  const { deleteFn, loading: isDeleting } = useDelete<any>();
 
   const maintenance = response?.data || [];
   const navigate = useNavigate();

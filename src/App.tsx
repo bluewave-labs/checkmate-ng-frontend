@@ -21,6 +21,7 @@ function App() {
         </AuthVerifier>
       </BrowserRouter>
       <ToastContainer
+        newestOnTop={true}
         theme={mode}
         style={
           {

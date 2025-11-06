@@ -23,14 +23,13 @@ const NotificationChannelsPage = () => {
     useState<INotificationChannel | null>(null);
   const open = Boolean(selectedChannel);
 
-  const { response, isValidating, error, refetch } = useGet<ApiResponse>(
-    "/notification-channels",
-    {},
-    {}
-  );
+  const { response, isValidating, error, refetch } = useGet<
+    ApiResponse<INotificationChannel[]>
+  >("/notification-channels", {}, {});
 
-  const { patch, loading: pausing } = usePatch<{}, ApiResponse>();
-  const { deleteFn, loading: deleting } = useDelete<ApiResponse>();
+  const { patch, loading: pausing } = usePatch<{}, INotificationChannel>();
+  const { deleteFn, loading: deleting } =
+    useDelete<ApiResponse<INotificationChannel>>();
 
   const notificationChannels = response?.data || [];
 

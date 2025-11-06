@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import { useGet } from "@/hooks/UseApi";
 import type { ApiResponse } from "@/hooks/UseApi";
-import type { IMonitor } from "@/types/monitor";
+import type { IMonitor, IMonitorWithStats } from "@/types/monitor";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useState } from "react";
 import { useDelete } from "@/hooks/UseApi";
@@ -30,19 +30,20 @@ const UptimeMonitors = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const { deleteFn } = useDelete();
-  const { response, loading, isValidating, error, refetch } =
-    useGet<ApiResponse>(
-      `/monitors?embedChecks=true&type=http&type=https&type=ping&page=${page}&rowsPerPage=${rowsPerPage}`,
-      {},
-      {
-        refreshInterval: GLOBAL_REFRESH,
-        keepPreviousData: true,
-        dedupingInterval: 0,
-      },
-      {
-        useTeamIdAsKey: true,
-      }
-    );
+  const { response, loading, isValidating, error, refetch } = useGet<
+    ApiResponse<IMonitorWithStats>
+  >(
+    `/monitors?embedChecks=true&type=http&type=https&type=ping&page=${page}&rowsPerPage=${rowsPerPage}`,
+    {},
+    {
+      refreshInterval: GLOBAL_REFRESH,
+      keepPreviousData: true,
+      dedupingInterval: 0,
+    },
+    {
+      useTeamIdAsKey: true,
+    }
+  );
 
   const monitors: IMonitor[] = response?.data?.monitors ?? ([] as IMonitor[]);
   const count = response?.data?.count || 0;

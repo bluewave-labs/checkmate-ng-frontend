@@ -9,7 +9,7 @@ import {
 import Stack from "@mui/material/Stack";
 import { CheckTable } from "@/pages/uptime/CheckTable";
 
-import type { IMonitor } from "@/types/monitor";
+import type { IMonitor, IMonitorWithMonitorStats } from "@/types/monitor";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { useParams } from "react-router";
@@ -27,7 +27,9 @@ const UptimeDetailsPage = () => {
   // Local state
   const [range, setRange] = useState("2h");
 
-  const { response, isValidating, error, refetch } = useGet<ApiResponse>(
+  const { response, isValidating, error, refetch } = useGet<
+    ApiResponse<IMonitorWithMonitorStats>
+  >(
     `/monitors/${id}?embedChecks=true&range=${range}`,
 
     {},
@@ -38,7 +40,7 @@ const UptimeDetailsPage = () => {
     response: upResponse,
     isValidating: upIsValidating,
     error: upError,
-  } = useGet<ApiResponse>(
+  } = useGet<ApiResponse<IMonitorWithMonitorStats>>(
     `/monitors/${id}?embedChecks=true&range=${range}&status=up`,
     {},
     { keepPreviousData: true }
@@ -48,7 +50,7 @@ const UptimeDetailsPage = () => {
     response: downResponse,
     error: downError,
     isValidating: downIsValidating,
-  } = useGet<ApiResponse>(
+  } = useGet<ApiResponse<IMonitorWithMonitorStats>>(
     `/monitors/${id}?embedChecks=true&range=${range}&status=down`,
     {},
     { keepPreviousData: true }
@@ -58,9 +60,9 @@ const UptimeDetailsPage = () => {
     patch,
     loading: isPatching,
     error: postError,
-  } = usePatch<ApiResponse>();
+  } = usePatch<any, IMonitor>();
 
-  const monitor: IMonitor = response?.data?.monitor;
+  const monitor = response?.data?.monitor;
 
   if (!monitor) {
     return null;

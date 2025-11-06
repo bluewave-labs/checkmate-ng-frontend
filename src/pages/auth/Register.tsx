@@ -9,7 +9,6 @@ import {
   logout,
 } from "@/features/authSlice";
 import { useAppDispatch } from "@/hooks/AppHooks";
-import type { ApiResponse } from "@/hooks/UseApi";
 import { useTranslation } from "react-i18next";
 import { usePost } from "@/hooks/UseApi";
 import { useNavigate } from "react-router";
@@ -20,7 +19,7 @@ type FormData = z.infer<typeof registerSchema>;
 const Register = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { post, loading, error } = usePost<Partial<FormData>, ApiResponse>();
+  const { post, loading, error } = usePost<Partial<FormData>, any>();
 
   const dispatch = useAppDispatch();
 

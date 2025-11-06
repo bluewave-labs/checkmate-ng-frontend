@@ -166,3 +166,8 @@ export interface IInfraCheck {
   host: IHostInfo;
   net: INetInfo[];
 }
+
+export interface IChecksWithCount {
+  checks: ICheck[];
+  count: number;
+}

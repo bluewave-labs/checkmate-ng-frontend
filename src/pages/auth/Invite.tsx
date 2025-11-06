@@ -23,7 +23,7 @@ const Invite = () => {
   const theme = useTheme();
 
   const [token, setToken] = useState<string | null>(null);
-  const { post, loading } = usePost<FormValues, ApiResponse>();
+  const { post, loading } = usePost<FormValues, any>();
   const onSubmit = async (data: FormValues) => {
     const res = await post("/invite", data);
     if (res) {
@@ -31,7 +31,7 @@ const Invite = () => {
     }
   };
 
-  const { response } = useGet<ApiResponse>("/roles");
+  const { response } = useGet<ApiResponse<any>>("/roles");
   const roles = response?.data;
   const orgRoles = useMemo(
     () => roles?.filter((role: any) => role.scope === "organization"),
@@ -42,7 +42,7 @@ const Invite = () => {
     [roles]
   );
 
-  const { response: teamsResponse } = useGet<ApiResponse>("/teams");
+  const { response: teamsResponse } = useGet<ApiResponse<any>>("/teams");
   const teams = teamsResponse?.data;
 
   const {

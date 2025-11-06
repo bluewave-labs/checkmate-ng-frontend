@@ -10,7 +10,7 @@ import { useParams } from "react-router";
 import { useTheme } from "@mui/material/styles";
 import { useGet, usePatch } from "@/hooks/UseApi";
 import type { ApiResponse } from "@/hooks/UseApi";
-import type { IMonitor } from "@/types/monitor";
+import type { IMonitor, IMonitorWithMonitorStats } from "@/types/monitor";
 import { getStatusPalette } from "@/utils/MonitorUtils";
 import prettyMilliseconds from "pretty-ms";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -22,17 +22,20 @@ const PageSpeedDetailsPage = () => {
   const [range, setRange] = useState("2h");
   const isSmall = useMediaQuery(theme.breakpoints.down("md"));
 
-  const { patch, loading: isPatching } = usePatch<ApiResponse>();
+  const { patch, loading: isPatching } = usePatch<any, IMonitor>();
 
-  const { response, isValidating, refetch } = useGet<ApiResponse>(
+  const { response, isValidating, refetch } = useGet<
+    ApiResponse<IMonitorWithMonitorStats>
+  >(
     `/monitors/${id}?embedChecks=true&range=${range}`,
     {},
     { refreshInterval: GLOBAL_REFRESH, keepPreviousData: true }
   );
 
-  const monitor: IMonitor = response?.data?.monitor;
+  const monitor = response?.data?.monitor;
   const stats = response?.data?.stats;
   const checks = response?.data?.checks || [];
+  console.log(checks);
 
   const streakDuration = stats?.currentStreakStartedAt
     ? Date.now() - stats?.currentStreakStartedAt

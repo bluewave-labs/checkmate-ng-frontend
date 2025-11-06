@@ -7,6 +7,8 @@ import type { ApiResponse } from "@/hooks/UseApi";
 import humanInterval from "human-interval";
 import { z } from "zod";
 import { useNavigate } from "react-router";
+import type { INotificationChannel } from "@/types/notification-channel";
+import type { IMonitor } from "@/types/monitor";
 
 const InfraConfigurePage = () => {
   type FormValues = z.infer<typeof monitorSchemaInfra>;
@@ -16,15 +18,16 @@ const InfraConfigurePage = () => {
 
   const { id } = useParams();
   const navigate = useNavigate();
-  const { response } = useGet<ApiResponse>("/notification-channels");
-  const { response: monitorResponse } = useGet<ApiResponse>(`/monitors/${id}`);
+  const { response } = useGet<ApiResponse<INotificationChannel[]>>(
+    "/notification-channels"
+  );
+  const { response: monitorResponse } = useGet<ApiResponse<any>>(
+    `/monitors/${id}`
+  );
   const monitor = monitorResponse?.data || null;
   const notificationOptions = response?.data ?? [];
 
-  const { patch, loading, error } = usePatch<
-    Partial<SubmitValues>,
-    ApiResponse
-  >();
+  const { patch, loading, error } = usePatch<Partial<SubmitValues>, IMonitor>();
 
   const onSubmit = async (data: FormValues) => {
     let interval = humanInterval(data.interval);

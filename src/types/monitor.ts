@@ -1,4 +1,6 @@
-import type { ICheck } from "@/types/check";
+import type { GroupedCheck, ICheck } from "@/types/check";
+import type { IMonitorStats } from "./monitorStats";
+
 export type MonitorStatus = "up" | "down" | "initializing";
 
 export interface IMonitor {
@@ -18,4 +20,18 @@ export interface IMonitor {
   url: string;
   __v: number;
   _id: string;
+}
+
+export interface IMonitorWithStats {
+  count: number;
+  downCount: number;
+  upCount: number;
+  pausedCount: number;
+  monitors: IMonitor[];
+}
+
+export interface IMonitorWithMonitorStats {
+  checks: GroupedCheck[];
+  monitor: IMonitor;
+  stats: IMonitorStats;
 }

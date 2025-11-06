@@ -2,7 +2,7 @@ import { Table, Pagination, StatusLabel } from "@/components/design-elements";
 import Box from "@mui/material/Box";
 
 import type { Header } from "@/components/design-elements/Table";
-import type { ICheck } from "@/types/check";
+import type { ICheck, IChecksWithCount } from "@/types/check";
 import type { ApiResponse } from "@/hooks/UseApi";
 import type { MonitorStatus } from "@/types/monitor";
 
@@ -50,11 +50,13 @@ export const CheckTable = ({ monitorId }: { monitorId: string }) => {
   const uiTimezone = useAppSelector((state: any) => state.ui.timezone);
   const headers = getHeaders(t, uiTimezone);
 
-  const { response, error } = useGet<ApiResponse>(
+  const { response, error } = useGet<ApiResponse<IChecksWithCount>>(
     `/monitors/${monitorId}/checks?page=${page}&rowsPerPage=${rowsPerPage}`,
     {},
     { keepPreviousData: true }
   );
+
+  console.log(response);
 
   const checks = response?.data?.checks || [];
   const count = response?.data?.count || 0;

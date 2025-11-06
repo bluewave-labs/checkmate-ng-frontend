@@ -18,7 +18,7 @@ export const TeamSwitch = () => {
   const dispatch = useAppDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const { response } = useGet<ApiResponse>("/teams/joined");
+  const { response } = useGet<ApiResponse<any>>("/teams/joined");
   const selectedTeamId = useAppSelector((state) => state.auth.selectedTeamId);
   const user = useAppSelector((state) => state.auth.user);
   const teams = response?.data || [];

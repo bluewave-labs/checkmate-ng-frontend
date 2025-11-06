@@ -9,11 +9,11 @@ import type { ApiResponse } from "@/hooks/UseApi";
 const TeamsConfigPage = () => {
   type FormValues = Omit<z.infer<typeof teamSchema>, "roleId">;
   const navigate = useNavigate();
-  const { response } = useGet<ApiResponse>("/roles?type=team");
-  const { patch, loading } = usePatch<FormValues, ApiResponse>();
+  const { response } = useGet<ApiResponse<any>>("/roles?type=team");
+  const { patch, loading } = usePatch<FormValues, ApiResponse<any>>();
 
   const { id } = useParams();
-  const { response: teamResponse } = useGet<ApiResponse>(`/teams/${id}`);
+  const { response: teamResponse } = useGet<ApiResponse<any>>(`/teams/${id}`);
   const team = teamResponse?.data || null;
   const roles = response?.data || [];
 

@@ -14,13 +14,17 @@ const GLOBAL_REFRESH = import.meta.env.VITE_APP_GLOBAL_REFRESH;
 const StatusPages = () => {
   const theme = useTheme();
   const { url } = useParams();
-  const { response } = useGet<ApiResponse>(
+  const { response } = useGet<ApiResponse<IStatusPageWithMonitors>>(
     `/status-pages/public/${url}`,
     {},
     { refreshInterval: GLOBAL_REFRESH, keepPreviousData: true }
   );
-  const statusPage: IStatusPageWithMonitors = response?.data || {};
+  const statusPage = response?.data;
   const monitors: IMonitor[] = statusPage?.monitors || [];
+
+  if (!statusPage) {
+    return null;
+  }
 
   return (
     <BasePage alignItems={"center"} paddingTop={theme.spacing(20)}>

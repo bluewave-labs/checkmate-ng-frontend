@@ -5,14 +5,16 @@ import { z } from "zod";
 import { usePost, useGet } from "@/hooks/UseApi";
 import type { ApiResponse } from "@/hooks/UseApi";
 import { maintenanceSchema } from "@/validation/zod";
+import type { IMonitor } from "@/types/monitor";
+import type { IMaintenance } from "@/types/maintenance";
 
 type FormValues = z.infer<typeof maintenanceSchema>;
 
 const MaintenanceCreatePage = () => {
   const navigate = useNavigate();
-  const { post, loading } = usePost<FormValues, ApiResponse>();
+  const { post, loading } = usePost<FormValues, IMaintenance>();
   const { response, loading: monitorsLoading } =
-    useGet<ApiResponse>("/monitors");
+    useGet<ApiResponse<IMonitor[]>>("/monitors");
 
   const monitors = response?.data || [];
   console.log(monitors);

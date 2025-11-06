@@ -16,8 +16,8 @@ const TeamDetailsPage = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const { id } = useParams();
-  const { response } = useGet<ApiResponse>(`/teams/${id}`);
-  const { response: teamMembersResponse } = useGet<ApiResponse>(
+  const { response } = useGet<ApiResponse<any>>(`/teams/${id}`);
+  const { response: teamMembersResponse } = useGet<ApiResponse<any>>(
     `/team-members?teamId=${id}`
   );
   const team = response?.data;

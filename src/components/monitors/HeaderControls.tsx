@@ -13,7 +13,6 @@ import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router";
 import type { IMonitor } from "@/types/monitor";
 import { usePost } from "@/hooks/UseApi";
-import type { ApiResponse } from "@/hooks/UseApi";
 
 export const HeaderControls = ({
   monitor,
@@ -32,8 +31,8 @@ export const HeaderControls = ({
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("md"));
   const navigate = useNavigate();
-  const { post, loading: isPosting } = usePost<any, ApiResponse>();
-  const hasNotificationChannels = monitor.notificationChannels.length > 0;
+  const { post, loading: isPosting } = usePost<any, any>();
+  const hasNotificationChannels = monitor?.notificationChannels.length > 0;
   return (
     <Stack
       direction={isSmall ? "column" : "row"}

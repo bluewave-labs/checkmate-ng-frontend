@@ -12,14 +12,16 @@ import type { Header } from "@/components/design-elements/Table";
 export const DiagnosticsQueueTab = () => {
   const { t } = useTranslation();
   const theme = useTheme();
-  const { response } = useGet<ApiResponse>(
-    `/diagnostic/jobs`,
-    {},
-    { refreshInterval: 5000 }
-  );
+  const { response } = useGet<
+    ApiResponse<{ jobs: IJob[]; metrics: IJobMetrics }>
+  >(`/diagnostic/jobs`, {}, { refreshInterval: 5000 });
 
   const jobs: IJob[] = response?.data?.jobs || [];
-  const metrics: IJobMetrics = response?.data?.metrics || {};
+  const metrics = response?.data?.metrics;
+
+  if (!metrics) {
+    return null;
+  }
 
   const getHeaders = () => {
     const headers: Header<IJob>[] = [

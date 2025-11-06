@@ -22,7 +22,7 @@ const IncidentsPage = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [range, setRange] = useState("2h");
 
-  const { response, isValidating } = useGet<ApiResponse>(
+  const { response, isValidating } = useGet<ApiResponse<any>>(
     `/checks?status=down&page=${page}&rowsPerPage=${rowsPerPage}&range=${range}${
       selectedMonitorId && selectedMonitorId !== "all"
         ? `&monitorId=${selectedMonitorId}`
@@ -33,7 +33,7 @@ const IncidentsPage = () => {
     { useTeamIdAsKey: true }
   );
 
-  const { response: monitorResponse } = useGet<ApiResponse>(
+  const { response: monitorResponse } = useGet<ApiResponse<IMonitor[]>>(
     `/monitors`,
     {},
     { keepPreviousData: true }

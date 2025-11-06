@@ -2,7 +2,6 @@ import { AuthBasePage } from "@/components/auth";
 import { Button, TextInput, TextLink } from "@/components/inputs";
 import Stack from "@mui/material/Stack";
 
-import type { ApiResponse } from "@/hooks/UseApi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePost } from "@/hooks/UseApi";
 import { useNavigate } from "react-router";
@@ -17,6 +16,7 @@ import {
 } from "@/features/authSlice";
 import { z } from "zod";
 import { useForm, Controller } from "react-hook-form";
+import type { IUser } from "@/types/user";
 
 const schema = z.object({
   email: z.email("Invalid email address"),
@@ -29,7 +29,7 @@ const Login = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const theme = useTheme();
-  const { post, loading } = usePost<FormData, ApiResponse>();
+  const { post, loading } = usePost<FormData, IUser>();
   const navigate = useNavigate();
 
   const {

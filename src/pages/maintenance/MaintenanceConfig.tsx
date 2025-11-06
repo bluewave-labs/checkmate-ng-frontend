@@ -6,16 +6,17 @@ import { z } from "zod";
 import { usePatch, useGet } from "@/hooks/UseApi";
 import type { ApiResponse } from "@/hooks/UseApi";
 import { maintenanceSchema } from "@/validation/zod";
+import type { IMonitor } from "@/types/monitor";
 
 type FormValues = z.infer<typeof maintenanceSchema>;
 
 const MaintenanceConfigPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { patch, loading: isPatching } = usePatch<FormValues, ApiResponse>();
-  const { response, loading } = useGet<ApiResponse>(`/maintenance/${id}`);
+  const { patch, loading: isPatching } = usePatch<FormValues, any>();
+  const { response, loading } = useGet<ApiResponse<any>>(`/maintenance/${id}`);
   const { response: monitorsResponse, loading: monitorsLoading } =
-    useGet<ApiResponse>("/monitors");
+    useGet<ApiResponse<IMonitor[]>>("/monitors");
   const maintenance = response?.data;
   const monitors = monitorsResponse?.data || [];
   const onSubmit = async (data: FormValues) => {

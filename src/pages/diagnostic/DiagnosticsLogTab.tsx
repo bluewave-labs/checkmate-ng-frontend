@@ -63,7 +63,7 @@ export const DiagnosticsLogTab = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const [logLevel, setLogLevel] = useState("all");
-  const { response } = useGet<ApiResponse>(
+  const { response } = useGet<ApiResponse<ILogEntry[]>>(
     `/diagnostic/logs`,
     {},
     { refreshInterval: 5000 }

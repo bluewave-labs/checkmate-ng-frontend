@@ -5,16 +5,18 @@ import { z } from "zod";
 import { usePost, useGet } from "@/hooks/UseApi";
 import type { ApiResponse } from "@/hooks/UseApi";
 import { statusPageSchema } from "@/validation/zod";
+import type { IMonitor } from "@/types/monitor";
 
 type FormValues = z.infer<typeof statusPageSchema>;
 
 const StatusPageCreatePage = () => {
   const navigate = useNavigate();
 
-  const { post, loading } = usePost<FormValues, ApiResponse>();
-  const { response, isValidating } = useGet<ApiResponse>("/monitors");
+  const { post, loading } = usePost<FormValues, IMonitor[]>();
+  const { response, isValidating } =
+    useGet<ApiResponse<IMonitor[]>>("/monitors");
 
-  const monitors = response?.data;
+  const monitors = response?.data || [];
 
   const onSubmit = async (data: FormValues) => {
     const res = await post("/status-pages", data);

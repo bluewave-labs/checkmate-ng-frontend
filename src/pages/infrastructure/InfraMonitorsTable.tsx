@@ -10,7 +10,6 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { usePatch } from "@/hooks/UseApi";
-import type { ApiResponse } from "@/hooks/UseApi";
 
 import type { IMonitor } from "@/types/monitor";
 import type { ActionMenuItem } from "@/components/actions-menu";
@@ -42,7 +41,7 @@ export const InfraMonitorsTable = ({
     patch,
     // loading: isPatching,
     // error: postError,
-  } = usePatch<ApiResponse>();
+  } = usePatch<any, IMonitor>();
 
   const handlePageChange = (
     _e: React.MouseEvent<HTMLButtonElement> | null,

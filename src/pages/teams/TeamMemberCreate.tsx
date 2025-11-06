@@ -8,9 +8,10 @@ import { mutate } from "swr";
 const TeamMemberCreate = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { response } = useGet<ApiResponse>("/team-members?type=org");
-  const { response: rolesResponse } = useGet<ApiResponse>("/roles?type=team");
-  const { post } = usePost<ApiResponse>();
+  const { response } = useGet<ApiResponse<any>>("/team-members?type=org");
+  const { response: rolesResponse } =
+    useGet<ApiResponse<any>>("/roles?type=team");
+  const { post } = usePost<ApiResponse<any>>();
   const teamMembers = response?.data || [];
   const roles = rolesResponse?.data || [];
 

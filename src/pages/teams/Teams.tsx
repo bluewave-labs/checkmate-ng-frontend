@@ -19,7 +19,7 @@ const TeamsPage = () => {
   const [selectedTeam, setSelectedTeam] = useState<ITeam | null>(null);
   const isDialogOpen = Boolean(selectedTeam);
   const { t } = useTranslation();
-  const { response, loading, refetch } = useGet<ApiResponse>("/teams");
+  const { response, loading, refetch } = useGet<ApiResponse<any>>("/teams");
   const { deleteFn } = useDelete();
   const teams = response?.data || [];
 

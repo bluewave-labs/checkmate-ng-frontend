@@ -18,8 +18,9 @@ const TeamMemberConfig = () => {
   const { t } = useTranslation();
   const { id } = useParams();
   const { patch, loading } = usePatch();
-  const { response } = useGet<ApiResponse>("/team-members");
-  const { response: rolesResponse } = useGet<ApiResponse>("/roles?type=team");
+  const { response } = useGet<ApiResponse<any>>("/team-members");
+  const { response: rolesResponse } =
+    useGet<ApiResponse<any>>("/roles?type=team");
   const teamMembers = response?.data || [];
   const roles = rolesResponse?.data || [];
 

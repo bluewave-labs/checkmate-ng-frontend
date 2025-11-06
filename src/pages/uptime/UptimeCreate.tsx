@@ -6,13 +6,16 @@ import { monitorSchema } from "@/validation/zod";
 import { useGet, usePost } from "@/hooks/UseApi";
 import type { ApiResponse } from "@/hooks/UseApi";
 import { useNavigate } from "react-router";
+import type { INotificationChannel } from "@/types/notification-channel";
 const UptimeCreatePage = () => {
   type FormValues = z.infer<typeof monitorSchema>;
   type SubmitValues = Omit<FormValues, "interval"> & {
     interval: number | undefined;
   };
   const navigate = useNavigate();
-  const { response } = useGet<ApiResponse>("/notification-channels");
+  const { response } = useGet<ApiResponse<INotificationChannel[]>>(
+    "/notification-channels"
+  );
   const { post, loading, error } = usePost<SubmitValues>();
 
   const onSubmit = async (data: FormValues) => {

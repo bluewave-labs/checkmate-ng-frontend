@@ -6,14 +6,17 @@ import { monitorSchemaInfra } from "@/validation/zod";
 import { useGet, usePost } from "@/hooks/UseApi";
 import type { ApiResponse } from "@/hooks/UseApi";
 import { useNavigate } from "react-router";
+import type { INotificationChannel } from "@/types/notification-channel";
 const InfraCreatePage = () => {
   type FormValues = z.infer<typeof monitorSchemaInfra>;
   type SubmitValues = Omit<FormValues, "interval"> & {
     interval: number | undefined;
   };
   const navigate = useNavigate();
-  const { response } = useGet<ApiResponse>("/notification-channels");
-  const { post, loading, error } = usePost<SubmitValues>();
+  const { response } = useGet<ApiResponse<INotificationChannel[]>>(
+    "/notification-channels"
+  );
+  const { post, loading, error } = usePost<SubmitValues, any>();
 
   const onSubmit = async (data: FormValues) => {
     let interval = humanInterval(data.interval);

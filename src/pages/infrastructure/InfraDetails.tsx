@@ -10,7 +10,7 @@ import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { useParams } from "react-router";
 import type { ApiResponse } from "@/hooks/UseApi";
-import type { IMonitor } from "@/types/monitor";
+import type { IMonitor, IMonitorWithMonitorStats } from "@/types/monitor";
 import type { IInfraCheck } from "@/types/check";
 import {
   getFrequency,
@@ -29,18 +29,20 @@ const InfraDetailsPage = () => {
   const { id } = useParams();
   const [range, setRange] = useState("2h");
 
-  const { response, isValidating, refetch } = useGet<ApiResponse>(
+  const { response, isValidating, refetch } = useGet<
+    ApiResponse<IMonitorWithMonitorStats>
+  >(
     `/monitors/${id}?embedChecks=true&range=${range}`,
     {},
     { refreshInterval: GLOBAL_REFRESH, keepPreviousData: true }
   );
 
-  const { patch, loading: isPatching } = usePatch<ApiResponse>();
+  const { patch, loading: isPatching } = usePatch<any, IMonitor>();
 
-  const monitor: IMonitor = response?.data?.monitor;
+  const monitor = response?.data?.monitor;
   const stats = response?.data?.stats;
   const checks = (response?.data?.checks || []) as IInfraCheck[];
-  const palette = getStatusPalette(monitor?.status);
+  const palette = getStatusPalette(monitor?.status || "initializing");
 
   const streakDuration = stats?.currentStreakStartedAt
     ? Date.now() - stats?.currentStreakStartedAt
@@ -49,6 +51,10 @@ const InfraDetailsPage = () => {
   const lastChecked = stats?.lastCheckTimestamp
     ? Date.now() - stats?.lastCheckTimestamp
     : -1;
+
+  if (!monitor) {
+    return null;
+  }
 
   return (
     <BasePage>
