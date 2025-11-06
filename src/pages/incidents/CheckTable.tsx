@@ -13,14 +13,14 @@ const getHeaders = (t: Function, uiTimezone: string) => {
   const headers: Header<CheckWithMonitor>[] = [
     {
       id: "name",
-      content: t("name"),
+      content: t("incidentsTableMonitorName"),
       render: (row) => {
         return row.metadata.monitorId.name || "N/A";
       },
     },
     {
       id: "status",
-      content: t("status"),
+      content: t("incidentsTableStatusCode"),
       render: (row) => {
         return <StatusLabel status={row.status as MonitorStatus} />;
       },

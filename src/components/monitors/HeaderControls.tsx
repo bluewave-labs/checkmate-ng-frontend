@@ -33,6 +33,7 @@ export const HeaderControls = ({
   const isSmall = useMediaQuery(theme.breakpoints.down("md"));
   const navigate = useNavigate();
   const { post, loading: isPosting } = usePost<any, ApiResponse>();
+  const hasNotificationChannels = monitor.notificationChannels.length > 0;
   return (
     <Stack
       direction={isSmall ? "column" : "row"}
@@ -47,15 +48,17 @@ export const HeaderControls = ({
           variant="contained"
           color="secondary"
         >
-          <Button
-            loading={isPosting || isPatching}
-            startIcon={<EmailIcon />}
-            onClick={async () => {
-              await post(`/monitors/${monitor._id}/notifications/test`, {});
-            }}
-          >
-            {t("sendTestNotifications")}
-          </Button>
+          {hasNotificationChannels && (
+            <Button
+              loading={isPosting || isPatching}
+              startIcon={<EmailIcon />}
+              onClick={async () => {
+                await post(`/monitors/${monitor._id}/notifications/test`, {});
+              }}
+            >
+              {t("sendTestNotifications")}
+            </Button>
+          )}
           <Button
             startIcon={<BugReportOutlinedIcon />}
             onClick={() => {

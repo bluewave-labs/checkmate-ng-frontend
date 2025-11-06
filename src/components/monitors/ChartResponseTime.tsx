@@ -89,8 +89,6 @@ export const ChartResponseTime = ({
 }) => {
   const theme = useTheme();
   const uiTimezone = useAppSelector((state: any) => state.ui.timezone);
-  const state = useAppSelector((state) => state);
-  console.log(state);
   const normalized = normalizeResponseTimes<GroupedCheck, "avgResponseTime">(
     checks,
     "avgResponseTime"

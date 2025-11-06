@@ -4,6 +4,7 @@ import type { SWRConfiguration } from "swr";
 import type { AxiosRequestConfig } from "axios";
 import { get, post, patch, deleteOp } from "@/utils/ApiClient";
 import { useAppSelector } from "@/hooks/AppHooks";
+import { toast } from "react-toastify";
 
 export type ApiResponse = {
   message: string;
@@ -42,7 +43,17 @@ export const useGet = <T,>(
       });
     },
     // Config
-    swrConfig
+    {
+      onError: (err) => {
+        console.log(err);
+        toast.error(
+          err?.response?.data?.message ||
+            err.message ||
+            "An unexpected error occurred"
+        );
+      },
+      ...swrConfig,
+    }
   );
 
   return {
@@ -79,7 +90,7 @@ export const usePost = <B = any, R = any>() => {
     } catch (err: any) {
       const errMsg =
         err?.response?.data?.msg || err.message || "An error occurred";
-      alert(errMsg);
+      toast.error(errMsg);
       setError(errMsg);
       return null;
     } finally {
@@ -115,7 +126,7 @@ export const usePatch = <B = any, R = any>() => {
     } catch (err: any) {
       const errMsg =
         err?.response?.data?.msg || err.message || "An error occurred";
-      alert(errMsg);
+      toast.error(errMsg);
       setError(errMsg);
       return null;
     } finally {
@@ -150,7 +161,7 @@ export const useDelete = <R = any,>() => {
     } catch (err: any) {
       const errMsg =
         err?.response?.data?.msg || err.message || "An error occurred";
-      alert(errMsg);
+      toast.error(errMsg);
       setError(errMsg);
       return null;
     } finally {

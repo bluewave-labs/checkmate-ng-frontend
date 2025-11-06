@@ -6,6 +6,8 @@ import { I18nLoader } from "@/components/i18nLoader";
 import { useAppSelector } from "./hooks/AppHooks";
 import { BrowserRouter } from "react-router-dom";
 import { AuthVerifier } from "@/components/auth-verifier";
+import { ToastContainer } from "react-toastify";
+
 function App() {
   const mode = useAppSelector((state) => state.ui.mode);
 
@@ -18,6 +20,15 @@ function App() {
           <AppRoutes />
         </AuthVerifier>
       </BrowserRouter>
+      <ToastContainer
+        theme={mode}
+        style={
+          {
+            "--toastify-color-progress-light": lightTheme.palette.accent.main,
+            "--toastify-color-progress-dark": darkTheme.palette.accent.main,
+          } as React.CSSProperties
+        }
+      />
     </ThemeProvider>
   );
 }

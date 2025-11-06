@@ -10,6 +10,7 @@ export interface IMonitor {
   latestChecks: ICheck[];
   n: number;
   name: string;
+  notificationChannels: string[];
   status: MonitorStatus;
   type: string;
   updatedAt: string;
