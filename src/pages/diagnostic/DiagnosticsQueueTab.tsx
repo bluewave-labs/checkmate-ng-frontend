@@ -29,7 +29,7 @@ export const DiagnosticsQueueTab = () => {
         id: "name",
         content: t("diagnosticsPage.tableHeaderId"),
         render: (row) => {
-          return row.id;
+          return row?.id || "-";
         },
       },
       {
@@ -57,7 +57,7 @@ export const DiagnosticsQueueTab = () => {
         id: "active",
         content: t("diagnosticsPage.tableHeaderActive"),
         render: (row) => {
-          return row?.data?.isActive;
+          return row?.data?.isActive ? "true" : "false";
         },
       },
 
