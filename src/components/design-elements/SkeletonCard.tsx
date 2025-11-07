@@ -42,7 +42,9 @@ const SkeletonCard: React.FC<SkeletonCardProps> = ({
     width: typeof width === "number" ? `${width}px` : width,
     height: "57.6px", // 60% of 96px
     borderRadius: "12px", // 60% of 20px
-    background: theme.palette.primary.main,
+    background: theme.palette.mode === 'dark'
+      ? '#222222'
+      : theme.palette.primary.main,
     boxShadow: theme.palette.mode === 'dark'
       ? "0 8px 30px rgba(0,0,0,.3), 0 0 0 1px rgba(255,255,255,.05) inset"
       : "0 8px 30px rgba(0,0,0,.08), 0 0 0 1px rgba(0,0,0,.05) inset",
@@ -113,7 +115,6 @@ const SkeletonCard: React.FC<SkeletonCardProps> = ({
           sx={{
             ...cardStyle,
             transform: "rotate(-4deg) translate(-12px, -12px)",
-            opacity: 0.75,
             filter: "blur(.2px)",
             position: "absolute",
             left: 0,
@@ -134,7 +135,6 @@ const SkeletonCard: React.FC<SkeletonCardProps> = ({
           sx={{
             ...cardStyle,
             transform: "rotate(5deg) translate(12px, -20px)",
-            opacity: 0.75,
             filter: "blur(.3px)",
             position: "absolute",
             left: 0,
