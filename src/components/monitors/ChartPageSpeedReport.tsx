@@ -1,5 +1,5 @@
 import { BaseChart } from "@/components/monitors/Chart";
-import SummarizeOutlinedIcon from "@mui/icons-material/SummarizeOutlined";
+import { FileText } from "lucide-react";
 import { Pie, PieChart, ResponsiveContainer, Label } from "recharts";
 import Typography from "@mui/material/Typography";
 import { getPageSpeedPalette } from "@/utils/MonitorUtils";
@@ -69,7 +69,7 @@ export const ChartPageSpeedReport = ({ latestCheck }: { latestCheck: any }) => {
   ];
 
   return (
-    <BaseChart icon={<SummarizeOutlinedIcon />} title="Average PageSpeed score">
+    <BaseChart icon={<FileText size={20} strokeWidth={1.5} />} title="Average PageSpeed score">
       <ResponsiveContainer width="100%" height={250}>
         <PieChart>
           <Pie data={score} dataKey="value" cx="50%" cy="50%" outerRadius="65%">

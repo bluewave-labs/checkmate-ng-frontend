@@ -1,7 +1,7 @@
 import Radio from "@mui/material/Radio";
 import type { RadioProps } from "@mui/material/Radio";
 import { useTheme } from "@mui/material/styles";
-import RadioChecked from "@/assets/icons/radio-checked.svg?react";
+import { Circle, CircleDot } from "lucide-react";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Typography from "@mui/material/Typography";
 
@@ -12,17 +12,27 @@ export const RadioInput: React.FC<RadioInputProps> = ({ ...props }) => {
   return (
     <Radio
       {...props}
-      checkedIcon={<RadioChecked />}
+      icon={<Circle size={16} strokeWidth={1.5} />}
+      checkedIcon={<CircleDot size={14} strokeWidth={1.5} />}
       sx={{
-        color: "transparent",
-        boxShadow: `inset 0 0 0 1px ${theme.palette.secondary.main}`,
-        "&:not(.Mui-checked)": {
-          boxShadow: `inset 0 0 0 1px ${theme.palette.primary.contrastText}70`, // Use theme text color for the outline
-        },
-        mt: theme.spacing(0.5),
         padding: 0,
+        mt: theme.spacing(0.5),
+        color: theme.palette.primary.contrastTextTertiary,
+        "&.Mui-checked": {
+          color: theme.palette.accent.main,
+          "& svg circle": {
+            fill: theme.palette.accent.main,
+          },
+        },
         "& .MuiSvgIcon-root": {
           fontSize: 16,
+        },
+        "& svg": {
+          stroke: "currentColor",
+        },
+        "& svg path, & svg line, & svg polyline, & svg rect, & svg circle": {
+          stroke: "currentColor",
+          fill: "none",
         },
       }}
     />

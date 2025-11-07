@@ -1,6 +1,6 @@
 import { BaseChart } from "@/components/monitors/Chart";
 import { BaseBox } from "@/components/design-elements";
-import ResponseTimeIcon from "@/assets/icons/response-time-icon.svg?react";
+import { Clock } from "lucide-react";
 import { normalizeResponseTimes } from "@/utils/DataUtils";
 import {
   AreaChart,
@@ -94,7 +94,7 @@ export const ChartResponseTime = ({
     "avgResponseTime"
   );
   return (
-    <BaseChart icon={<ResponseTimeIcon />} title="Response times">
+    <BaseChart icon={<Clock size={20} strokeWidth={1.5} />} title="Response times">
       <ResponsiveContainer width="100%" height={300}>
         <AreaChart data={normalized?.slice().reverse()}>
           <CartesianGrid

@@ -1,21 +1,21 @@
-import LeftArrow from "@/assets/icons/left-arrow.svg?react";
-import LeftArrowDouble from "@/assets/icons/left-arrow-double.svg?react";
-import LeftArrowLong from "@/assets/icons/left-arrow-long.svg?react";
+import { ChevronLeft, ChevronsLeft, MoveLeft } from "lucide-react";
 
 export const ArrowLeft = ({
   type,
   color = "#667085",
+  size = 24,
   ...props
 }: {
   type?: string,
   color?: string | undefined,
+  size?: number,
   [key: string]: any,
 }) => {
   if (type === "double") {
-    return <LeftArrowDouble style={{ color }} {...props} />;
+    return <ChevronsLeft color={color} size={size} strokeWidth={1.5} {...props} />;
   } else if (type === "long") {
-    return <LeftArrowLong style={{ color }} {...props} />;
+    return <MoveLeft color={color} size={size} strokeWidth={1.5} {...props} />;
   } else {
-    return <LeftArrow style={{ color }} {...props} />;
+    return <ChevronLeft color={color} size={size} strokeWidth={1.5} {...props} />;
   }
 };

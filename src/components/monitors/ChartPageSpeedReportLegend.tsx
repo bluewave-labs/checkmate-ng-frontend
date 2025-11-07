@@ -1,6 +1,6 @@
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import AnalyticsOutlinedIcon from "@mui/icons-material/AnalyticsOutlined";
+import { BarChart3 } from "lucide-react";
 import { BaseChart } from "@/components/monitors/Chart";
 import Typography from "@mui/material/Typography";
 
@@ -54,7 +54,7 @@ export const ChartPageSpeedReportLegend = ({
 }) => {
   const theme = useTheme();
   return (
-    <BaseChart icon={<AnalyticsOutlinedIcon />} title="PageSpeed report">
+    <BaseChart icon={<BarChart3 size={20} strokeWidth={1.5} />} title="PageSpeed report">
       <Stack gap={theme.spacing(4)}>
         <MetricBox
           label="Speed index (SI)"

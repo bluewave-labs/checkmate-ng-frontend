@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
-import Settings from "@/assets/icons/settings-bold.svg?react";
+import { Settings } from "lucide-react";
 
 export type ActionMenuItem = {
   id: number | string;
@@ -28,7 +28,7 @@ export const ActionsMenu = ({ items }: { items: ActionMenuItem[] }) => {
   return (
     <div>
       <IconButton onClick={handleClick}>
-        <Settings />
+        <Settings size={20} strokeWidth={1.5} />
       </IconButton>
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
         {items.map((item) => (
