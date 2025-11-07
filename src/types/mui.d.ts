@@ -14,6 +14,7 @@ declare module "@mui/material/styles" {
     contrastTextSecondary?: string;
     contrastTextTertiary?: string;
     lowContrast?: string;
+    veryLowContrast?: string;
   }
 }
 
