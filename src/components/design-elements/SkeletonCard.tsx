@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, useTheme } from "@mui/material";
 
 interface SkeletonCardProps {
   /**
@@ -23,6 +23,7 @@ const SkeletonCard: React.FC<SkeletonCardProps> = ({
   width = 216, // 60% of 360
   showHalo = true,
 }) => {
+  const theme = useTheme();
   const pulseAnimation = {
     "@keyframes pulse": {
       "0%, 100%": { opacity: 1 },
@@ -41,8 +42,10 @@ const SkeletonCard: React.FC<SkeletonCardProps> = ({
     width: typeof width === "number" ? `${width}px` : width,
     height: "57.6px", // 60% of 96px
     borderRadius: "12px", // 60% of 20px
-    background: "#ffffff",
-    boxShadow: "0 8px 30px rgba(0,0,0,.08), 0 0 0 1px rgba(0,0,0,.05) inset",
+    background: theme.palette.primary.main,
+    boxShadow: theme.palette.mode === 'dark'
+      ? "0 8px 30px rgba(0,0,0,.3), 0 0 0 1px rgba(255,255,255,.05) inset"
+      : "0 8px 30px rgba(0,0,0,.08), 0 0 0 1px rgba(0,0,0,.05) inset",
     display: "flex",
     gap: "9.6px", // 60% of 16px
     alignItems: "center",
@@ -53,8 +56,8 @@ const SkeletonCard: React.FC<SkeletonCardProps> = ({
     width: "54px", // 60% of 90px
     height: "33.6px", // 60% of 56px
     borderRadius: "7.2px", // 60% of 12px
-    background: "#f3f4f6",
-    border: "1px solid #e5e7eb",
+    background: theme.palette.secondary.main,
+    border: `1px solid ${theme.palette.primary.lowContrast}`,
     animation: "pulse 1.6s ease-in-out infinite",
     ...pulseAnimation,
   };
@@ -62,8 +65,8 @@ const SkeletonCard: React.FC<SkeletonCardProps> = ({
   const lineStyle = {
     height: "7.2px", // 60% of 12px
     borderRadius: "999px",
-    background: "#f3f4f6",
-    border: "1px solid #e5e7eb",
+    background: theme.palette.secondary.main,
+    border: `1px solid ${theme.palette.primary.lowContrast}`,
     animation: "pulse 1.6s ease-in-out infinite",
     ...pulseAnimation,
   };
@@ -84,7 +87,9 @@ const SkeletonCard: React.FC<SkeletonCardProps> = ({
               width: "260px",
               height: "260px",
               borderRadius: "999px",
-              background: "#fff",
+              background: theme.palette.mode === 'dark'
+                ? "rgba(255, 255, 255, 0.05)"
+                : "#fff",
               filter: "blur(60px)",
               opacity: 0.9,
             },
