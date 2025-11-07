@@ -9,7 +9,6 @@ import { useNavigate } from "react-router";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import type { BoxProps } from "@mui/material";
-import { useAppSelector } from "@/hooks/AppHooks";
 interface BaseFallbackProps extends BoxProps {
   children: React.ReactNode;
 }
@@ -24,7 +23,7 @@ export const BaseFallback: React.FC<BaseFallbackProps> = ({
   return (
     <Box
       margin={isSmall ? "inherit" : "auto"}
-      marginTop={isSmall ? "33%" : "auto"}
+      marginTop={isSmall ? "33%" : "10%"}
       width={{
         sm: "90%",
         md: "70%",
@@ -62,7 +61,7 @@ export const BaseFallback: React.FC<BaseFallbackProps> = ({
               width: "100%",
             }}
           >
-            <SkeletonCard width={216} showHalo={true} />
+            <SkeletonCard showHalo={true} />
           </Box>
 
           <Stack

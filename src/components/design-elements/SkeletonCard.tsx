@@ -2,15 +2,7 @@ import React from "react";
 import { Box, Stack, useTheme } from "@mui/material";
 
 interface SkeletonCardProps {
-  /**
-   * Width of the card. Can be a number (px) or string with units
-   * @default 216 (60% of 360)
-   */
   width?: number | string;
-  /**
-   * Whether to show the soft spotlight halo effect
-   * @default true
-   */
   showHalo?: boolean;
 }
 
@@ -20,7 +12,7 @@ interface SkeletonCardProps {
  * Default size is 60% of original design
  */
 const SkeletonCard: React.FC<SkeletonCardProps> = ({
-  width = 216, // 60% of 360
+  width = 216,
   showHalo = true,
 }) => {
   const theme = useTheme();
@@ -39,25 +31,25 @@ const SkeletonCard: React.FC<SkeletonCardProps> = ({
   };
 
   const cardStyle = {
-    width: typeof width === "number" ? `${width}px` : width,
-    height: "57.6px", // 60% of 96px
-    borderRadius: "12px", // 60% of 20px
-    background: theme.palette.mode === 'dark'
-      ? '#222222'
-      : theme.palette.primary.main,
-    boxShadow: theme.palette.mode === 'dark'
-      ? "0 8px 30px rgba(0,0,0,.3), 0 0 0 1px rgba(255,255,255,.05) inset"
-      : "0 8px 30px rgba(0,0,0,.08), 0 0 0 1px rgba(0,0,0,.05) inset",
+    width: width,
+    height: 57,
+    borderRadius: theme.shape.borderRadius,
+    background:
+      theme.palette.mode === "dark" ? "#222222" : theme.palette.primary.main,
+    boxShadow:
+      theme.palette.mode === "dark"
+        ? "0 8px 30px rgba(0,0,0,.3), 0 0 0 1px rgba(255,255,255,.05) inset"
+        : "0 8px 30px rgba(0,0,0,.08), 0 0 0 1px rgba(0,0,0,.05) inset",
     display: "flex",
-    gap: "9.6px", // 60% of 16px
+    gap: theme.spacing(5),
     alignItems: "center",
-    padding: "9.6px", // 60% of 16px
+    padding: theme.spacing(5),
   };
 
   const blockStyle = {
-    width: "54px", // 60% of 90px
-    height: "33.6px", // 60% of 56px
-    borderRadius: "7.2px", // 60% of 12px
+    width: 55,
+    height: 34,
+    borderRadius: theme.shape.borderRadius,
     background: theme.palette.secondary.main,
     border: `1px solid ${theme.palette.primary.lowContrast}`,
     animation: "pulse 1.6s ease-in-out infinite",
@@ -65,8 +57,8 @@ const SkeletonCard: React.FC<SkeletonCardProps> = ({
   };
 
   const lineStyle = {
-    height: "7.2px", // 60% of 12px
-    borderRadius: "999px",
+    height: 7,
+    borderRadius: theme.shape.borderRadius,
     background: theme.palette.secondary.main,
     border: `1px solid ${theme.palette.primary.lowContrast}`,
     animation: "pulse 1.6s ease-in-out infinite",
@@ -75,7 +67,6 @@ const SkeletonCard: React.FC<SkeletonCardProps> = ({
 
   return (
     <Box sx={{ position: "relative" }}>
-      {/* Soft spotlight halo */}
       {showHalo && (
         <Box
           sx={{
@@ -89,9 +80,10 @@ const SkeletonCard: React.FC<SkeletonCardProps> = ({
               width: "260px",
               height: "260px",
               borderRadius: "999px",
-              background: theme.palette.mode === 'dark'
-                ? "rgba(255, 255, 255, 0.05)"
-                : "#fff",
+              background:
+                theme.palette.mode === "dark"
+                  ? "rgba(255, 255, 255, 0.05)"
+                  : "#fff",
               filter: "blur(60px)",
               opacity: 0.9,
             },
