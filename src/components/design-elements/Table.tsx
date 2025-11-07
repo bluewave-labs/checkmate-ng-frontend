@@ -11,7 +11,12 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
 import IconButton from "@mui/material/IconButton";
-import { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ChevronsLeft,
+  ChevronsRight,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 import TablePagination from "@mui/material/TablePagination";
 import type { TablePaginationProps } from "@mui/material/TablePagination";
@@ -51,12 +56,14 @@ export function DataTable<
 }: DataTableProps<T>) {
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("md"));
-
+  const keys = [];
   // Return stack of cards for small screens
   if (isSmall && cardsOnSmallScreens) {
     return (
       <Stack spacing={theme.spacing(4)}>
         {data.map((row) => {
+          const key = row.id || row._id || Math.random();
+          keys.push(key);
           return (
             <Stack
               onClick={() => (onRowClick ? onRowClick(row) : null)}
@@ -69,11 +76,11 @@ export function DataTable<
                 padding: theme.spacing(4),
                 cursor: onRowClick ? "pointer" : "default",
               }}
-              key={row.id || row._id || Math.random()}
+              key={key}
             >
               {headers.map((header) => {
                 return (
-                  <Grid container>
+                  <Grid container key={header.id}>
                     <Grid size={3} display={"flex"} alignItems={"center"}>
                       <Typography color={theme.palette.text.primary}>
                         {header.content}
@@ -209,7 +216,11 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
         disabled={page === 0}
         aria-label="first page"
       >
-        {theme.direction === "rtl" ? <ChevronsRight size={20} strokeWidth={1.5} /> : <ChevronsLeft size={20} strokeWidth={1.5} />}
+        {theme.direction === "rtl" ? (
+          <ChevronsRight size={20} strokeWidth={1.5} />
+        ) : (
+          <ChevronsLeft size={20} strokeWidth={1.5} />
+        )}
       </IconButton>
       <IconButton
         onClick={handleBackButtonClick}
@@ -238,7 +249,11 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="last page"
       >
-        {theme.direction === "rtl" ? <ChevronsLeft size={20} strokeWidth={1.5} /> : <ChevronsRight size={20} strokeWidth={1.5} />}
+        {theme.direction === "rtl" ? (
+          <ChevronsLeft size={20} strokeWidth={1.5} />
+        ) : (
+          <ChevronsRight size={20} strokeWidth={1.5} />
+        )}
       </IconButton>
     </Box>
   );
