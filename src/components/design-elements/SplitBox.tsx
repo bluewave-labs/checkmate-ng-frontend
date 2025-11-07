@@ -27,6 +27,11 @@ export const SplitBox = ({
         borderBottom={isSmall ? 1 : 0}
         borderColor={theme.palette.primary.lowContrast}
         flex={0.7}
+        sx={{
+          background: theme.palette.mode === 'dark'
+            ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.01) 0%, rgba(255, 255, 255, 0.02) 100%)'
+            : 'linear-gradient(135deg, rgba(0, 0, 0, 0.01) 0%, rgba(0, 0, 0, 0.02) 100%)',
+        }}
       >
         {left}
       </Box>

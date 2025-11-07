@@ -6,7 +6,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
-import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
+import { Trash2 } from "lucide-react";
 
 import dayjs from "dayjs";
 import type { Dayjs } from "dayjs";
@@ -213,14 +213,16 @@ export const MaintenanceForm = ({
                     key={monitorId}
                   >
                     <Typography>{option.name}</Typography>
-                    <DeleteOutlineRoundedIcon
+                    <Trash2
+                      size={20}
+                      strokeWidth={1.5}
                       onClick={() => {
                         const updated = monitors.filter(
                           (id) => id !== monitorId
                         );
                         setValue("monitors", updated);
                       }}
-                      sx={{ cursor: "pointer" }}
+                      style={{ cursor: "pointer" }}
                     />
                   </Stack>
                 );

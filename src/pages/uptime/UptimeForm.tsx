@@ -8,7 +8,7 @@ import {
 import { ConfigBox, BasePage } from "@/components/design-elements";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControl from "@mui/material/FormControl";
-import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
+import { Trash2 } from "lucide-react";
 import { Typography } from "@mui/material";
 
 import { useEffect, useRef } from "react";
@@ -252,14 +252,16 @@ export const UptimeForm = ({
                     key={notificationId}
                   >
                     <Typography>{option.name}</Typography>
-                    <DeleteOutlineRoundedIcon
+                    <Trash2
+                      size={20}
+                      strokeWidth={1.5}
                       onClick={() => {
                         const updated = notificationChannels.filter(
                           (id) => id !== notificationId
                         );
                         setValue("notificationChannels", updated);
                       }}
-                      sx={{ cursor: "pointer" }}
+                      style={{ cursor: "pointer" }}
                     />
                   </Stack>
                 );
