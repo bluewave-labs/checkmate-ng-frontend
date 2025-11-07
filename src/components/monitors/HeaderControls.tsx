@@ -1,11 +1,7 @@
 import Stack from "@mui/material/Stack";
 import { MonitorStatus } from "@/components/monitors/MonitorStatus";
 import { ButtonGroup, Button } from "@/components/inputs";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import PauseOutlinedIcon from "@mui/icons-material/PauseOutlined";
-import PlayArrowOutlinedIcon from "@mui/icons-material/PlayArrowOutlined";
-import EmailIcon from "@mui/icons-material/Email";
-import BugReportOutlinedIcon from "@mui/icons-material/BugReportOutlined";
+import { Settings, Pause, Play, Mail, Bug } from "lucide-react";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTranslation } from "react-i18next";
@@ -50,7 +46,7 @@ export const HeaderControls = ({
           {hasNotificationChannels && (
             <Button
               loading={isPosting || isPatching}
-              startIcon={<EmailIcon />}
+              startIcon={<Mail size={20} strokeWidth={1.5} />}
               onClick={async () => {
                 await post(`/monitors/${monitor._id}/notifications/test`, {});
               }}
@@ -59,7 +55,7 @@ export const HeaderControls = ({
             </Button>
           )}
           <Button
-            startIcon={<BugReportOutlinedIcon />}
+            startIcon={<Bug size={20} strokeWidth={1.5} />}
             onClick={() => {
               navigate(`/incidents/${monitor._id}`);
             }}
@@ -74,16 +70,16 @@ export const HeaderControls = ({
             }}
             startIcon={
               monitor?.isActive ? (
-                <PauseOutlinedIcon />
+                <Pause size={20} strokeWidth={1.5} />
               ) : (
-                <PlayArrowOutlinedIcon />
+                <Play size={20} strokeWidth={1.5} />
               )
             }
           >
             {monitor?.isActive ? t("pause") : t("resume")}
           </Button>
           <Button
-            startIcon={<SettingsOutlinedIcon />}
+            startIcon={<Settings size={20} strokeWidth={1.5} />}
             onClick={() => {
               navigate(`${path}/${monitor._id}/configure`);
             }}

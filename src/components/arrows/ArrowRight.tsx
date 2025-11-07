@@ -1,18 +1,19 @@
-import RightArrow from "@/assets/icons/right-arrow.svg?react";
-import RightArrowDouble from "@/assets/icons/right-arrow-double.svg?react";
+import { ChevronRight, ChevronsRight } from "lucide-react";
 
 export const ArrowRight = ({
   type,
   color = "#667085",
+  size = 24,
   ...props
 }: {
   type?: string;
   color?: string | undefined;
+  size?: number;
   [key: string]: any;
 }) => {
   if (type === "double") {
-    return <RightArrowDouble style={{ color }} {...props} />;
+    return <ChevronsRight color={color} size={size} strokeWidth={1.5} {...props} />;
   } else {
-    return <RightArrow style={{ color }} {...props} />;
+    return <ChevronRight color={color} size={size} strokeWidth={1.5} {...props} />;
   }
 };

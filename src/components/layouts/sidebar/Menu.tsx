@@ -1,37 +1,37 @@
-import Notifications from "@/assets/icons/notifications.svg?react";
-import Monitors from "@/assets/icons/monitors.svg?react";
-import PageSpeed from "@/assets/icons/page-speed.svg?react";
-import Integrations from "@/assets/icons/integrations.svg?react";
-import Incidents from "@/assets/icons/incidents.svg?react";
-import StatusPages from "@/assets/icons/status-pages.svg?react";
-import Maintenance from "@/assets/icons/maintenance.svg?react";
-import Activity from "@/assets/icons/activity.svg?react";
-
-// import Settings from "@/assets/icons/settings.svg?react";
-import Support from "@/assets/icons/support.svg?react";
-import Discussions from "@/assets/icons/discussions.svg?react";
-import Docs from "@/assets/icons/docs.svg?react";
-import ChangeLog from "@/assets/icons/changeLog.svg?react";
+import {
+  Bell,
+  Monitor,
+  Gauge,
+  Server,
+  AlertTriangle,
+  LayoutList,
+  Wrench,
+  Activity,
+  LifeBuoy,
+  MessageSquare,
+  FileText,
+  ScrollText
+} from "lucide-react";
 
 export const getMenu = (t: Function) => [
-  { name: t("menu.uptime"), path: "uptime", icon: <Monitors /> },
-  { name: t("menu.pagespeed"), path: "pagespeed", icon: <PageSpeed /> },
+  { name: t("menu.uptime"), path: "uptime", icon: <Monitor size={20} strokeWidth={1.5} /> },
+  { name: t("menu.pagespeed"), path: "pagespeed", icon: <Gauge size={20} strokeWidth={1.5} /> },
 
   {
     name: t("menu.infrastructure"),
     path: "infrastructure",
-    icon: <Integrations />,
+    icon: <Server size={20} strokeWidth={1.5} />,
   },
   {
     name: t("menu.notifications"),
     path: "notification-channels",
-    icon: <Notifications />,
+    icon: <Bell size={20} strokeWidth={1.5} />,
   },
-  { name: t("menu.incidents"), path: "incidents", icon: <Incidents /> },
+  { name: t("menu.incidents"), path: "incidents", icon: <AlertTriangle size={20} strokeWidth={1.5} /> },
 
-  { name: t("menu.statusPages"), path: "status-pages", icon: <StatusPages /> },
-  { name: t("menu.maintenance"), path: "maintenance", icon: <Maintenance /> },
-  { name: t("menu.diagnostics"), path: "diagnostics", icon: <Activity /> },
+  { name: t("menu.statusPages"), path: "status-pages", icon: <LayoutList size={20} strokeWidth={1.5} /> },
+  { name: t("menu.maintenance"), path: "maintenance", icon: <Wrench size={20} strokeWidth={1.5} /> },
+  { name: t("menu.diagnostics"), path: "diagnostics", icon: <Activity size={20} strokeWidth={1.5} /> },
 
   // {
   // 	name: t("menu.settings"),
@@ -44,25 +44,25 @@ export const getBottomMenu = (t: Function) => [
   {
     name: t("menu.support"),
     path: "support",
-    icon: <Support />,
+    icon: <LifeBuoy size={20} strokeWidth={1.5} />,
     url: "invite",
   },
   {
     name: t("menu.discussions"),
     path: "discussions",
-    icon: <Discussions />,
+    icon: <MessageSquare size={20} strokeWidth={1.5} />,
     url: "https://github.com/bluewave-labs/checkmate/discussions",
   },
   {
     name: t("menu.docs"),
     path: "docs",
-    icon: <Docs />,
+    icon: <FileText size={20} strokeWidth={1.5} />,
     url: "https://bluewavelabs.gitbook.io/checkmate",
   },
   {
     name: t("menu.changelog"),
     path: "changelog",
-    icon: <ChangeLog />,
+    icon: <ScrollText size={20} strokeWidth={1.5} />,
     url: "https://github.com/bluewave-labs/checkmate/releases",
   },
 ];
