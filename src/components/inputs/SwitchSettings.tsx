@@ -1,15 +1,18 @@
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Typography from "@mui/material/Typography";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import Tooltip from "@mui/material/Tooltip";
+import { Settings } from "lucide-react";
 import IconButton from "@mui/material/IconButton";
 
 import { useNavigate } from "react-router";
 import { useAppSelector } from "@/hooks/AppHooks";
 import { useState } from "react";
+import { useTheme } from "@mui/material/styles";
 
 export const SettingsSwitch = () => {
   const navigate = useNavigate();
+  const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -41,9 +44,21 @@ export const SettingsSwitch = () => {
 
   return (
     <>
-      <IconButton onClick={handleOpen}>
-        <SettingsOutlinedIcon />
-      </IconButton>
+      <Tooltip title="Settings" placement="right">
+        <IconButton
+          onClick={handleOpen}
+          sx={{
+            "& svg": {
+              transition: "stroke 0.2s ease",
+            },
+            "&:hover svg path, &:hover svg line, &:hover svg polyline, &:hover svg rect, &:hover svg circle": {
+              stroke: theme.palette.accent.main,
+            },
+          }}
+        >
+          <Settings size={16} strokeWidth={1.5} />
+        </IconButton>
+      </Tooltip>
       <Menu
         anchorEl={anchorEl}
         open={open}

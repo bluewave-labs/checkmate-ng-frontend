@@ -23,6 +23,7 @@ const colors = {
   gray500: "#A2A3A3",
   gray900: "#1c1c1c",
   blueGray50: "#E8F0FE",
+  blueGray400: "#8b9dc3",
   blueGray500: "#475467",
   blueGray600: "#344054",
   blueGray800: "#1C2130",
@@ -56,15 +57,18 @@ export const lightPalette = {
     contrastTextSecondary: colors.blueGray600,
     contrastTextTertiary: colors.blueGray500,
     lowContrast: colors.gray250,
+    veryLowContrast: lighten(colors.gray250, 0.5),
   },
   secondary: {
     main: colors.gray200,
     light: colors.lightBlueWave,
+    dark: lighten(colors.gray200, 0.1),
     contrastText: colors.blueGray600,
   },
   tertiary: {
     main: colors.gray100,
     contrastText: colors.blueGray800,
+    hover: colors.blueGray400,
   },
   success: {
     main: colors.green700,
@@ -96,15 +100,18 @@ export const darkPalette = {
     contrastTextSecondary: colors.gray200,
     contrastTextTertiary: colors.gray500,
     lowContrast: colors.blueGray600,
+    veryLowContrast: darken(colors.blueGray600, 0.5),
   },
   secondary: {
     main: "#313131",
     light: colors.lightBlueWave,
+    dark: lighten("#313131", 0.1),
     contrastText: colors.gray200,
   },
   tertiary: {
     main: colors.blueGray800,
     contrastText: colors.gray100,
+    hover: colors.blueGray400,
   },
   success: {
     main: colors.green100,

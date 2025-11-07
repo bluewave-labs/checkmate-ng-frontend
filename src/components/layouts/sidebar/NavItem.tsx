@@ -23,7 +23,7 @@ export const NavItem = ({
 }) => {
   const theme = useTheme();
   const iconStroke = selected
-    ? theme.palette.primary.contrastText
+    ? theme.palette.accent.main
     : theme.palette.primary.contrastTextTertiary;
 
   const buttonBgColor = selected ? theme.palette.secondary.main : "transparent";
@@ -52,10 +52,18 @@ export const NavItem = ({
       <ListItemButton
         sx={{
           backgroundColor: buttonBgColor,
+          backgroundImage: selected
+            ? `linear-gradient(135deg, ${theme.palette.secondary.main} 0%, ${theme.palette.secondary.dark} 100%)`
+            : "none",
+          border: 1,
+          borderColor: selected ? theme.palette.primary.veryLowContrast : "transparent",
           "&:hover": {
             backgroundColor: buttonBgHoverColor,
+            backgroundImage: selected
+              ? `linear-gradient(135deg, ${theme.palette.secondary.main} 0%, ${theme.palette.secondary.dark} 100%)`
+              : "none",
           },
-          height: 37,
+          height: 32,
           gap: theme.spacing(4),
           borderRadius: theme.shape.borderRadius,
           px: theme.spacing(4),
@@ -67,12 +75,18 @@ export const NavItem = ({
           sx={{
             minWidth: 0,
             "& svg": {
-              height: 20,
-              width: 20,
+              height: 16,
+              width: 16,
               opacity: 0.81,
+              transition: "stroke 0.2s ease",
             },
-            "& svg path": {
+            "& svg path, & svg line, & svg polyline, & svg rect, & svg circle": {
               stroke: iconStroke,
+            },
+            ".MuiListItemButton-root:hover &": {
+              "& svg path, & svg line, & svg polyline, & svg rect, & svg circle": {
+                stroke: theme.palette.accent.main,
+              },
             },
           }}
         >
