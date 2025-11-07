@@ -9,7 +9,7 @@ export type PaletteKey = {
     : never;
 }[keyof Theme["palette"]];
 
-const fontFamilyPrimary = '"Inter" , sans-serif';
+const fontFamilyPrimary = 'system-ui, sans-serif';
 const shadow =
   "0px 4px 24px -4px rgba(16, 24, 40, 0.08), 0px 3px 3px -3px rgba(16, 24, 40, 0.03)";
 
@@ -56,6 +56,11 @@ export const theme = (mode: string, palette: any) =>
     },
 
     components: {
+      MuiButtonBase: {
+        defaultProps: {
+          disableRipple: true,
+        },
+      },
       MuiFormLabel: {
         styleOverrides: {
           root: ({ theme }) => ({

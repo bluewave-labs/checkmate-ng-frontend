@@ -14,7 +14,7 @@ export const Logo = ({ sidebarOpen }: { sidebarOpen: boolean }) => {
     <Stack
       pt={theme.spacing(6)}
       pb={theme.spacing(12)}
-      pl={theme.spacing(8)}
+      pl={theme.spacing(11)}
       direction="row"
       alignItems="center"
       gap={theme.spacing(4)}

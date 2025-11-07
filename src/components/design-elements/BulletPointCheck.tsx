@@ -1,6 +1,6 @@
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import CheckOutlined from "@/assets/icons/check-outlined.svg?react";
+import { Check } from "lucide-react";
 import { useTheme } from "@mui/material/styles";
 
 export const BulletPointCheck = ({
@@ -25,9 +25,9 @@ export const BulletPointCheck = ({
       gap={theme.spacing(6)}
       alignItems="center"
     >
-      <CheckOutlined
-        height={16}
-        width={16}
+      <Check
+        size={16}
+        strokeWidth={1.5}
         style={{
           flexShrink: 0,
         }}
@@ -42,6 +42,7 @@ export const BulletPointCheck = ({
         fontWeight={450}
         sx={{
           opacity: 0.9,
+          whiteSpace: 'nowrap',
         }}
       >
         {text}

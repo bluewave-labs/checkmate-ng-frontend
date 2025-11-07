@@ -1,8 +1,8 @@
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Typography from "@mui/material/Typography";
-import Groups2OutlinedIcon from "@mui/icons-material/Groups2Outlined";
-import CheckOutlined from "@/assets/icons/check-outlined.svg?react";
+import Tooltip from "@mui/material/Tooltip";
+import { Users, Check } from "lucide-react";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 
@@ -12,10 +12,12 @@ import { setSelectedTeamId } from "@/features/authSlice";
 import { useNavigate } from "react-router";
 import { useGet } from "@/hooks/UseApi";
 import type { ApiResponse } from "@/hooks/UseApi";
+import { useTheme } from "@mui/material/styles";
 
 export const TeamSwitch = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const { response } = useGet<ApiResponse<any>>("/teams/joined");
@@ -47,9 +49,22 @@ export const TeamSwitch = () => {
 
   return (
     <>
-      <IconButton onClick={handleOpen}>
-        <Groups2OutlinedIcon />
-      </IconButton>
+      <Tooltip title="Teams" placement="top">
+        <IconButton
+          onClick={handleOpen}
+          sx={{
+            "& svg": {
+              transition: "stroke 0.2s ease",
+            },
+            "&:hover svg path, &:hover svg line, &:hover svg polyline, &:hover svg rect, &:hover svg circle":
+              {
+                stroke: theme.palette.accent.main,
+              },
+          }}
+        >
+          <Users size={16} strokeWidth={1.5} />
+        </IconButton>
+      </Tooltip>
       <Menu
         anchorEl={anchorEl}
         open={open}
@@ -69,7 +84,9 @@ export const TeamSwitch = () => {
               >
                 <Typography mr={2}>{t.name}</Typography>
                 <Stack width={16} alignItems="center" justifyContent={"center"}>
-                  {selectedTeamId === t._id && <CheckOutlined height={16} />}
+                  {selectedTeamId === t._id && (
+                    <Check size={16} strokeWidth={1.5} />
+                  )}
                 </Stack>
               </Stack>
             </MenuItem>

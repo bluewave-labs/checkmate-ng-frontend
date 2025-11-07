@@ -11,10 +11,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
 import IconButton from "@mui/material/IconButton";
-import LastPageIcon from "@mui/icons-material/LastPage";
-import FirstPageIcon from "@mui/icons-material/FirstPage";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import { ChevronsLeft, ChevronsRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 import TablePagination from "@mui/material/TablePagination";
 import type { TablePaginationProps } from "@mui/material/TablePagination";
@@ -212,7 +209,7 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
         disabled={page === 0}
         aria-label="first page"
       >
-        {theme.direction === "rtl" ? <LastPageIcon /> : <FirstPageIcon />}
+        {theme.direction === "rtl" ? <ChevronsRight size={20} strokeWidth={1.5} /> : <ChevronsLeft size={20} strokeWidth={1.5} />}
       </IconButton>
       <IconButton
         onClick={handleBackButtonClick}
@@ -220,9 +217,9 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
         aria-label="previous page"
       >
         {theme.direction === "rtl" ? (
-          <KeyboardArrowRight />
+          <ChevronRight size={20} strokeWidth={1.5} />
         ) : (
-          <KeyboardArrowLeft />
+          <ChevronLeft size={20} strokeWidth={1.5} />
         )}
       </IconButton>
       <IconButton
@@ -231,9 +228,9 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
         aria-label="next page"
       >
         {theme.direction === "rtl" ? (
-          <KeyboardArrowLeft />
+          <ChevronLeft size={20} strokeWidth={1.5} />
         ) : (
-          <KeyboardArrowRight />
+          <ChevronRight size={20} strokeWidth={1.5} />
         )}
       </IconButton>
       <IconButton
@@ -241,7 +238,7 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="last page"
       >
-        {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
+        {theme.direction === "rtl" ? <ChevronsLeft size={20} strokeWidth={1.5} /> : <ChevronsRight size={20} strokeWidth={1.5} />}
       </IconButton>
     </Box>
   );
