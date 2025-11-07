@@ -1,5 +1,5 @@
 import { BaseChart } from "@/components/monitors/Chart";
-import ScoreIcon from "@/assets/icons/monitor-graph-line.svg?react";
+import { TrendingUp } from "lucide-react";
 import {
   AreaChart,
   Area,
@@ -53,7 +53,7 @@ export const HistogramPageSpeedScores = ({
 }) => {
   const theme = useTheme();
   return (
-    <BaseChart icon={<ScoreIcon />} title="Score history">
+    <BaseChart icon={<TrendingUp size={20} strokeWidth={1.5} />} title="Score history">
       <ResponsiveContainer width="100%" minWidth={25} height={215}>
         <AreaChart data={checks}>
           <CartesianGrid

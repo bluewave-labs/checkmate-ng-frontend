@@ -2,8 +2,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { BaseChart } from "@/components/monitors/Chart";
 import { ResponsiveContainer, BarChart, XAxis, Bar, Cell } from "recharts";
-import UptimeIcon from "@/assets/icons/uptime-icon.svg?react";
-import IncidentsIcon from "@/assets/icons/incidents.svg?react";
+import { TrendingUp, AlertTriangle } from "lucide-react";
 
 import type { GroupedCheck } from "@/types/check";
 import type { MonitorStatus } from "@/types/monitor";
@@ -66,7 +65,7 @@ export const HistogramStatus = ({
 }) => {
   const uiTimezone = useAppSelector((state: any) => state.ui.timezone);
 
-  const icon = status === "up" ? <UptimeIcon /> : <IncidentsIcon />;
+  const icon = status === "up" ? <TrendingUp size={20} strokeWidth={1.5} /> : <AlertTriangle size={20} strokeWidth={1.5} />;
   const theme = useTheme();
   const [idx, setIdx] = useState<number | null>(null);
   const dateFormat = range === "1d" || range === "2h" ? "MMM D, h A" : "MMM D";

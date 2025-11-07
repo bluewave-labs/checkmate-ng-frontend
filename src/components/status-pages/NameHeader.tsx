@@ -1,6 +1,6 @@
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import ArrowOutwardOutlinedIcon from "@mui/icons-material/ArrowOutwardOutlined";
+import { ExternalLink } from "lucide-react";
 
 import type { IStatusPageWithMonitors } from "@/types/status-page";
 import { useTheme } from "@mui/material/styles";
@@ -25,7 +25,7 @@ export const NameHeader = ({
           sx={{ textDecoration: "none", color: "inherit" }}
         >
           <Typography>Public link</Typography>
-          <ArrowOutwardOutlinedIcon fontSize={"small"} />
+          <ExternalLink size={16} strokeWidth={1.5} />
         </Stack>
       )}
     </Stack>

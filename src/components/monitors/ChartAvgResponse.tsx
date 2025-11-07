@@ -1,7 +1,7 @@
 import { BaseChart } from "@/components/monitors/Chart";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import AverageResponseIcon from "@/assets/icons/average-response-icon.svg?react";
+import { Gauge } from "lucide-react";
 import { Cell, RadialBarChart, RadialBar, ResponsiveContainer } from "recharts";
 
 import { getResponseTimeColor } from "@/utils/MonitorUtils";
@@ -28,7 +28,7 @@ export const ChartAvgResponse = ({
   };
 
   return (
-    <BaseChart icon={<AverageResponseIcon />} title={"Average response time"}>
+    <BaseChart icon={<Gauge size={20} strokeWidth={1.5} />} title={"Average response time"}>
       <Stack height="100%" position={"relative"} justifyContent={"flex-end"}>
         <ResponsiveContainer width="100%" height={155}>
           <RadialBarChart
