@@ -15,7 +15,7 @@ import { NavItem } from "@/components/layouts/sidebar/NavItem";
 import { BottomControls } from "@/components/layouts/sidebar/BottomControls";
 import { setSidebarOpen } from "@/features/uiSlice";
 
-export const COLLAPSED_WIDTH = 51;
+export const COLLAPSED_WIDTH = 64;
 export const EXPANDED_WIDTH = 200;
 
 export const SideBar = () => {
@@ -41,7 +41,6 @@ export const SideBar = () => {
       maxHeight={"100vh"}
       paddingTop={theme.spacing(6)}
       paddingBottom={theme.spacing(6)}
-      paddingLeft={theme.spacing(4)}
       gap={theme.spacing(6)}
       borderRight={`1px solid ${theme.palette.primary.lowContrast}`}
       width={sideBarOpen ? EXPANDED_WIDTH : COLLAPSED_WIDTH}
@@ -49,6 +48,8 @@ export const SideBar = () => {
         transition: "width 650ms cubic-bezier(0.36, -0.01, 0, 0.77)",
       }}
     >
+      <CollapseButton sidebarOpen={sideBarOpen} />
+
       <Logo sidebarOpen={sideBarOpen} />
       <List
         component="nav"
