@@ -28,7 +28,7 @@ const SettingsPage = () => {
     <BasePage>
       <ConfigBox
         title="UI Settings"
-        subtitle="Change your UI settings here"
+        subtitle="Configure time zone, UI mode, and language preferences"
         rightContent={
           <Stack spacing={theme.spacing(8)}>
             <Stack spacing={theme.spacing(2)}>

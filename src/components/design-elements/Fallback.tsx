@@ -1,7 +1,6 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import OutputAnimation from "@/assets/animations/output.gif";
-import DarkmodeOutput from "@/assets/animations/darkmodeOutput.gif";
+import SkeletonCard from "@/components/design-elements/SkeletonCard";
 import Typography from "@mui/material/Typography";
 import { BulletPointCheck } from "@/components/design-elements";
 import { Button } from "@/components/inputs";
@@ -10,7 +9,6 @@ import { useNavigate } from "react-router";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import type { BoxProps } from "@mui/material";
-import { useAppSelector } from "@/hooks/AppHooks";
 interface BaseFallbackProps extends BoxProps {
   children: React.ReactNode;
 }
@@ -20,13 +18,12 @@ export const BaseFallback: React.FC<BaseFallbackProps> = ({
   ...props
 }) => {
   const theme = useTheme();
-  const mode = useAppSelector((state: any) => state.ui.mode);
   const isSmall = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <Box
       margin={isSmall ? "inherit" : "auto"}
-      marginTop={isSmall ? "33%" : "auto"}
+      marginTop={isSmall ? "33%" : "10%"}
       width={{
         sm: "90%",
         md: "70%",
@@ -45,37 +42,38 @@ export const BaseFallback: React.FC<BaseFallbackProps> = ({
       }}
       {...props}
     >
-      <Stack
-        alignItems="center"
-        gap={theme.spacing(20)}
-        sx={{
-          width: "fit-content",
-          margin: "auto",
-          marginTop: "100px",
-        }}
-      >
-        <Box
-          component="img"
-          src={mode === "light" ? OutputAnimation : DarkmodeOutput}
-          bgcolor="transparent"
-          alt="Loading animation"
-          width="100%"
-          sx={{
-            zIndex: 1,
-            border: "none",
-            borderRadius: theme.spacing(8),
-          }}
-        />
-
+      <Box sx={{ marginTop: "100px" }}>
         <Stack
-          gap={theme.spacing(4)}
           alignItems="center"
-          maxWidth={"300px"}
-          zIndex={1}
+          gap={theme.spacing(20)}
+          sx={{
+            width: "fit-content",
+            margin: "auto",
+            marginTop: 0,
+          }}
         >
-          {children}
+          <Box
+            sx={{
+              zIndex: 1,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
+            <SkeletonCard showHalo={true} />
+          </Box>
+
+          <Stack
+            gap={theme.spacing(4)}
+            alignItems="center"
+            maxWidth={"300px"}
+            zIndex={1}
+          >
+            {children}
+          </Stack>
         </Stack>
-      </Stack>
+      </Box>
     </Box>
   );
 };
@@ -125,7 +123,8 @@ export const EmptyFallback = ({
           sx={{
             flexWrap: "wrap",
             gap: theme.spacing(2),
-            maxWidth: { xs: "90%", md: "80%", lg: "75%" },
+            maxWidth: "1100px",
+            width: "100%",
           }}
         >
           {bullets?.map((bullet: string) => (
@@ -174,7 +173,8 @@ export const EmptyMonitorFallback = ({
           sx={{
             flexWrap: "wrap",
             gap: theme.spacing(2),
-            maxWidth: { xs: "90%", md: "80%", lg: "75%" },
+            maxWidth: "1100px",
+            width: "100%",
           }}
         >
           {bullets?.map((bullet: string, index: number) => (

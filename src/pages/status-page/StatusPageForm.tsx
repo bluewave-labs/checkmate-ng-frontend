@@ -3,7 +3,7 @@ import { Button, FormControlLabel } from "@/components/inputs";
 import { ConfigBox, BasePage } from "@/components/design-elements";
 import { TextInput, AutoComplete, Checkbox } from "@/components/inputs";
 import Typography from "@mui/material/Typography";
-import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
+import { Trash2 } from "lucide-react";
 
 import { useTheme } from "@mui/material/styles";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -180,14 +180,16 @@ export const StatusPageForm = ({
                     key={monitorId}
                   >
                     <Typography>{option.name}</Typography>
-                    <DeleteOutlineRoundedIcon
+                    <Trash2
+                      size={20}
+                      strokeWidth={1.5}
                       onClick={() => {
                         const updated = monitors.filter(
                           (id) => id !== monitorId
                         );
                         setValue("monitors", updated);
                       }}
-                      sx={{ cursor: "pointer" }}
+                      style={{ cursor: "pointer" }}
                     />
                   </Stack>
                 );
