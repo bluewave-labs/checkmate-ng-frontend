@@ -21,6 +21,7 @@ const colors = {
   gray200: "#EFEFEF",
   gray250: "#DADADA",
   gray500: "#A2A3A3",
+  gray700: "#313131",
   gray900: "#1c1c1c",
   blueGray50: "#E8F0FE",
   blueGray400: "#8b9dc3",
@@ -68,7 +69,6 @@ export const lightPalette = {
   tertiary: {
     main: colors.gray100,
     contrastText: colors.blueGray800,
-    hover: colors.blueGray400,
   },
   success: {
     main: colors.green700,
@@ -103,15 +103,14 @@ export const darkPalette = {
     veryLowContrast: darken(colors.blueGray600, 0.5),
   },
   secondary: {
-    main: "#313131",
+    main: colors.gray700,
     light: colors.lightBlueWave,
-    dark: lighten("#313131", 0.1),
+    dark: lighten(colors.gray700, 0.1),
     contrastText: colors.gray200,
   },
   tertiary: {
     main: colors.blueGray800,
     contrastText: colors.gray100,
-    hover: colors.blueGray400,
   },
   success: {
     main: colors.green100,

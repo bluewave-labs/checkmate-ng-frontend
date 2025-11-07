@@ -17,7 +17,7 @@ export const ThemeSwitch = () => {
   };
 
   return (
-    <Tooltip title={t("common.buttons.toggleTheme")} placement="right">
+    <Tooltip title={t("common.buttons.toggleTheme")} placement="top">
       <IconButton
         id="theme-toggle"
         onClick={handleChange}
@@ -28,12 +28,17 @@ export const ThemeSwitch = () => {
           "& svg": {
             transition: "stroke 0.2s ease",
           },
-          "&:hover svg path, &:hover svg line, &:hover svg polyline, &:hover svg rect, &:hover svg circle": {
-            stroke: theme.palette.accent.main,
-          },
+          "&:hover svg path, &:hover svg line, &:hover svg polyline, &:hover svg rect, &:hover svg circle":
+            {
+              stroke: theme.palette.accent.main,
+            },
         }}
       >
-        {mode === "light" ? <Moon size={16} strokeWidth={1.5} /> : <Sun size={16} strokeWidth={1.5} />}
+        {mode === "light" ? (
+          <Moon size={16} strokeWidth={1.5} />
+        ) : (
+          <Sun size={16} strokeWidth={1.5} />
+        )}
       </IconButton>
     </Tooltip>
   );

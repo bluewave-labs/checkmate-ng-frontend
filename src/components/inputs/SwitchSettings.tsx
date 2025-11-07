@@ -44,16 +44,17 @@ export const SettingsSwitch = () => {
 
   return (
     <>
-      <Tooltip title="Settings" placement="right">
+      <Tooltip title="Settings" placement="top">
         <IconButton
           onClick={handleOpen}
           sx={{
             "& svg": {
               transition: "stroke 0.2s ease",
             },
-            "&:hover svg path, &:hover svg line, &:hover svg polyline, &:hover svg rect, &:hover svg circle": {
-              stroke: theme.palette.accent.main,
-            },
+            "&:hover svg path, &:hover svg line, &:hover svg polyline, &:hover svg rect, &:hover svg circle":
+              {
+                stroke: theme.palette.accent.main,
+              },
           }}
         >
           <Settings size={16} strokeWidth={1.5} />

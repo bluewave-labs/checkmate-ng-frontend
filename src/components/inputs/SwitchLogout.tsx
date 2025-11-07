@@ -20,16 +20,17 @@ export const LogoutSwitch = () => {
   };
 
   return (
-    <Tooltip title="Logout" placement="right">
+    <Tooltip title="Logout" placement="top">
       <IconButton
         onClick={handleClick}
         sx={{
           "& svg": {
             transition: "stroke 0.2s ease",
           },
-          "&:hover svg path, &:hover svg line, &:hover svg polyline, &:hover svg rect, &:hover svg circle": {
-            stroke: theme.palette.accent.main,
-          },
+          "&:hover svg path, &:hover svg line, &:hover svg polyline, &:hover svg rect, &:hover svg circle":
+            {
+              stroke: theme.palette.accent.main,
+            },
         }}
       >
         <LogOut size={16} strokeWidth={1.5} />

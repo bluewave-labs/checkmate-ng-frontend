@@ -49,16 +49,17 @@ export const TeamSwitch = () => {
 
   return (
     <>
-      <Tooltip title="Teams" placement="right">
+      <Tooltip title="Teams" placement="top">
         <IconButton
           onClick={handleOpen}
           sx={{
             "& svg": {
               transition: "stroke 0.2s ease",
             },
-            "&:hover svg path, &:hover svg line, &:hover svg polyline, &:hover svg rect, &:hover svg circle": {
-              stroke: theme.palette.accent.main,
-            },
+            "&:hover svg path, &:hover svg line, &:hover svg polyline, &:hover svg rect, &:hover svg circle":
+              {
+                stroke: theme.palette.accent.main,
+              },
           }}
         >
           <Users size={16} strokeWidth={1.5} />
@@ -83,7 +84,9 @@ export const TeamSwitch = () => {
               >
                 <Typography mr={2}>{t.name}</Typography>
                 <Stack width={16} alignItems="center" justifyContent={"center"}>
-                  {selectedTeamId === t._id && <Check size={16} strokeWidth={1.5} />}
+                  {selectedTeamId === t._id && (
+                    <Check size={16} strokeWidth={1.5} />
+                  )}
                 </Stack>
               </Stack>
             </MenuItem>
