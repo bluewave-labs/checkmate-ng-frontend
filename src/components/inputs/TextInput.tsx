@@ -3,11 +3,19 @@ import TextField from "@mui/material/TextField";
 import type { TextFieldProps } from "@mui/material";
 import { typographyLevels } from "@/theme/palette";
 import { useTheme } from "@mui/material/styles";
+import Stack from "@mui/material/Stack";
+import { FieldLabel } from "./FieldLabel";
 
-export const TextInput = forwardRef<HTMLInputElement, TextFieldProps>(
-  function TextInput(props, ref) {
+interface TextInputProps extends Omit<TextFieldProps, "label"> {
+  fieldLabel?: string;
+  required?: boolean;
+}
+
+export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
+  function TextInput({ fieldLabel, required, ...props }, ref) {
     const theme = useTheme();
-    return (
+
+    const input = (
       <TextField
         {...props}
         inputRef={ref}
@@ -26,6 +34,17 @@ export const TextInput = forwardRef<HTMLInputElement, TextFieldProps>(
         }}
       />
     );
+
+    if (fieldLabel) {
+      return (
+        <Stack spacing={theme.spacing(2)}>
+          <FieldLabel required={required}>{fieldLabel}</FieldLabel>
+          {input}
+        </Stack>
+      );
+    }
+
+    return input;
   }
 );
 TextInput.displayName = "TextInput";

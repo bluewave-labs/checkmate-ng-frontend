@@ -77,7 +77,7 @@ export const StatusPageForm = ({
                 <TextInput
                   {...field}
                   type="text"
-                  label={t("createStatusPage.nameConfigLabel")}
+                  fieldLabel={t("createStatusPage.nameConfigLabel")}
                   fullWidth
                   error={!!errors.name}
                   helperText={errors.name ? errors.name.message : ""}
@@ -91,7 +91,7 @@ export const StatusPageForm = ({
                 <TextInput
                   {...field}
                   type="text"
-                  label={t("createStatusPage.descriptionConfigLabel")}
+                  fieldLabel={t("createStatusPage.descriptionConfigLabel")}
                   fullWidth
                   error={!!errors.description}
                   helperText={
@@ -114,7 +114,7 @@ export const StatusPageForm = ({
               <TextInput
                 {...field}
                 type="text"
-                label={t("createStatusPage.urlConfigTitle")}
+                fieldLabel={t("createStatusPage.urlConfigTitle")}
                 fullWidth
                 error={!!errors.url}
                 helperText={errors.url ? errors.url.message : ""}

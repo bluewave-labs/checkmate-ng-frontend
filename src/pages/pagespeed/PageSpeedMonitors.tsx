@@ -3,6 +3,7 @@ import {
   UpStatusBox,
   DownStatusBox,
   PausedStatusBox,
+  InfoBox,
 } from "@/components/design-elements";
 import { HeaderCreate } from "@/components/monitors";
 import Stack from "@mui/material/Stack";
@@ -67,6 +68,10 @@ const PageSpeedMonitorsPage = () => {
       page="pageSpeed"
       actionLink="/pagespeed/create"
     >
+      <InfoBox
+        title="Website Performance Tracking"
+        description="Measure how fast your websites load and identify performance bottlenecks. Track Core Web Vitals and get actionable insights to improve user experience."
+      />
       <HeaderCreate isLoading={loading} path="/pagespeed/create" />
       <Stack direction={isSmall ? "column" : "row"} gap={theme.spacing(8)}>
         <UpStatusBox n={upCount} />

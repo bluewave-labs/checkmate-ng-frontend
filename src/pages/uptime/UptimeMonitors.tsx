@@ -3,6 +3,7 @@ import {
   UpStatusBox,
   DownStatusBox,
   PausedStatusBox,
+  InfoBox,
 } from "@/components/design-elements";
 import { HeaderCreate } from "@/components/monitors";
 import Stack from "@mui/material/Stack";
@@ -69,6 +70,10 @@ const UptimeMonitors = () => {
       page="uptime"
       actionLink="/uptime/create"
     >
+      <InfoBox
+        title="Website & API Uptime Monitoring"
+        description="Monitor your websites and APIs to ensure they're always accessible. Get instant alerts when your services go down and track uptime history over time."
+      />
       <HeaderCreate isLoading={loading} path="/uptime/create" />
       <Stack direction={isSmall ? "column" : "row"} gap={theme.spacing(8)}>
         <UpStatusBox n={upCount} />
