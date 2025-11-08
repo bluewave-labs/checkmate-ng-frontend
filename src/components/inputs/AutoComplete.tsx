@@ -58,8 +58,8 @@ export const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({
         "&.MuiAutocomplete-root .MuiAutocomplete-input": {
           padding: `0 ${theme.spacing(5)}`,
         },
-        "& .MuiAutocomplete-endAdornment": {
-          right: `${theme.spacing(3)} !important`,
+        "& .MuiInputBase-root .MuiAutocomplete-endAdornment": {
+          right: theme.spacing(3),
         },
       }}
     />

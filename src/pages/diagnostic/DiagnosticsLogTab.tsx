@@ -99,4 +99,6 @@ export const DiagnosticsLogTab = () => {
       />
     </Stack>
   );
+
+  console.log(response);
 };
