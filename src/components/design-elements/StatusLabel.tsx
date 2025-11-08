@@ -26,7 +26,9 @@ export const StatusLabel = ({
         justifyContent: "center",
         padding: theme.spacing(3, 5),
         color: theme.palette[palette].main,
-        borderColor: theme.palette[palette].lowContrast,
+        borderColor: theme.palette.mode === 'dark'
+          ? 'rgba(255, 255, 255, 0.08)'
+          : 'rgba(0, 0, 0, 0.08)',
       }}
     >
       <Box

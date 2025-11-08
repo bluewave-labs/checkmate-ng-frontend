@@ -1,7 +1,9 @@
 import Button from "@mui/material/Button";
 import type { ButtonProps } from "@mui/material/Button";
+import { useTheme } from "@mui/material/styles";
 
 export const ButtonInput = ({ sx, ...props }: ButtonProps) => {
+  const theme = useTheme();
   return (
     <Button
       {...props}
@@ -13,6 +15,13 @@ export const ButtonInput = ({ sx, ...props }: ButtonProps) => {
         whiteSpace: "nowrap",
         textOverflow: "ellipsis",
         overflow: "hidden",
+        boxShadow: "none",
+        "&:hover": {
+          boxShadow: "none",
+          backgroundColor: props.color === "primary"
+            ? theme.palette.tertiary.main
+            : undefined,
+        },
         ...sx,
       }}
     />
