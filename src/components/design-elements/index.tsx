@@ -26,4 +26,5 @@ export { Dot } from "./Dot";
 export { Gauge } from "./Gauge";
 export { Tab } from "./Tab";
 export { Tabs } from "./Tabs";
+export { Breadcrumb } from "./Breadcrumb";
 export { InfoBox } from "./InfoBox";

@@ -28,7 +28,12 @@ export const FieldLabel: React.FC<FieldLabelProps> = ({
     >
       {children}
       {required && (
-        <span style={{ color: theme.palette.error.main, marginLeft: "4px" }}>
+        <span
+          style={{
+            color: theme.palette.error.main,
+            marginLeft: theme.spacing(2),
+          }}
+        >
           *
         </span>
       )}

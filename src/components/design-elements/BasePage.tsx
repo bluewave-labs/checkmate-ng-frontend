@@ -1,5 +1,6 @@
 import Stack from "@mui/material/Stack";
 import { ErrorFallback, EmptyFallback, EmptyMonitorFallback } from "./Fallback";
+import { Breadcrumb } from "./Breadcrumb";
 
 import type { StackProps } from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
@@ -17,6 +18,7 @@ export const BasePage: React.FC<BasePageProps> = ({
   const theme = useTheme();
   return (
     <Stack spacing={theme.spacing(10)} {...props}>
+      <Breadcrumb />
       {children}
     </Stack>
   );

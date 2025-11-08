@@ -8,8 +8,15 @@ export const Tabs = (props: CustomTabsProps) => {
   return (
     <MuiTabs
       sx={{
+        minHeight: 34,
+        borderBottom: `1px solid ${theme.palette.primary.lowContrast}`,
         "& .MuiTabs-indicator": {
-          backgroundColor: theme.palette.primary.contrastText,
+          backgroundColor: theme.palette.accent.main,
+          height: 2,
+          bottom: 0,
+        },
+        "& .MuiTabs-flexContainer": {
+          gap: theme.spacing(16),
         },
       }}
       {...props}
