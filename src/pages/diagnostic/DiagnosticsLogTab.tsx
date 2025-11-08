@@ -2,8 +2,8 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { Select } from "@/components/inputs";
 import MenuItem from "@mui/material/MenuItem";
-import { DataTable } from "@/components/design-elements";
-import type { Header } from "@/components/design-elements";
+import { Table } from "@/components/design-elements";
+import type { Header } from "@/components/design-elements/Table";
 
 import { useState } from "react";
 import { useGet } from "@/hooks/UseApi";
@@ -41,9 +41,12 @@ export const DiagnosticsLogTab = () => {
       id: "level",
       content: "Level",
       render: (log: ILogEntry) => {
-        const color = levelColors[log.level] || theme.palette.primary.contrastText;
+        const color =
+          levelColors[log.level] || theme.palette.primary.contrastText;
         return (
-          <span style={{ color, fontWeight: "bold", textTransform: "uppercase" }}>
+          <span
+            style={{ color, fontWeight: "bold", textTransform: "uppercase" }}
+          >
             {log.level}
           </span>
         );
@@ -86,7 +89,7 @@ export const DiagnosticsLogTab = () => {
         </Select>
       </Stack>
 
-      <DataTable
+      <Table
         headers={headers}
         data={filteredLogEntries}
         onRowClick={(log) => {

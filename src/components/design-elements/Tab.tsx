@@ -11,9 +11,9 @@ export const Tab = (props: CustomTabProps) => {
       iconPosition="start"
       sx={{
         textTransform: "none",
-        fontSize: "14px",
+        fontSize: 14,
         fontWeight: 500,
-        minHeight: "32px",
+        minHeight: 34,
         padding: theme.spacing(1, 0),
         paddingBottom: 0,
         minWidth: "auto",

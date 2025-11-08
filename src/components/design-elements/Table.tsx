@@ -117,13 +117,13 @@ export function DataTable<
             fontWeight: 500,
             textTransform: "uppercase",
             padding: `${theme.spacing(2)} ${theme.spacing(8)}`,
-            fontSize: "13px",
+            fontSize: theme.typography.fontSize,
           },
           "& :is(td)": {
             backgroundColor: theme.palette.primary.main,
             color: theme.palette.primary.contrastTextSecondary,
             padding: `${theme.spacing(7)} ${theme.spacing(8)}`,
-            fontSize: "13px",
+            fontSize: theme.typography.fontSize,
           },
           "& .MuiTableBody-root .MuiTableRow-root:last-child .MuiTableCell-root":
             {
