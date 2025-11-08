@@ -1,4 +1,4 @@
-import { BasePage } from "@/components/design-elements";
+import { BasePage, InfoBox } from "@/components/design-elements";
 import { Table } from "@/components/design-elements";
 import { HeaderCreate } from "@/components/teams/HeaderCreate";
 import { ActionsMenu } from "@/components/actions-menu";
@@ -85,6 +85,10 @@ const TeamsPage = () => {
 
   return (
     <BasePage>
+      <InfoBox
+        title="Team Collaboration"
+        description="Organize your monitoring workspace by creating teams. Control who can view and manage monitors, set up role-based permissions, and collaborate effectively."
+      />
       <HeaderCreate
         label="Create new team"
         isLoading={loading}

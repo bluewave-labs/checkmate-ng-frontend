@@ -1,7 +1,7 @@
 import Stack from "@mui/material/Stack";
 import MenuItem from "@mui/material/MenuItem";
 import { Select } from "@/components/inputs";
-import { BasePage } from "@/components/design-elements";
+import { BasePage, InfoBox } from "@/components/design-elements";
 import { CheckTable } from "@/pages/incidents/CheckTable";
 import { HeaderRange } from "@/components/common/HeaderRange";
 
@@ -52,6 +52,10 @@ const IncidentsPage = () => {
 
   return (
     <BasePage>
+      <InfoBox
+        title="Incident History"
+        description="View all past and ongoing incidents across your monitors. Analyze downtime patterns, incident duration, and resolution times to improve reliability."
+      />
       <Stack
         direction={{ xs: "column", md: "row" }}
         spacing={theme.spacing(8)}

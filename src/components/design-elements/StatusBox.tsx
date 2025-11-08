@@ -17,7 +17,7 @@ export const BGBox: React.FC<StatusBoxProps> = ({ children }) => {
         overflow: "hidden",
         position: "relative",
         flex: 1,
-        padding: theme.spacing(8),
+        padding: theme.spacing(4),
       }}
     >
       <Box position="absolute" top="-10%" left="5%">
@@ -40,7 +40,7 @@ const StatusBox = ({
   const theme = useTheme();
   return (
     <BGBox>
-      <Stack spacing={theme.spacing(8)}>
+      <Stack spacing={theme.spacing(4)}>
         <Typography
           variant={"h2"}
           textTransform="uppercase"

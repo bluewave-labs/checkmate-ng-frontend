@@ -10,7 +10,7 @@ export {
   DownStatusBox,
   PausedStatusBox,
 } from "./StatusBox";
-export { DataTable as Table, Pagination } from "./Table";
+export { DataTable as Table, DataTable, Pagination } from "./Table";
 export { GradientBox, StatBox } from "./StatBox";
 export { BaseBox } from "./BaseBox";
 export { StatusLabel } from "./StatusLabel";
@@ -26,3 +26,5 @@ export { Dot } from "./Dot";
 export { Gauge } from "./Gauge";
 export { Tab } from "./Tab";
 export { Tabs } from "./Tabs";
+export { Breadcrumb } from "./Breadcrumb";
+export { InfoBox } from "./InfoBox";

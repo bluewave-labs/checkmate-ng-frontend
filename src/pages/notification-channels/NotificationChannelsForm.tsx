@@ -65,7 +65,7 @@ export const NotificationChannelsForm = ({
               <TextInput
                 {...field}
                 type="text"
-                label={t("createNotifications.nameSettings.nameLabel")}
+                fieldLabel={t("createNotifications.nameSettings.nameLabel")}
                 fullWidth
                 error={!!errors.name}
                 helperText={errors.name ? errors.name.message : ""}
@@ -86,6 +86,7 @@ export const NotificationChannelsForm = ({
               return (
                 <Select
                   value={field.value}
+                  fieldLabel={t("createNotifications.typeSettings.title")}
                   error={!!errors.type}
                   onChange={field.onChange}
                 >
@@ -116,7 +117,7 @@ export const NotificationChannelsForm = ({
                   <TextInput
                     {...field}
                     type="text"
-                    label={t("createNotifications.emailSettings.description")}
+                    fieldLabel={t("createNotifications.emailSettings.description")}
                     fullWidth
                     error={!!errors.config?.emailAddress}
                     helperText={
@@ -138,7 +139,7 @@ export const NotificationChannelsForm = ({
                   <TextInput
                     {...field}
                     type="text"
-                    label={"URL"}
+                    fieldLabel="URL"
                     fullWidth
                     error={!!errors.config?.url}
                     helperText={

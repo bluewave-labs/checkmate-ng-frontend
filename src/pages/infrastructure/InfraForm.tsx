@@ -140,7 +140,7 @@ export const InfraForm = ({
                     }, 0);
                   }}
                   type="text"
-                  label={t("url")}
+                  fieldLabel={t("url")}
                   fullWidth
                   error={!!errors.url}
                   helperText={errors.url ? errors.url.message : ""}
@@ -155,7 +155,7 @@ export const InfraForm = ({
                 <TextInput
                   {...field}
                   type="text"
-                  label={t("displayName")}
+                  fieldLabel={t("displayName")}
                   fullWidth
                   error={!!errors.name}
                   helperText={errors.name ? errors.name.message : ""}
@@ -169,7 +169,7 @@ export const InfraForm = ({
                 <TextInput
                   {...field}
                   type="text"
-                  label={t("infrastructureAuthorizationSecretLabel")}
+                  fieldLabel={t("infrastructureAuthorizationSecretLabel")}
                   fullWidth
                   error={!!errors.secret}
                   helperText={errors.secret ? errors.secret.message : ""}
@@ -190,7 +190,7 @@ export const InfraForm = ({
               <TextInput
                 {...field}
                 type="number"
-                label={t("createMonitorPage.incidentConfigStatusCheckNumber")}
+                fieldLabel={t("createMonitorPage.incidentConfigStatusCheckNumber")}
                 fullWidth
                 error={!!errors.n}
                 helperText={errors.n ? errors.n.message : ""}
@@ -269,7 +269,7 @@ export const InfraForm = ({
               <TextInput
                 {...field}
                 type="text"
-                label={t("createMonitorPage.intervalDescription")}
+                fieldLabel={t("createMonitorPage.intervalDescription")}
                 fullWidth
                 error={!!errors.interval}
                 helperText={errors.interval ? errors.interval.message : ""}

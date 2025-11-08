@@ -101,21 +101,29 @@ export function DataTable<
 
   if (data.length === 0 || headers.length === 0) return <div>No data</div>;
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} elevation={0} sx={{ boxShadow: "none" }}>
       <Table
         sx={{
           "&.MuiTable-root  :is(.MuiTableHead-root, .MuiTableBody-root) :is(th, td)":
             {
               paddingLeft: theme.spacing(8),
             },
+          "& .MuiTableHead-root .MuiTableRow-root": {
+            height: "28px",
+          },
           "& :is(th)": {
-            backgroundColor: theme.palette.secondary.main,
+            backgroundColor: theme.palette.tertiary.main,
             color: theme.palette.secondary.contrastText,
-            fontWeight: 600,
+            fontWeight: 500,
+            textTransform: "uppercase",
+            padding: `${theme.spacing(2)} ${theme.spacing(8)}`,
+            fontSize: "13px",
           },
           "& :is(td)": {
             backgroundColor: theme.palette.primary.main,
             color: theme.palette.primary.contrastTextSecondary,
+            padding: `${theme.spacing(7)} ${theme.spacing(8)}`,
+            fontSize: "13px",
           },
           "& .MuiTableBody-root .MuiTableRow-root:last-child .MuiTableCell-root":
             {

@@ -66,8 +66,9 @@ export const TeamsForm = ({
               render={({ field }) => (
                 <TextInput
                   {...field}
+                  fieldLabel={t("createTeamsPage.basicInfoName")}
+                  required
                   type="text"
-                  label={t("createTeamsPage.basicInfoName")}
                   fullWidth
                   error={!!errors.name}
                   helperText={errors.name ? errors.name.message : ""}
@@ -80,8 +81,8 @@ export const TeamsForm = ({
               render={({ field }) => (
                 <TextInput
                   {...field}
+                  fieldLabel={t("createTeamsPage.basicInfoDescription")}
                   type="text"
-                  label={t("createTeamsPage.basicInfoDescription")}
                   fullWidth
                   error={!!errors.description}
                   helperText={
@@ -110,6 +111,8 @@ export const TeamsForm = ({
                   <Stack gap={theme.spacing(8)}>
                     <Select
                       value={field.value}
+                      fieldLabel="Role"
+                      required
                       error={!!errors.roleId}
                       onChange={field.onChange}
                     >

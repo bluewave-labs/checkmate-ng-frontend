@@ -8,9 +8,27 @@ export const Tab = (props: CustomTabProps) => {
   return (
     <MuiTab
       disableRipple
+      iconPosition="start"
       sx={{
+        textTransform: "none",
+        fontSize: "14px",
+        fontWeight: 500,
+        minHeight: "32px",
+        padding: theme.spacing(1, 0),
+        paddingBottom: 0,
+        minWidth: "auto",
+        alignItems: "flex-start",
+        color: theme.palette.primary.contrastTextTertiary,
         "&.Mui-selected": {
-          color: theme.palette.primary.contrastText,
+          color: theme.palette.accent.main,
+          fontWeight: 600,
+        },
+        "&:hover": {
+          color: theme.palette.primary.contrastTextSecondary,
+        },
+        "& .MuiTab-iconWrapper": {
+          marginRight: theme.spacing(2),
+          marginBottom: 0,
         },
       }}
       {...props}

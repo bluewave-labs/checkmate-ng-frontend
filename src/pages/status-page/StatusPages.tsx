@@ -1,6 +1,6 @@
 import { HeaderCreate } from "@/components/notification-channels/HeaderCreate";
 import Typography from "@mui/material/Typography";
-import { BasePageWithStates } from "@/components/design-elements";
+import { BasePageWithStates, InfoBox } from "@/components/design-elements";
 import { Table } from "@/components/design-elements";
 import { ActionsMenu } from "@/components/actions-menu";
 import { Dialog } from "@/components/inputs";
@@ -116,6 +116,10 @@ const StatusPages = () => {
       actionButtonText="Create a new status page"
       actionLink="/status-pages/create"
     >
+      <InfoBox
+        title="Public Status Pages"
+        description="Create beautiful, branded status pages to keep your users informed about service health. Share real-time status updates and incident reports with your customers."
+      />
       <HeaderCreate
         label={"Create a new Status Page"}
         isLoading={isValidating || deleting}

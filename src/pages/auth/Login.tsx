@@ -98,7 +98,7 @@ const Login = () => {
             render={({ field }) => (
               <TextInput
                 {...field}
-                label={t("auth.common.inputs.email.label")}
+                fieldLabel={t("auth.common.inputs.email.label")}
                 fullWidth
                 placeholder={t("auth.common.inputs.email.placeholder")}
                 error={!!errors.email}
@@ -114,7 +114,7 @@ const Login = () => {
               <TextInput
                 {...field}
                 type="password"
-                label={t("auth.common.inputs.password.label")}
+                fieldLabel={t("auth.common.inputs.password.label")}
                 fullWidth
                 placeholder="••••••••••"
                 error={!!errors.password}

@@ -1,6 +1,6 @@
 import { HeaderCreate } from "@/components/notification-channels/HeaderCreate";
 import Typography from "@mui/material/Typography";
-import { BasePageWithStates } from "@/components/design-elements";
+import { BasePageWithStates, InfoBox } from "@/components/design-elements";
 import { Table } from "@/components/design-elements";
 import { ActionsMenu } from "@/components/actions-menu";
 import { Dialog } from "@/components/inputs";
@@ -132,6 +132,10 @@ const NotificationChannelsPage = () => {
       actionButtonText="Create a new notification channel"
       actionLink="/notification-channels/create"
     >
+      <InfoBox
+        title="Alert Destinations"
+        description="Configure where you want to receive alerts when monitors detect issues. Connect email, Slack, Discord, webhooks, and other channels to stay informed."
+      />
       <HeaderCreate
         label={"Create a new notification channel"}
         isLoading={isValidating || pausing || deleting}

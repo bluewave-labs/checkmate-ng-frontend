@@ -1,63 +1,16 @@
-import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { Select } from "@/components/inputs";
 import MenuItem from "@mui/material/MenuItem";
+import { DataTable } from "@/components/design-elements";
+import type { Header } from "@/components/design-elements";
 
 import { useState } from "react";
 import { useGet } from "@/hooks/UseApi";
-import { useTheme, alpha } from "@mui/material/styles";
-import type { Theme } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import type { ILogEntry } from "@/types/log";
 import type { ApiResponse } from "@/hooks/UseApi";
 import { useNavigate } from "react-router";
-const formatLog = (
-  theme: Theme,
-  logEntry: ILogEntry,
-  idx: number,
-  navigate: Function
-) => {
-  const levelColors = {
-    info: theme.palette.success.main,
-    warn: theme.palette.warning.main,
-    error: theme.palette.error.main,
-    debug: theme.palette.accent.main,
-  };
-
-  const color =
-    levelColors[logEntry.level] || theme.palette.primary.contrastText;
-
-  return (
-    <Box
-      key={logEntry.timestamp + idx}
-      onClick={() => {
-        navigate(`/diagnostics/log`, { state: { logEntry } });
-      }}
-      mt={4}
-      bgcolor={alpha(color, 0.1)}
-      sx={{
-        cursor: "pointer",
-        padding: theme.spacing(4),
-        borderRadius: theme.shape.borderRadius,
-        borderStyle: "solid",
-        borderWidth: "1px",
-        borderColor: theme.palette.primary.lowContrast,
-      }}
-    >
-      <span>
-        <span>[{logEntry.timestamp}]</span>{" "}
-        <span style={{ color, fontWeight: "bold" }}>
-          {logEntry.level.toUpperCase()}
-        </span>
-        {": "}
-        {`(${logEntry.service})`}
-        {": "}
-        {logEntry.message}
-        <br />
-      </span>
-    </Box>
-  );
-};
 
 export const DiagnosticsLogTab = () => {
   const theme = useTheme();
@@ -70,6 +23,50 @@ export const DiagnosticsLogTab = () => {
   );
 
   const logEntries = response?.data || [];
+
+  const levelColors = {
+    info: theme.palette.success.main,
+    warn: theme.palette.warning.main,
+    error: theme.palette.error.main,
+    debug: theme.palette.accent.main,
+  };
+
+  const headers: Header<ILogEntry>[] = [
+    {
+      id: "timestamp",
+      content: "Timestamp",
+      render: (log: ILogEntry) => log.timestamp,
+    },
+    {
+      id: "level",
+      content: "Level",
+      render: (log: ILogEntry) => {
+        const color = levelColors[log.level] || theme.palette.primary.contrastText;
+        return (
+          <span style={{ color, fontWeight: "bold", textTransform: "uppercase" }}>
+            {log.level}
+          </span>
+        );
+      },
+    },
+    {
+      id: "service",
+      content: "Service",
+      render: (log: ILogEntry) => log.service,
+    },
+    {
+      id: "message",
+      content: "Message",
+      render: (log: ILogEntry) => log.message,
+    },
+  ];
+
+  const filteredLogEntries = logEntries
+    .filter((log: ILogEntry) => {
+      if (logLevel === "all") return true;
+      return log.level === logLevel;
+    })
+    .map((log, idx) => ({ ...log, id: `${log.timestamp}-${idx}` }));
 
   return (
     <Stack spacing={theme.spacing(4)}>
@@ -89,18 +86,14 @@ export const DiagnosticsLogTab = () => {
         </Select>
       </Stack>
 
-      <code>
-        {logEntries
-          .filter((log: ILogEntry) => {
-            if (logLevel === "all") return true;
-            return log.level === logLevel;
-          })
-          .map((log: ILogEntry, idx: number) =>
-            formatLog(theme, log, idx, navigate)
-          )}
-      </code>
+      <DataTable
+        headers={headers}
+        data={filteredLogEntries}
+        onRowClick={(log) => {
+          navigate(`/diagnostics/log`, { state: { logEntry: log } });
+        }}
+        cardsOnSmallScreens={true}
+      />
     </Stack>
   );
-
-  console.log(response);
 };

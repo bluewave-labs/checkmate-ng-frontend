@@ -67,6 +67,7 @@ export const TeamMemberForm = ({
                   <Select
                     disabled={mode !== "create"}
                     value={field.value}
+                    fieldLabel="Team member"
                     error={!!errors.userId}
                     onChange={field.onChange}
                   >
@@ -99,6 +100,7 @@ export const TeamMemberForm = ({
                 <Stack gap={theme.spacing(8)}>
                   <Select
                     value={field.value}
+                    fieldLabel="Role"
                     error={!!errors.roleId}
                     onChange={field.onChange}
                   >

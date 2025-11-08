@@ -1,5 +1,5 @@
 import { HeaderCreate } from "@/components/notification-channels/HeaderCreate";
-import { BasePageWithStates } from "@/components/design-elements";
+import { BasePageWithStates, InfoBox } from "@/components/design-elements";
 import { ActionsMenu } from "@/components/actions-menu";
 import { Table } from "@/components/design-elements";
 import Typography from "@mui/material/Typography";
@@ -126,6 +126,10 @@ const MaintenancePage = () => {
       actionLink="/maintenance/create"
       actionButtonText={t("createMaintenanceWindow")}
     >
+      <InfoBox
+        title="Scheduled Maintenance Periods"
+        description="Plan maintenance windows to temporarily pause monitoring checks. During maintenance, your monitors won't run checks or send notifications, preventing false alerts during planned downtime."
+      />
       <HeaderCreate
         label={"Create a new maintenance window"}
         isLoading={isValidating || isPausing || isDeleting}

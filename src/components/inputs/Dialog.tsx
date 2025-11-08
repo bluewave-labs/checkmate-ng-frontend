@@ -4,6 +4,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Button } from "@/components/inputs";
+import { useTheme } from "@mui/material/styles";
+import { typographyLevels } from "@/theme/palette";
 
 export const DialogInput = ({
   open,
@@ -11,8 +13,8 @@ export const DialogInput = ({
   content,
   onConfirm,
   onCancel,
-  confirmColor = "error",
-  cancelColor = "accent",
+  confirmColor = "accent",
+  cancelColor = "error",
 }: {
   open: boolean;
   title?: string;
@@ -22,18 +24,22 @@ export const DialogInput = ({
   confirmColor?: "error" | "accent";
   cancelColor?: "error" | "accent";
 }) => {
+  const theme = useTheme();
+
   return (
     <Dialog open={open}>
-      <DialogTitle>{title}</DialogTitle>
+      <DialogTitle sx={{ fontSize: typographyLevels.l }}>
+        {title}
+      </DialogTitle>
       <DialogContent>
         <DialogContentText>{content}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button variant="contained" color={confirmColor} onClick={onConfirm}>
-          Confirm
-        </Button>
         <Button variant="contained" color={cancelColor} onClick={onCancel}>
           Cancel
+        </Button>
+        <Button variant="contained" color={confirmColor} onClick={onConfirm}>
+          Confirm
         </Button>
       </DialogActions>
     </Dialog>

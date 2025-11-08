@@ -2,7 +2,10 @@ import Autocomplete from "@mui/material/Autocomplete";
 import type { AutocompleteProps } from "@mui/material/Autocomplete";
 import { TextInput, Checkbox } from "@/components/inputs";
 import ListItem from "@mui/material/ListItem";
+import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
+import { FieldLabel } from "./FieldLabel";
+import { ChevronDown } from "lucide-react";
 
 type AutoCompleteInputProps = Omit<
   AutocompleteProps<any, boolean, boolean, boolean>,
@@ -14,17 +17,29 @@ type AutoCompleteInputProps = Omit<
     boolean,
     boolean
   >["renderInput"];
+  fieldLabel?: string;
+  required?: boolean;
 };
 
 export const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({
+  fieldLabel,
+  required,
   ...props
 }) => {
   const theme = useTheme();
   const multiple = props.multiple;
-  return (
+
+  const autocomplete = (
     <Autocomplete
       {...props}
       disableCloseOnSelect={!!multiple}
+      popupIcon={
+        <ChevronDown
+          size={18}
+          strokeWidth={1.5}
+          style={{ marginRight: theme.spacing(3) }}
+        />
+      }
       renderInput={(params) => (
         <TextInput {...params} placeholder="Type to search" />
       )}
@@ -43,7 +58,21 @@ export const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({
         "&.MuiAutocomplete-root .MuiAutocomplete-input": {
           padding: `0 ${theme.spacing(5)}`,
         },
+        "& .MuiAutocomplete-endAdornment": {
+          right: `${theme.spacing(3)} !important`,
+        },
       }}
     />
   );
+
+  if (fieldLabel) {
+    return (
+      <Stack spacing={theme.spacing(2)}>
+        <FieldLabel required={required}>{fieldLabel}</FieldLabel>
+        {autocomplete}
+      </Stack>
+    );
+  }
+
+  return autocomplete;
 };

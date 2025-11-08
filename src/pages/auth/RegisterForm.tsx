@@ -88,7 +88,7 @@ export const RegisterForm = ({
           <TextInput
             disabled={mode === "invite"}
             {...field}
-            label={t("auth.common.inputs.email.label")}
+            fieldLabel={t("auth.common.inputs.email.label")}
             fullWidth
             placeholder={t("auth.common.inputs.email.placeholder")}
             error={!!errors.email}
@@ -104,7 +104,7 @@ export const RegisterForm = ({
         render={({ field }) => (
           <TextInput
             {...field}
-            label={t("auth.common.inputs.firstName.label")}
+            fieldLabel={t("auth.common.inputs.firstName.label")}
             fullWidth
             placeholder={t("auth.common.inputs.firstName.placeholder")}
             error={!!errors.firstName}
@@ -120,7 +120,7 @@ export const RegisterForm = ({
         render={({ field }) => (
           <TextInput
             {...field}
-            label={t("auth.common.inputs.lastName.label")}
+            fieldLabel={t("auth.common.inputs.lastName.label")}
             fullWidth
             placeholder={t("auth.common.inputs.lastName.placeholder")}
             error={!!errors.lastName}
@@ -136,7 +136,7 @@ export const RegisterForm = ({
           <TextInput
             {...field}
             type="password"
-            label={t("auth.common.inputs.password.label")}
+            fieldLabel={t("auth.common.inputs.password.label")}
             fullWidth
             placeholder="••••••••••"
             error={!!errors.password}
@@ -152,7 +152,7 @@ export const RegisterForm = ({
           <TextInput
             {...field}
             type="password"
-            label={t("auth.common.inputs.passwordConfirm.label")}
+            fieldLabel={t("auth.common.inputs.passwordConfirm.label")}
             fullWidth
             placeholder={t("auth.common.inputs.passwordConfirm.placeholder")}
             error={!!errors.confirmPassword}

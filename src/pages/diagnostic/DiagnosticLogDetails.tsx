@@ -17,6 +17,18 @@ const logKeysOrder: (keyof ILogEntry)[] = [
 const DiagnosticLogDetailsPage = () => {
   const { state } = useLocation();
   const theme = useTheme();
+
+  if (!state || !state.logEntry) {
+    return (
+      <BasePage>
+        <Typography variant="h2">No log entry selected</Typography>
+        <Typography variant="body1">
+          Please navigate to this page by clicking on a log entry from the diagnostics page.
+        </Typography>
+      </BasePage>
+    );
+  }
+
   const logEntry: ILogEntry = state.logEntry;
   const levelColors = {
     info: theme.palette.success.main,
