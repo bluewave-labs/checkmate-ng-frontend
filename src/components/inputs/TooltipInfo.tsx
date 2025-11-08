@@ -23,7 +23,7 @@ export const TooltipInfo: React.FC<TooltipInfoProps> = ({
       title={title}
       placement={placement}
       arrow
-      componentsProps={{
+      slotProps={{
         tooltip: {
           sx: {
             background: theme.palette.mode === "dark"

@@ -2,7 +2,7 @@ import Tooltip from "@mui/material/Tooltip";
 import { useTheme } from "@mui/material/styles";
 import type { TooltipProps } from "@mui/material/Tooltip";
 
-type StyledTooltipProps = Omit<TooltipProps, "componentsProps"> & {
+type StyledTooltipProps = Omit<TooltipProps, "slotProps"> & {
   children: React.ReactElement;
 };
 
@@ -12,7 +12,7 @@ export const StyledTooltip: React.FC<StyledTooltipProps> = ({ children, ...props
   return (
     <Tooltip
       {...props}
-      componentsProps={{
+      slotProps={{
         tooltip: {
           sx: {
             background: theme.palette.mode === "dark"
