@@ -23,10 +23,11 @@ function App() {
       <ToastContainer
         newestOnTop={true}
         theme={mode}
+        transition={undefined}
         style={
           {
-            "--toastify-color-progress-light": lightTheme.palette.accent.main,
-            "--toastify-color-progress-dark": darkTheme.palette.accent.main,
+            "--toastify-color-progress-light": "#7C8BA1",
+            "--toastify-color-progress-dark": "#7C8BA1",
           } as React.CSSProperties
         }
       />
