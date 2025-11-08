@@ -1,22 +1,30 @@
 import { DateTimePicker as MuiDateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-
 import { forwardRef } from "react";
 import { useTheme } from "@mui/material/styles";
 import type { DateTimePickerProps } from "@mui/x-date-pickers/DateTimePicker";
+import Stack from "@mui/material/Stack";
+import { FieldLabel } from "./FieldLabel";
+import { Calendar } from "lucide-react";
 
-// ...existing code...
-export const DateTimePicker = forwardRef<HTMLDivElement, DateTimePickerProps>(
-  function DateTimePicker(props, ref) {
+interface CustomDateTimePickerProps extends Omit<DateTimePickerProps<any>, "label"> {
+  fieldLabel?: string;
+  required?: boolean;
+}
+
+export const DateTimePicker = forwardRef<HTMLDivElement, CustomDateTimePickerProps>(
+  function DateTimePicker({ fieldLabel, required, ...props }, ref) {
     const theme = useTheme();
-    return (
+
+    const picker = (
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <MuiDateTimePicker
           {...props}
-          // pass the forwarded ref through (cast to any if TS complains about exact ref type)
           ref={ref as any}
+          slots={{
+            openPickerIcon: () => <Calendar size={18} strokeWidth={1.5} />,
+          }}
           sx={{
             "& .MuiPickersOutlinedInput-root ": {
               height: 34,
@@ -37,8 +45,18 @@ export const DateTimePicker = forwardRef<HTMLDivElement, DateTimePickerProps>(
         />
       </LocalizationProvider>
     );
+
+    if (fieldLabel) {
+      return (
+        <Stack spacing={theme.spacing(2)}>
+          <FieldLabel required={required}>{fieldLabel}</FieldLabel>
+          {picker}
+        </Stack>
+      );
+    }
+
+    return picker;
   }
 );
 
 (DateTimePicker as any).displayName = "DateTimePicker";
-// ...existing code...

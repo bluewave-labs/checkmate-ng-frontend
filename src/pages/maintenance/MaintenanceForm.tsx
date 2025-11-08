@@ -1,11 +1,9 @@
 import Stack from "@mui/material/Stack";
 import { Button, DateTimePicker } from "@/components/inputs";
-import { ConfigBox, BasePage } from "@/components/design-elements";
+import { ConfigBox, BasePage, InfoBox } from "@/components/design-elements";
 import { TextInput, Select, AutoComplete } from "@/components/inputs";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
 import { Trash2 } from "lucide-react";
 
 import dayjs from "dayjs";
@@ -72,6 +70,10 @@ export const MaintenanceForm = ({
 
   return (
     <BasePage component={"form"} onSubmit={handleSubmit(onSubmit, onError)}>
+      <InfoBox
+        title="About Maintenance Windows"
+        description="During maintenance windows, all monitoring is suspended for selected monitors. No network checks will be performed, preventing any status updates or notifications from being triggered. Your monitors will appear frozen at their last known status, and status pages will display a maintenance indicator. Once the maintenance window ends, monitoring automatically resumes, and alerts will trigger if issues are detected. Maintenance periods do not count against uptime calculations."
+      />
       <ConfigBox
         title={t("createMaintenanceWindowPage.generalSettingsTitle")}
         subtitle={t("createMaintenanceWindowPage.generalSettingsDescription")}
@@ -83,8 +85,9 @@ export const MaintenanceForm = ({
               render={({ field }) => (
                 <TextInput
                   {...field}
+                  fieldLabel={t("createMaintenanceWindowPage.generalSettingsName")}
+                  required
                   type="text"
-                  label={t("createMaintenanceWindowPage.generalSettingsName")}
                   placeholder={t(
                     "createMaintenanceWindowPage.generalSettingsNamePlaceholder"
                   )}
@@ -98,29 +101,24 @@ export const MaintenanceForm = ({
               name="repeat"
               control={control}
               render={({ field }) => (
-                <FormControl>
-                  <InputLabel id="repeat-label">
-                    {t("createMaintenanceWindowPage.generalSettingsRepeat")}
-                  </InputLabel>
-                  <Select
-                    label={t(
-                      "createMaintenanceWindowPage.generalSettingsRepeat"
-                    )}
-                    value={field.value || ""}
-                    error={!!errors.repeat}
-                    onChange={field.onChange}
-                  >
-                    {MaintenanceRepeats.map((option) => {
-                      return (
-                        <MenuItem key={option} value={option}>
-                          <Typography textTransform={"capitalize"}>
-                            {option}
-                          </Typography>
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                </FormControl>
+                <Select
+                  value={field.value || ""}
+                  fieldLabel={t("createMaintenanceWindowPage.generalSettingsRepeat")}
+                  required
+                  error={!!errors.repeat}
+                  onChange={field.onChange}
+                  fullWidth
+                >
+                  {MaintenanceRepeats.map((option) => {
+                    return (
+                      <MenuItem key={option} value={option}>
+                        <Typography textTransform={"capitalize"}>
+                          {option}
+                        </Typography>
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
               )}
             />
           </Stack>
@@ -137,19 +135,22 @@ export const MaintenanceForm = ({
               render={({ field }) => {
                 const value = field.value ? dayjs(field.value) : null;
                 return (
-                  <Stack spacing={theme.spacing(4)}>
-                    <Typography>Start time</Typography>
+                  <>
                     <DateTimePicker
                       {...field}
+                      fieldLabel="Start time"
+                      required
                       value={value}
                       onChange={(val: Dayjs | null) =>
                         field.onChange(val?.toDate())
                       }
                     />
-                    <Typography color="error" variant="caption">
-                      {errors?.startTime?.message}
-                    </Typography>
-                  </Stack>
+                    {errors?.startTime?.message && (
+                      <Typography color="error" variant="caption">
+                        {errors.startTime.message}
+                      </Typography>
+                    )}
+                  </>
                 );
               }}
             />
@@ -159,19 +160,22 @@ export const MaintenanceForm = ({
               render={({ field }) => {
                 const value = field.value ? dayjs(field.value) : null;
                 return (
-                  <Stack spacing={theme.spacing(4)}>
-                    <Typography>End time</Typography>
+                  <>
                     <DateTimePicker
                       {...field}
+                      fieldLabel="End time"
+                      required
                       value={value}
                       onChange={(val: Dayjs | null) =>
                         field.onChange(val?.toDate())
                       }
                     />
-                    <Typography color="error" variant="caption">
-                      {errors?.endTime?.message}
-                    </Typography>
-                  </Stack>
+                    {errors?.endTime?.message && (
+                      <Typography color="error" variant="caption">
+                        {errors.endTime.message}
+                      </Typography>
+                    )}
+                  </>
                 );
               }}
             />
@@ -190,6 +194,8 @@ export const MaintenanceForm = ({
               render={({ field }) => (
                 <AutoComplete
                   multiple
+                  fieldLabel="Monitors"
+                  required
                   options={monitorOptions}
                   getOptionLabel={(option) => option.name}
                   value={monitorOptions.filter((o: any) =>

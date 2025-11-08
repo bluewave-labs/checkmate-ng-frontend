@@ -81,7 +81,7 @@ const Invite = () => {
               render={({ field }) => (
                 <TextInput
                   {...field}
-                  label={t("auth.common.inputs.email.label")}
+                  fieldLabel={t("auth.common.inputs.email.label")}
                   fullWidth
                   placeholder={t("auth.common.inputs.email.placeholder")}
                   error={!!errors.email}
@@ -97,6 +97,7 @@ const Invite = () => {
                   <Stack gap={theme.spacing(8)}>
                     <Select
                       value={field.value}
+                      fieldLabel="Team"
                       error={!!errors.teamId}
                       onChange={field.onChange}
                     >
@@ -123,6 +124,7 @@ const Invite = () => {
                   <Stack gap={theme.spacing(8)}>
                     <Select
                       value={field.value}
+                      fieldLabel="Team role"
                       error={!!errors.teamRoleId}
                       onChange={field.onChange}
                     >
@@ -168,6 +170,7 @@ const Invite = () => {
                   <Stack gap={theme.spacing(8)}>
                     <Select
                       value={field.value}
+                      fieldLabel="Organization role"
                       error={!!errors.orgRoleId}
                       onChange={field.onChange}
                     >
