@@ -1,7 +1,7 @@
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Typography from "@mui/material/Typography";
-import { StyledTooltip } from "./StyledTooltip";
+import Tooltip from "@mui/material/Tooltip";
 import { Settings } from "lucide-react";
 import IconButton from "@mui/material/IconButton";
 
@@ -44,7 +44,25 @@ export const SettingsSwitch = () => {
 
   return (
     <>
-      <StyledTooltip title="Settings" placement="top">
+      <Tooltip
+        title="Settings"
+        placement="top"
+        slotProps={{
+          tooltip: {
+            sx: {
+              background: theme.palette.mode === "dark"
+                ? "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)"
+                : "linear-gradient(135deg, #2c3e50 0%, #1a252f 100%)",
+              backgroundColor: "transparent",
+              color: "#ffffff",
+              fontSize: "13px",
+              padding: `${theme.spacing(4)} ${theme.spacing(5)}`,
+              borderRadius: `${theme.shape.borderRadius}px`,
+              boxShadow: "0 8px 24px rgba(0, 0, 0, 0.4)",
+            },
+          },
+        }}
+      >
         <IconButton
           onClick={handleOpen}
           sx={{
@@ -59,7 +77,7 @@ export const SettingsSwitch = () => {
         >
           <Settings size={16} strokeWidth={1.5} />
         </IconButton>
-      </StyledTooltip>
+      </Tooltip>
       <Menu
         anchorEl={anchorEl}
         open={open}

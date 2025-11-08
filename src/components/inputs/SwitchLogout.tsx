@@ -1,6 +1,6 @@
 import { LogOut } from "lucide-react";
 import IconButton from "@mui/material/IconButton";
-import { StyledTooltip } from "./StyledTooltip";
+import Tooltip from "@mui/material/Tooltip";
 import { useAppDispatch } from "@/hooks/AppHooks";
 import { logout } from "@/features/authSlice";
 import { usePost } from "@/hooks/UseApi";
@@ -20,7 +20,25 @@ export const LogoutSwitch = () => {
   };
 
   return (
-    <StyledTooltip title="Logout" placement="top">
+    <Tooltip
+      title="Logout"
+      placement="top"
+      slotProps={{
+        tooltip: {
+          sx: {
+            background: theme.palette.mode === "dark"
+              ? "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)"
+              : "linear-gradient(135deg, #2c3e50 0%, #1a252f 100%)",
+            backgroundColor: "transparent",
+            color: "#ffffff",
+            fontSize: "13px",
+            padding: `${theme.spacing(4)} ${theme.spacing(5)}`,
+            borderRadius: `${theme.shape.borderRadius}px`,
+            boxShadow: "0 8px 24px rgba(0, 0, 0, 0.4)",
+          },
+        },
+      }}
+    >
       <IconButton
         onClick={handleClick}
         sx={{
@@ -35,6 +53,6 @@ export const LogoutSwitch = () => {
       >
         <LogOut size={16} strokeWidth={1.5} />
       </IconButton>
-    </StyledTooltip>
+    </Tooltip>
   );
 };
