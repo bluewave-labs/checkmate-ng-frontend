@@ -66,6 +66,7 @@ export const NotificationChannelsForm = ({
                 {...field}
                 type="text"
                 fieldLabel={t("createNotifications.nameSettings.nameLabel")}
+                placeholder="e.g. Production Alerts"
                 fullWidth
                 error={!!errors.name}
                 helperText={errors.name ? errors.name.message : ""}
@@ -93,7 +94,7 @@ export const NotificationChannelsForm = ({
                   {ChannelTypes.map((type: string) => {
                     return (
                       <MenuItem key={type} value={type}>
-                        {type}
+                        {type.charAt(0).toUpperCase() + type.slice(1)}
                       </MenuItem>
                     );
                   })}
@@ -104,8 +105,18 @@ export const NotificationChannelsForm = ({
         }
       />
       <ConfigBox
-        title={"Config"}
-        subtitle={"Configure notification channel settings"}
+        title={type ? `${type.charAt(0).toUpperCase() + type.slice(1)} configuration` : "Config"}
+        subtitle={
+          type === "email"
+            ? "Configure the email address where notifications will be sent"
+            : type === "webhook"
+            ? "Configure the webhook URL endpoint where notifications will be sent"
+            : type === "slack"
+            ? "Configure your Slack webhook URL. Create one in Slack: Settings & administration → Manage apps → Custom Integrations → Incoming Webhooks"
+            : type === "discord"
+            ? "Configure your Discord webhook URL. Create one in Discord: Server Settings → Integrations → Webhooks → New Webhook"
+            : "Configure notification channel settings"
+        }
         rightContent={
           type === "email" ? (
             <Controller
@@ -118,6 +129,7 @@ export const NotificationChannelsForm = ({
                     {...field}
                     type="text"
                     fieldLabel={t("createNotifications.emailSettings.description")}
+                    placeholder="e.g. john@example.com"
                     fullWidth
                     error={!!errors.config?.emailAddress}
                     helperText={
@@ -135,11 +147,25 @@ export const NotificationChannelsForm = ({
               control={control}
               defaultValue={defaults.config.url}
               render={({ field }) => {
+                const getPlaceholder = () => {
+                  switch (type) {
+                    case "slack":
+                      return "https://hooks.slack.com/services/YOUR/WEBHOOK/URL";
+                    case "discord":
+                      return "https://discord.com/api/webhooks/YOUR/WEBHOOK/URL";
+                    case "webhook":
+                      return "https://your-server.com/webhook";
+                    default:
+                      return "https://example.com/webhook";
+                  }
+                };
+
                 return (
                   <TextInput
                     {...field}
                     type="text"
-                    fieldLabel="URL"
+                    fieldLabel={type ? `${type.charAt(0).toUpperCase() + type.slice(1)} webhook URL` : "URL"}
+                    placeholder={getPlaceholder()}
                     fullWidth
                     error={!!errors.config?.url}
                     helperText={

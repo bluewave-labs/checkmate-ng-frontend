@@ -227,6 +227,7 @@ export const UptimeForm = ({
               render={({ field }) => (
                 <AutoComplete
                   multiple
+                  fieldLabel={`You have ${notificationOptions.length} available notification ${notificationOptions.length === 1 ? 'channel' : 'channels'}`}
                   options={notificationOptions}
                   getOptionLabel={(option) => option.name}
                   value={notificationOptions.filter((o: any) =>
