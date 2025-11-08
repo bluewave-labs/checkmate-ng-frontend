@@ -1,7 +1,7 @@
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Typography from "@mui/material/Typography";
-import Tooltip from "@mui/material/Tooltip";
+import { StyledTooltip } from "./StyledTooltip";
 import { Settings } from "lucide-react";
 import IconButton from "@mui/material/IconButton";
 
@@ -44,7 +44,7 @@ export const SettingsSwitch = () => {
 
   return (
     <>
-      <Tooltip title="Settings" placement="top">
+      <StyledTooltip title="Settings" placement="top">
         <IconButton
           onClick={handleOpen}
           sx={{
@@ -59,7 +59,7 @@ export const SettingsSwitch = () => {
         >
           <Settings size={16} strokeWidth={1.5} />
         </IconButton>
-      </Tooltip>
+      </StyledTooltip>
       <Menu
         anchorEl={anchorEl}
         open={open}

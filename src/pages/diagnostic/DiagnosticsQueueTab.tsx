@@ -43,7 +43,9 @@ export const DiagnosticsQueueTab = () => {
         id: "interval",
         content: t("diagnosticsPage.tableHeaderInterval"),
         render: (row) => {
-          return row?.data?.interval || "-";
+          if (!row?.data?.interval) return "-";
+          const seconds = row.data.interval / 1000;
+          return `${seconds}s`;
         },
       },
       {
@@ -72,21 +74,42 @@ export const DiagnosticsQueueTab = () => {
         id: "lastRun",
         content: t("diagnosticsPage.tableHeaderLastRun"),
         render: (row) => {
-          return row?.lastRunAt || "-";
+          if (!row?.lastRunAt) return "-";
+          const date = new Date(row.lastRunAt);
+          return (
+            <div>
+              <div>{date.toLocaleDateString()}</div>
+              <div>{date.toLocaleTimeString()}</div>
+            </div>
+          );
         },
       },
       {
         id: "lockedAt",
         content: t("diagnosticsPage.tableHeaderLockedAt"),
         render: (row) => {
-          return row?.lockedAt || "-";
+          if (!row?.lockedAt) return "-";
+          const date = new Date(row.lockedAt);
+          return (
+            <div>
+              <div>{date.toLocaleDateString()}</div>
+              <div>{date.toLocaleTimeString()}</div>
+            </div>
+          );
         },
       },
       {
         id: "lastFinishedAt",
         content: t("diagnosticsPage.tableHeaderLastFinishedAt"),
         render: (row) => {
-          return row?.lastFinishedAt || "-";
+          if (!row?.lastFinishedAt) return "-";
+          const date = new Date(row.lastFinishedAt);
+          return (
+            <div>
+              <div>{date.toLocaleDateString()}</div>
+              <div>{date.toLocaleTimeString()}</div>
+            </div>
+          );
         },
       },
       {
@@ -109,26 +132,31 @@ export const DiagnosticsQueueTab = () => {
           title={t("diagnosticsPage.statBoxJobsTitle")}
           subtitle={`${metrics?.jobs}`}
           sx={{ width: "100%" }}
+          tooltip="Total number of monitoring jobs in the queue"
         />
         <StatBox
           title={t("diagnosticsPage.statBoxActiveJobsTitle")}
           subtitle={`${metrics.activeJobs}`}
           sx={{ width: "100%" }}
+          tooltip="Jobs currently running or locked for execution"
         />
         <StatBox
           title={t("diagnosticsPage.statBoxFailingJobsTitle")}
           subtitle={`${metrics.failingJobs}`}
           sx={{ width: "100%" }}
+          tooltip="Jobs that failed on their last execution"
         />
         <StatBox
           title={t("diagnosticsPage.statBoxTotalRunsTitle")}
           subtitle={`${metrics.totalRuns}`}
           sx={{ width: "100%" }}
+          tooltip="Total number of job executions across all jobs"
         />
         <StatBox
           title={t("diagnosticsPage.statBoxTotalFailuresTitle")}
           subtitle={`${metrics.totalFailures}`}
           sx={{ width: "100%" }}
+          tooltip="Total number of failed job executions across all jobs"
         />
       </Stack>
       <Table headers={headers} data={jobs} />

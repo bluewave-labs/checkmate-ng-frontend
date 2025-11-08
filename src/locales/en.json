@@ -265,7 +265,7 @@
     "incidentConfigStatusWindowLabel": "How many checks should be in the sliding window?",
     "incidentConfigStatusWindowThresholdLabel": "What percentage of checks in the sliding window fail/succeed before monitor status changes?",
     "incidentConfigTitle": "Incidents",
-    "intervalDescription": "How often the monitor should be checked.",
+    "intervalDescription": "How often do you want to check this service?",
     "intervalTitle": "Check interval"
   },
   "createNew": "Create new",
@@ -280,7 +280,7 @@
       "webhookPlaceholder": "https://your-server.com/webhook"
     },
     "emailSettings": {
-      "description": "Destination email addresses.",
+      "description": "Destination email address",
       "emailLabel": "Email address",
       "emailPlaceholder": "e.g. john@example.com",
       "title": "Email"
@@ -349,14 +349,14 @@
     "statBoxTotalFailuresTitle": "Total failures",
     "tableHeaderId": "Monitor ID",
     "tableHeaderUrl": "URL",
-    "tableHeaderInterval": "Interval (ms)",
+    "tableHeaderInterval": "Interval",
     "tableHeaderType": "Type",
     "tableHeaderActive": "Active",
-    "tableHeaderRunCount": "Run count",
+    "tableHeaderRunCount": "Runs",
     "tableHeaderLastRun": "Last run",
-    "tableHeaderLockedAt": "Locked at",
-    "tableHeaderLastFinishedAt": "Last finished at",
-    "tableHeaderLastRunTook": "Last run took",
+    "tableHeaderLockedAt": "Running",
+    "tableHeaderLastFinishedAt": "Finished",
+    "tableHeaderLastRunTook": "Duration",
 
     "gauges": {
       "heapAllocationSubtitle": "% of available memory",

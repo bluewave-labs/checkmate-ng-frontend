@@ -1,5 +1,5 @@
 import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
+import { StyledTooltip } from "./StyledTooltip";
 import { useAppDispatch, useAppSelector } from "@/hooks/AppHooks";
 import { setMode } from "@/features/uiSlice.js";
 import { useTranslation } from "react-i18next";
@@ -17,7 +17,7 @@ export const ThemeSwitch = () => {
   };
 
   return (
-    <Tooltip title={t("common.buttons.toggleTheme")} placement="top">
+    <StyledTooltip title={t("common.buttons.toggleTheme")} placement="top">
       <IconButton
         id="theme-toggle"
         onClick={handleChange}
@@ -40,6 +40,6 @@ export const ThemeSwitch = () => {
           <Sun size={16} strokeWidth={1.5} />
         )}
       </IconButton>
-    </Tooltip>
+    </StyledTooltip>
   );
 };

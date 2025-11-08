@@ -1,6 +1,6 @@
 import { LogOut } from "lucide-react";
 import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
+import { StyledTooltip } from "./StyledTooltip";
 import { useAppDispatch } from "@/hooks/AppHooks";
 import { logout } from "@/features/authSlice";
 import { usePost } from "@/hooks/UseApi";
@@ -20,7 +20,7 @@ export const LogoutSwitch = () => {
   };
 
   return (
-    <Tooltip title="Logout" placement="top">
+    <StyledTooltip title="Logout" placement="top">
       <IconButton
         onClick={handleClick}
         sx={{
@@ -35,6 +35,6 @@ export const LogoutSwitch = () => {
       >
         <LogOut size={16} strokeWidth={1.5} />
       </IconButton>
-    </Tooltip>
+    </StyledTooltip>
   );
 };

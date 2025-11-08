@@ -1,21 +1,21 @@
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { Select } from "@/components/inputs";
+import { Select, Dialog } from "@/components/inputs";
 import MenuItem from "@mui/material/MenuItem";
 import { Table } from "@/components/design-elements";
 import type { Header } from "@/components/design-elements/Table";
+import Box from "@mui/material/Box";
 
 import { useState } from "react";
 import { useGet } from "@/hooks/UseApi";
 import { useTheme } from "@mui/material/styles";
 import type { ILogEntry } from "@/types/log";
 import type { ApiResponse } from "@/hooks/UseApi";
-import { useNavigate } from "react-router";
 
 export const DiagnosticsLogTab = () => {
   const theme = useTheme();
-  const navigate = useNavigate();
   const [logLevel, setLogLevel] = useState("all");
+  const [selectedLog, setSelectedLog] = useState<ILogEntry | null>(null);
   const { response } = useGet<ApiResponse<ILogEntry[]>>(
     `/diagnostic/logs`,
     {},
@@ -60,7 +60,14 @@ export const DiagnosticsLogTab = () => {
     {
       id: "message",
       content: "Message",
-      render: (log: ILogEntry) => log.message,
+      render: (log: ILogEntry) => (
+        <div style={{ textAlign: "left" }}>{log.message}</div>
+      ),
+    },
+    {
+      id: "hasStack",
+      content: "Has Stack trace",
+      render: (log: ILogEntry) => (log.stack ? "Yes" : "No"),
     },
   ];
 
@@ -93,12 +100,39 @@ export const DiagnosticsLogTab = () => {
         headers={headers}
         data={filteredLogEntries}
         onRowClick={(log) => {
-          navigate(`/diagnostics/log`, { state: { logEntry: log } });
+          if (log.stack) {
+            setSelectedLog(log);
+          }
         }}
         cardsOnSmallScreens={true}
       />
+
+      <Dialog
+        open={!!selectedLog}
+        title="Stack Trace"
+        onCancel={() => setSelectedLog(null)}
+        onConfirm={() => setSelectedLog(null)}
+        confirmColor="accent"
+      >
+        {selectedLog && (
+          <Box
+            component="pre"
+            sx={{
+              backgroundColor: theme.palette.mode === "dark" ? "#1e1e1e" : "#f5f5f5",
+              padding: theme.spacing(4),
+              borderRadius: theme.shape.borderRadius,
+              overflow: "auto",
+              maxHeight: "400px",
+              fontSize: "12px",
+              fontFamily: "monospace",
+              whiteSpace: "pre-wrap",
+              wordBreak: "break-word",
+            }}
+          >
+            {selectedLog.stack}
+          </Box>
+        )}
+      </Dialog>
     </Stack>
   );
-
-  console.log(response);
 };

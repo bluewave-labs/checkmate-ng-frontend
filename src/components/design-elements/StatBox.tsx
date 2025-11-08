@@ -1,9 +1,11 @@
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import type { PaletteKey } from "@/theme/theme";
 import { BaseBox } from "@/components/design-elements";
+import { TooltipInfo } from "@/components/inputs";
 import type { SxProps } from "@mui/material";
 
 type GradientBox = React.PropsWithChildren<{
@@ -44,6 +46,7 @@ type StatBoxProps = React.PropsWithChildren<{
   subtitle: string;
   palette?: PaletteKey;
   sx?: SxProps;
+  tooltip?: string;
 }>;
 
 export const StatBox: React.FC<StatBoxProps> = ({
@@ -52,6 +55,7 @@ export const StatBox: React.FC<StatBoxProps> = ({
   palette,
   children,
   sx,
+  tooltip,
 }) => {
   const theme = useTheme();
   const textColor = palette ? theme.palette[palette].contrastText : "inherit";
@@ -59,7 +63,16 @@ export const StatBox: React.FC<StatBoxProps> = ({
   return (
     <GradientBox palette={palette} sx={sx}>
       <Stack>
-        <Typography color={textColor}>{title}</Typography>
+        <Box sx={{ display: "flex", alignItems: "center", gap: theme.spacing(2) }}>
+          <Typography color={textColor}>{title}</Typography>
+          {tooltip && (
+            <TooltipInfo
+              title={tooltip}
+              iconColor={textColor as string}
+              iconSize={14}
+            />
+          )}
+        </Box>
         <Typography color={textColor}>{subtitle}</Typography>
         {children}
       </Stack>

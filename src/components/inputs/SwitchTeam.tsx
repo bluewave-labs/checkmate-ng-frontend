@@ -1,7 +1,7 @@
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Typography from "@mui/material/Typography";
-import Tooltip from "@mui/material/Tooltip";
+import { StyledTooltip } from "./StyledTooltip";
 import { Users, Check } from "lucide-react";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
@@ -49,7 +49,7 @@ export const TeamSwitch = () => {
 
   return (
     <>
-      <Tooltip title="Teams" placement="top">
+      <StyledTooltip title="Teams" placement="top">
         <IconButton
           onClick={handleOpen}
           sx={{
@@ -64,7 +64,7 @@ export const TeamSwitch = () => {
         >
           <Users size={16} strokeWidth={1.5} />
         </IconButton>
-      </Tooltip>
+      </StyledTooltip>
       <Menu
         anchorEl={anchorEl}
         open={open}
