@@ -4,7 +4,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Button } from "@/components/inputs";
-import { useTheme } from "@mui/material/styles";
 import { typographyLevels } from "@/theme/palette";
 
 export const DialogInput = ({
@@ -24,13 +23,9 @@ export const DialogInput = ({
   confirmColor?: "error" | "accent";
   cancelColor?: "error" | "accent";
 }) => {
-  const theme = useTheme();
-
   return (
     <Dialog open={open}>
-      <DialogTitle sx={{ fontSize: typographyLevels.l }}>
-        {title}
-      </DialogTitle>
+      <DialogTitle sx={{ fontSize: typographyLevels.l }}>{title}</DialogTitle>
       <DialogContent>
         <DialogContentText>{content}</DialogContentText>
       </DialogContent>
