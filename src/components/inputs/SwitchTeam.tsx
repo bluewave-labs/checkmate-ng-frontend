@@ -1,7 +1,6 @@
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Typography from "@mui/material/Typography";
-import Tooltip from "@mui/material/Tooltip";
 import { Users, Check } from "lucide-react";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
@@ -13,6 +12,7 @@ import { useNavigate } from "react-router";
 import { useGet } from "@/hooks/UseApi";
 import type { ApiResponse } from "@/hooks/UseApi";
 import { useTheme } from "@mui/material/styles";
+import { StyledTooltip } from "./StyledTooltip";
 
 export const TeamSwitch = () => {
   const navigate = useNavigate();
@@ -49,25 +49,7 @@ export const TeamSwitch = () => {
 
   return (
     <>
-      <Tooltip
-        title="Teams"
-        placement="top"
-        slotProps={{
-          tooltip: {
-            sx: {
-              background: theme.palette.mode === "dark"
-                ? "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)"
-                : "linear-gradient(135deg, #2c3e50 0%, #1a252f 100%)",
-              backgroundColor: "transparent",
-              color: "#ffffff",
-              fontSize: "13px",
-              padding: `${theme.spacing(4)} ${theme.spacing(5)}`,
-              borderRadius: `${theme.shape.borderRadius}px`,
-              boxShadow: "0 8px 24px rgba(0, 0, 0, 0.4)",
-            },
-          },
-        }}
-      >
+      <StyledTooltip title="Teams" placement="top">
         <IconButton
           onClick={handleOpen}
           sx={{
@@ -82,7 +64,7 @@ export const TeamSwitch = () => {
         >
           <Users size={16} strokeWidth={1.5} />
         </IconButton>
-      </Tooltip>
+      </StyledTooltip>
       <Menu
         anchorEl={anchorEl}
         open={open}
