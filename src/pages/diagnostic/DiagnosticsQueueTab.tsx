@@ -8,6 +8,7 @@ import { useGet } from "@/hooks/UseApi";
 import type { ApiResponse } from "@/hooks/UseApi";
 import type { IJob, IJobMetrics } from "@/types/job";
 import type { Header } from "@/components/design-elements/Table";
+import { Typography } from "@mui/material";
 
 export const DiagnosticsQueueTab = () => {
   const { t } = useTranslation();
@@ -77,10 +78,10 @@ export const DiagnosticsQueueTab = () => {
           if (!row?.lastRunAt) return "-";
           const date = new Date(row.lastRunAt);
           return (
-            <div>
+            <Stack>
               <div>{date.toLocaleDateString()}</div>
               <div>{date.toLocaleTimeString()}</div>
-            </div>
+            </Stack>
           );
         },
       },
@@ -91,10 +92,10 @@ export const DiagnosticsQueueTab = () => {
           if (!row?.lockedAt) return "-";
           const date = new Date(row.lockedAt);
           return (
-            <div>
+            <Stack>
               <div>{date.toLocaleDateString()}</div>
               <div>{date.toLocaleTimeString()}</div>
-            </div>
+            </Stack>
           );
         },
       },
@@ -105,10 +106,10 @@ export const DiagnosticsQueueTab = () => {
           if (!row?.lastFinishedAt) return "-";
           const date = new Date(row.lastFinishedAt);
           return (
-            <div>
+            <Stack>
               <div>{date.toLocaleDateString()}</div>
               <div>{date.toLocaleTimeString()}</div>
-            </div>
+            </Stack>
           );
         },
       },
