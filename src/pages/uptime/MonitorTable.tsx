@@ -99,10 +99,8 @@ export const MonitorTable = ({
         id: 6,
         label: monitor.isActive ? "Pause" : "Resume",
         action: async () => {
-          const result = await patch(`/monitors/${monitor._id}/active`);
-          if (result) {
-            refetch();
-          }
+          await patch(`/monitors/${monitor._id}/active`);
+          refetch();
         },
         closeMenu: true,
       },
