@@ -56,8 +56,6 @@ export const CheckTable = ({ monitorId }: { monitorId: string }) => {
     { keepPreviousData: true }
   );
 
-  console.log(response);
-
   const checks = response?.data?.checks || [];
   const count = response?.data?.count || 0;
 
