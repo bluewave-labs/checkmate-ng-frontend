@@ -1,10 +1,10 @@
 import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
 import { useAppDispatch, useAppSelector } from "@/hooks/AppHooks";
 import { setMode } from "@/features/uiSlice.js";
 import { useTranslation } from "react-i18next";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "@mui/material/styles";
+import { Tooltip } from "@/components/design-elements";
 
 export const ThemeSwitch = () => {
   const mode = useAppSelector((state: any) => state.ui.mode);

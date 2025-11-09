@@ -1,7 +1,6 @@
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Typography from "@mui/material/Typography";
-import Tooltip from "@mui/material/Tooltip";
 import { Settings } from "lucide-react";
 import IconButton from "@mui/material/IconButton";
 
@@ -9,6 +8,7 @@ import { useNavigate } from "react-router";
 import { useAppSelector } from "@/hooks/AppHooks";
 import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
+import { Tooltip } from "@/components/design-elements";
 
 export const SettingsSwitch = () => {
   const navigate = useNavigate();

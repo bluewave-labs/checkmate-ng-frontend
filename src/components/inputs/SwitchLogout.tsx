@@ -1,11 +1,11 @@
 import { LogOut } from "lucide-react";
 import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
 import { useAppDispatch } from "@/hooks/AppHooks";
 import { logout } from "@/features/authSlice";
 import { usePost } from "@/hooks/UseApi";
 import { useNavigate } from "react-router";
 import { useTheme } from "@mui/material/styles";
+import { Tooltip } from "@/components/design-elements";
 
 export const LogoutSwitch = () => {
   const dispatch = useAppDispatch();

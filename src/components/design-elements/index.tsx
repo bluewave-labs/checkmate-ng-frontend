@@ -28,3 +28,4 @@ export { Tab } from "./Tab";
 export { Tabs } from "./Tabs";
 export { Breadcrumb } from "./Breadcrumb";
 export { InfoBox } from "./InfoBox";
+export { Tooltip, TooltipWithInfo } from "./Tooltip";

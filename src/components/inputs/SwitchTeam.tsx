@@ -1,10 +1,10 @@
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Typography from "@mui/material/Typography";
-import Tooltip from "@mui/material/Tooltip";
 import { Users, Check } from "lucide-react";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
+import { Tooltip } from "@/components/design-elements";
 
 import { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/hooks/AppHooks";

@@ -11,6 +11,7 @@ import { useAppSelector } from "@/hooks/AppHooks";
 export const BottomControls = () => {
   const theme = useTheme();
   const sidebarOpen = useAppSelector((state) => state.ui.sidebarOpen);
+
   return (
     <Stack
       alignItems={sidebarOpen ? "flex-start" : "center"}

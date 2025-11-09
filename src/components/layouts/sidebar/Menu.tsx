@@ -45,7 +45,7 @@ export const getBottomMenu = (t: Function) => [
     name: t("menu.support"),
     path: "support",
     icon: <LifeBuoy size={20} strokeWidth={1.5} />,
-    url: "invite",
+    url: "https://discord.com/invite/NAb6H3UTjK",
   },
   {
     name: t("menu.discussions"),
