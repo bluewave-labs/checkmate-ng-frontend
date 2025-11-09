@@ -28,9 +28,10 @@ export const SplitBox = ({
         borderColor={theme.palette.primary.lowContrast}
         flex={0.7}
         sx={{
-          background: theme.palette.mode === 'dark'
-            ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.01) 0%, rgba(255, 255, 255, 0.02) 100%)'
-            : 'linear-gradient(135deg, rgba(0, 0, 0, 0.01) 0%, rgba(0, 0, 0, 0.02) 100%)',
+          background:
+            theme.palette.mode === "dark"
+              ? "linear-gradient(135deg, rgba(255, 255, 255, 0.01) 0%, rgba(255, 255, 255, 0.02) 100%)"
+              : "linear-gradient(135deg, rgba(0, 0, 0, 0.01) 0%, rgba(0, 0, 0, 0.02) 100%)",
         }}
       >
         {left}
@@ -55,7 +56,7 @@ export const ConfigBox = ({
     <SplitBox
       left={
         <Fragment>
-          <Typography component="h2" variant="h2">
+          <Typography textTransform={"capitalize"} component="h2" variant="h2">
             {title}
           </Typography>
           <Typography component="p">{subtitle}</Typography>

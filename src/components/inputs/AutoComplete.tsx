@@ -24,10 +24,15 @@ type AutoCompleteInputProps = Omit<
 export const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({
   fieldLabel,
   required,
+  renderInput,
   ...props
 }) => {
   const theme = useTheme();
   const multiple = props.multiple;
+
+  const defaultRenderInput = (params: any) => (
+    <TextInput {...params} placeholder="Type to search" />
+  );
 
   const autocomplete = (
     <Autocomplete
@@ -40,9 +45,7 @@ export const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({
           style={{ marginRight: theme.spacing(3) }}
         />
       }
-      renderInput={(params) => (
-        <TextInput {...params} placeholder="Type to search" />
-      )}
+      renderInput={renderInput || defaultRenderInput}
       getOptionKey={(option) => option._id}
       renderTags={() => null}
       renderOption={(props, option, { selected }) => {
