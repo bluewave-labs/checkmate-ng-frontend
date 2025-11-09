@@ -16,4 +16,3 @@ export { DateTimePicker } from "./DateTimePicker";
 export { FormControlLabel } from "./FormControlLabel";
 export { FieldLabel } from "./FieldLabel";
 export { FormField } from "./FormField";
-export { TooltipInfo } from "./TooltipInfo";

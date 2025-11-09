@@ -4,8 +4,7 @@ import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import type { PaletteKey } from "@/theme/theme";
-import { BaseBox } from "@/components/design-elements";
-import { TooltipInfo } from "@/components/inputs";
+import { BaseBox, TooltipWithInfo } from "@/components/design-elements";
 import type { SxProps } from "@mui/material";
 
 type GradientBox = React.PropsWithChildren<{
@@ -63,10 +62,12 @@ export const StatBox: React.FC<StatBoxProps> = ({
   return (
     <GradientBox palette={palette} sx={sx}>
       <Stack>
-        <Box sx={{ display: "flex", alignItems: "center", gap: theme.spacing(2) }}>
+        <Box
+          sx={{ display: "flex", alignItems: "center", gap: theme.spacing(2) }}
+        >
           <Typography color={textColor}>{title}</Typography>
           {tooltip && (
-            <TooltipInfo
+            <TooltipWithInfo
               title={tooltip}
               iconColor={textColor as string}
               iconSize={14}
