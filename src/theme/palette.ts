@@ -11,7 +11,7 @@ export const typographyLevels = {
   xl: `${(typographyBase + 10) / 16}rem`,
 };
 
-const colors = {
+export const colors = {
   offWhite: "#FEFEFE",
   offBlack: "#131315",
   gray0: "#FDFDFD",
@@ -25,6 +25,7 @@ const colors = {
   gray900: "#1c1c1c",
   blueGray50: "#E8F0FE",
   blueGray400: "#8b9dc3",
+  blueGray450: "#7C8BA1",
   blueGray500: "#475467",
   blueGray600: "#344054",
   blueGray800: "#1C2130",

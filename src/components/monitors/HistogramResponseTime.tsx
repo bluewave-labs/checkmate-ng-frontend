@@ -41,7 +41,7 @@ export const HistogramResponseTime = ({ checks }: { checks: ICheck[] }) => {
               position="relative"
               width={BAR_WIDTH}
               height="100%"
-              bgcolor={theme.palette.primary.lowContrast}
+              bgcolor={theme.palette.primary.veryLowContrast}
               sx={{
                 borderRadius: theme.spacing(1.5),
               }}
@@ -56,7 +56,7 @@ export const HistogramResponseTime = ({ checks }: { checks: ICheck[] }) => {
               <Box
                 position="relative"
                 height="100%"
-                bgcolor={theme.palette.primary.lowContrast}
+                bgcolor={theme.palette.primary.veryLowContrast}
                 width={BAR_WIDTH}
                 sx={{
                   borderRadius: theme.spacing(1.5),

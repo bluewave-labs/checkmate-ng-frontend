@@ -4,7 +4,6 @@ import { ConfigBox, BasePage, InfoBox } from "@/components/design-elements";
 import { TextInput, Select, AutoComplete } from "@/components/inputs";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
-import { Trash2 } from "lucide-react";
 
 import dayjs from "dayjs";
 import type { Dayjs } from "dayjs";
@@ -186,55 +185,37 @@ export const MaintenanceForm = ({
         title={t("createMaintenanceWindowPage.monitorsTitle")}
         subtitle={t("createMaintenanceWindowPage.monitorsDescription")}
         rightContent={
-          <Stack>
-            <Controller
-              name="monitors"
-              control={control}
-              defaultValue={[]}
-              render={({ field }) => (
+          <Controller
+            name="monitors"
+            control={control}
+            defaultValue={[]}
+            render={({ field }) => {
+              const selectedMonitors = monitorOptions.filter((o: any) =>
+                (field.value || []).includes(o._id)
+              );
+              const count = selectedMonitors.length;
+
+              return (
                 <AutoComplete
                   multiple
                   fieldLabel="Monitors"
                   required
                   options={monitorOptions}
                   getOptionLabel={(option) => option.name}
-                  value={monitorOptions.filter((o: any) =>
-                    (field.value || []).includes(o._id)
-                  )}
+                  value={selectedMonitors}
                   onChange={(_, newValue) => {
                     field.onChange(newValue.map((o: any) => o._id));
                   }}
-                />
-              )}
-            />
-            <Stack gap={theme.spacing(2)} mt={theme.spacing(2)}>
-              {monitors.map((monitorId) => {
-                const option = monitorOptions.find((o) => o._id === monitorId);
-                if (!option) return null;
-                return (
-                  <Stack
-                    width={"100%"}
-                    justifyContent={"space-between"}
-                    direction="row"
-                    key={monitorId}
-                  >
-                    <Typography>{option.name}</Typography>
-                    <Trash2
-                      size={20}
-                      strokeWidth={1.5}
-                      onClick={() => {
-                        const updated = monitors.filter(
-                          (id) => id !== monitorId
-                        );
-                        setValue("monitors", updated);
-                      }}
-                      style={{ cursor: "pointer" }}
+                  renderInput={(params) => (
+                    <TextInput
+                      {...params}
+                      placeholder={count > 0 ? `${count} selected` : "Type to search"}
                     />
-                  </Stack>
-                );
-              })}
-            </Stack>
-          </Stack>
+                  )}
+                />
+              );
+            }}
+          />
         }
       />
 

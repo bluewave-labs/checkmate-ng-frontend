@@ -41,6 +41,11 @@ export const DateTimePicker = forwardRef<HTMLDivElement, CustomDateTimePickerPro
               {
                 borderColor: theme.palette.accent.main,
               },
+            "& .MuiFormHelperText-root": {
+              marginLeft: 0,
+              marginRight: 0,
+              marginTop: theme.spacing(1),
+            },
           }}
         />
       </LocalizationProvider>
