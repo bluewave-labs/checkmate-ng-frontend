@@ -12,6 +12,7 @@ import { notificationChannelSchema } from "@/validation/zod";
 import { useForm, Controller, type SubmitHandler } from "react-hook-form";
 import { useEffect } from "react";
 import { useInitForm } from "@/hooks/forms/UseInitNotificationsChannelForm";
+import { Typography } from "@mui/material";
 
 type FormValues = z.infer<typeof notificationChannelSchema>;
 
@@ -94,7 +95,9 @@ export const NotificationChannelsForm = ({
                   {ChannelTypes.map((type: string) => {
                     return (
                       <MenuItem key={type} value={type}>
-                        {type.charAt(0).toUpperCase() + type.slice(1)}
+                        <Typography textTransform={"capitalize"}>
+                          {type}
+                        </Typography>
                       </MenuItem>
                     );
                   })}
@@ -105,7 +108,7 @@ export const NotificationChannelsForm = ({
         }
       />
       <ConfigBox
-        title={type ? `${type.charAt(0).toUpperCase() + type.slice(1)} configuration` : "Config"}
+        title={type ? `${type} configuration` : "Config"}
         subtitle={
           type === "email"
             ? "Configure the email address where notifications will be sent"
@@ -128,7 +131,9 @@ export const NotificationChannelsForm = ({
                   <TextInput
                     {...field}
                     type="text"
-                    fieldLabel={t("createNotifications.emailSettings.description")}
+                    fieldLabel={t(
+                      "createNotifications.emailSettings.description"
+                    )}
                     placeholder="e.g. john@example.com"
                     fullWidth
                     error={!!errors.config?.emailAddress}
@@ -164,7 +169,13 @@ export const NotificationChannelsForm = ({
                   <TextInput
                     {...field}
                     type="text"
-                    fieldLabel={type ? `${type.charAt(0).toUpperCase() + type.slice(1)} webhook URL` : "URL"}
+                    fieldLabel={
+                      type
+                        ? `${
+                            type.charAt(0).toUpperCase() + type.slice(1)
+                          } webhook URL`
+                        : "URL"
+                    }
                     placeholder={getPlaceholder()}
                     fullWidth
                     error={!!errors.config?.url}
