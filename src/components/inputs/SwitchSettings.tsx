@@ -8,7 +8,7 @@ import { useNavigate } from "react-router";
 import { useAppSelector } from "@/hooks/AppHooks";
 import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
-import { StyledTooltip } from "./StyledTooltip";
+import { Tooltip } from "@/components/design-elements";
 
 export const SettingsSwitch = () => {
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ export const SettingsSwitch = () => {
 
   return (
     <>
-      <StyledTooltip title="Settings" placement="top">
+      <Tooltip title="Settings" placement="top">
         <IconButton
           onClick={handleOpen}
           sx={{
@@ -59,7 +59,7 @@ export const SettingsSwitch = () => {
         >
           <Settings size={16} strokeWidth={1.5} />
         </IconButton>
-      </StyledTooltip>
+      </Tooltip>
       <Menu
         anchorEl={anchorEl}
         open={open}

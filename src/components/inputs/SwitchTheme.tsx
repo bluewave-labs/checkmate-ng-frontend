@@ -4,7 +4,7 @@ import { setMode } from "@/features/uiSlice.js";
 import { useTranslation } from "react-i18next";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "@mui/material/styles";
-import { StyledTooltip } from "./StyledTooltip";
+import { Tooltip } from "@/components/design-elements";
 
 export const ThemeSwitch = () => {
   const mode = useAppSelector((state: any) => state.ui.mode);
@@ -17,7 +17,7 @@ export const ThemeSwitch = () => {
   };
 
   return (
-    <StyledTooltip title={t("common.buttons.toggleTheme")} placement="top">
+    <Tooltip title={t("common.buttons.toggleTheme")} placement="top">
       <IconButton
         id="theme-toggle"
         onClick={handleChange}
@@ -40,6 +40,6 @@ export const ThemeSwitch = () => {
           <Sun size={16} strokeWidth={1.5} />
         )}
       </IconButton>
-    </StyledTooltip>
+    </Tooltip>
   );
 };

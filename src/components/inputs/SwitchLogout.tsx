@@ -5,7 +5,7 @@ import { logout } from "@/features/authSlice";
 import { usePost } from "@/hooks/UseApi";
 import { useNavigate } from "react-router";
 import { useTheme } from "@mui/material/styles";
-import { StyledTooltip } from "./StyledTooltip";
+import { Tooltip } from "@/components/design-elements";
 
 export const LogoutSwitch = () => {
   const dispatch = useAppDispatch();
@@ -20,7 +20,7 @@ export const LogoutSwitch = () => {
   };
 
   return (
-    <StyledTooltip title="Logout" placement="top">
+    <Tooltip title="Logout" placement="top">
       <IconButton
         onClick={handleClick}
         sx={{
@@ -35,6 +35,6 @@ export const LogoutSwitch = () => {
       >
         <LogOut size={16} strokeWidth={1.5} />
       </IconButton>
-    </StyledTooltip>
+    </Tooltip>
   );
 };

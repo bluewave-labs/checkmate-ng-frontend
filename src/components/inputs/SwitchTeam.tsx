@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import { Users, Check } from "lucide-react";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
+import { Tooltip } from "@/components/design-elements";
 
 import { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/hooks/AppHooks";
@@ -12,7 +13,6 @@ import { useNavigate } from "react-router";
 import { useGet } from "@/hooks/UseApi";
 import type { ApiResponse } from "@/hooks/UseApi";
 import { useTheme } from "@mui/material/styles";
-import { StyledTooltip } from "./StyledTooltip";
 
 export const TeamSwitch = () => {
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ export const TeamSwitch = () => {
 
   return (
     <>
-      <StyledTooltip title="Teams" placement="top">
+      <Tooltip title="Teams" placement="top">
         <IconButton
           onClick={handleOpen}
           sx={{
@@ -64,7 +64,7 @@ export const TeamSwitch = () => {
         >
           <Users size={16} strokeWidth={1.5} />
         </IconButton>
-      </StyledTooltip>
+      </Tooltip>
       <Menu
         anchorEl={anchorEl}
         open={open}
