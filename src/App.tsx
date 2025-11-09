@@ -7,6 +7,7 @@ import { useAppSelector } from "./hooks/AppHooks";
 import { BrowserRouter } from "react-router-dom";
 import { AuthVerifier } from "@/components/auth-verifier";
 import { ToastContainer } from "react-toastify";
+import { colors } from "@/theme/palette";
 
 function App() {
   const mode = useAppSelector((state) => state.ui.mode);
@@ -25,8 +26,8 @@ function App() {
         theme={mode}
         style={
           {
-            "--toastify-color-progress-light": lightTheme.palette.accent.main,
-            "--toastify-color-progress-dark": darkTheme.palette.accent.main,
+            "--toastify-color-progress-light": colors.blueGray450,
+            "--toastify-color-progress-dark": colors.blueGray450,
           } as React.CSSProperties
         }
       />

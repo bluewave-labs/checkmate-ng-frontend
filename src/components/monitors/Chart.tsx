@@ -41,7 +41,7 @@ export const BaseChart: React.FC<BaseChartProps> = ({
                 justifyContent: "center",
                 width: 34,
                 height: 34,
-                backgroundColor: theme.palette.tertiary.main,
+                backgroundColor: theme.palette.primary.veryLowContrast,
                 "& svg": {
                   width: 20,
                   height: 20,

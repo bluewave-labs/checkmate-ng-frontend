@@ -20,7 +20,7 @@ export const CheckboxInput = forwardRef<HTMLInputElement, CheckboxInputProps>(
           },
         }}
         icon={<Square size={16} strokeWidth={1.5} />}
-        checkedIcon={<SquareCheck size={14} strokeWidth={1.5} />}
+        checkedIcon={<SquareCheck size={16} strokeWidth={1.5} />}
         sx={{
           padding: 0,
           color: theme.palette.primary.contrastTextTertiary,

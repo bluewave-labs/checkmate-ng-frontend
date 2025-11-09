@@ -31,6 +31,11 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           "&:hover .MuiOutlinedInput-notchedOutline": {
             borderColor: theme.palette.primary.lowContrast,
           },
+          "& .MuiFormHelperText-root": {
+            marginLeft: 0,
+            marginRight: 0,
+            marginTop: theme.spacing(1),
+          },
         }}
       />
     );

@@ -49,7 +49,7 @@ export const Breadcrumb = () => {
       }}
     >
       <Link
-        to="/"
+        to="/uptime"
         style={{
           display: "flex",
           alignItems: "center",
