@@ -135,7 +135,7 @@ const Login = () => {
         <TextLink
           text={t("auth.login.links.forgotPassword")}
           linkText={t("auth.login.links.forgotPasswordLink")}
-          href="/forgot-password"
+          href="/recovery"
         />
         <TextLink
           text={t("auth.login.links.register")}

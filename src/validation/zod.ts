@@ -215,3 +215,21 @@ export const statusPageSchema = z.object({
   isPublished: z.boolean().optional(),
   monitors: z.array(z.string()),
 });
+
+export const recoverySchema = z.object({
+  email: z.email({ message: "Invalid email address" }).trim().toLowerCase(),
+});
+
+export const resetSchema = z
+  .object({
+    password: z
+      .string()
+      .min(6, { message: "Password must be at least 6 characters" }),
+    confirmPassword: z
+      .string()
+      .min(6, { message: "Confirm Password must be at least 6 characters" }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ["confirmPassword"],
+    message: "Passwords must match",
+  });
