@@ -41,6 +41,9 @@ import StatusConfigPage from "@/pages/status-page/StatusPageConfig";
 import DiagnosticPage from "@/pages/diagnostic/DiagnosticPage";
 import DiagnosticLogDetailsPage from "@/pages/diagnostic/DiagnosticLogDetails";
 
+import RecoveryPage from "@/pages/recovery/Recovery";
+import ResetPage from "@/pages/recovery/Reset";
+
 import RootLayout from "@/components/layouts/RootLayout";
 import { ProtectedRoute } from "@/components/protected-route";
 
@@ -51,6 +54,9 @@ const Router = () => {
       <Route path="register/:id" element={<AuthRegisterInvite />} />
       <Route path="register" element={<AuthRegister />} />
       <Route path="status-pages/public/:url/" element={<StatusPublicPage />} />
+      <Route path="recovery/:id" element={<ResetPage />} />
+      <Route path="recovery" element={<RecoveryPage />} />
+
       <Route
         path="/"
         element={

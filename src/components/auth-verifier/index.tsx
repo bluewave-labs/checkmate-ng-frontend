@@ -14,7 +14,9 @@ import { get } from "@/utils/ApiClient";
 import { useLocation } from "react-router-dom";
 export const AuthVerifier = ({ children }: { children: ReactNode }) => {
   const location = useLocation();
-  const isAuthRoute = ["/login", "/register"].includes(location.pathname);
+  const isAuthRoute =
+    ["/login", "/register"].includes(location.pathname) ||
+    location.pathname.startsWith("/recovery");
   const isPublicRoute = location.pathname.startsWith("/status-pages/public");
 
   const [isVerifying, setIsVerifying] = useState(true);
