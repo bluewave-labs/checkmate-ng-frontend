@@ -72,17 +72,18 @@ const Router = () => {
         <Route path="uptime" element={<UptimeMonitorsPage />} />
         <Route path="settings" element={<SettingsPage />} />
         <Route path="teams/create" element={<TeamsCreatePage />} />
+        <Route
+          path="teams/:id/member/:memberId/configure"
+          element={<TeamMemberConfigPage />}
+        />
+        <Route
+          path="teams/:id/member/create"
+          element={<TeamMemberCreatePage />}
+        />
         <Route path="teams/:id/configure" element={<TeamsConfigPage />} />
         <Route path="teams/:id" element={<TeamDetailsPage />} />
         <Route path="teams" element={<TeamsPage />} />
-        <Route
-          path="team-members/:id/create"
-          element={<TeamMemberCreatePage />}
-        />
-        <Route
-          path="team-members/:id/configure"
-          element={<TeamMemberConfigPage />}
-        />
+
         <Route path="invite" element={<InvitePage />} />
         <Route
           path="notification-channels/:id/configure"

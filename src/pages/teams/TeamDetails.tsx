@@ -75,7 +75,7 @@ const TeamDetailsPage = () => {
       </Stack>
       <HeaderCreate
         label="Add new team member"
-        path={`/team-members/${id}/create`}
+        path={`/teams/${id}/member/create`}
         isLoading={false}
       />
       <Typography variant="h2" marginTop={theme.spacing(4)}>
@@ -85,7 +85,7 @@ const TeamDetailsPage = () => {
         headers={headers}
         data={teamMembers || []}
         onRowClick={(row) => {
-          navigate(`/team-members/${row._id}/configure`);
+          navigate(`/teams/${id}/member/${row._id}/configure`);
         }}
       />
     </BasePage>

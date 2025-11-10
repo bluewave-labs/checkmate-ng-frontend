@@ -24,6 +24,7 @@ export const TeamMemberForm = ({
   onSubmit,
   loading,
   deleteButton,
+  breadcrumbOverride,
 }: {
   mode?: string;
   initialData?: Partial<FormValues>;
@@ -32,6 +33,7 @@ export const TeamMemberForm = ({
   onSubmit: SubmitHandler<FormValues>;
   loading: boolean;
   deleteButton?: React.ReactNode;
+  breadcrumbOverride?: string[];
 }) => {
   const { t } = useTranslation();
   const theme = useTheme();
@@ -53,7 +55,11 @@ export const TeamMemberForm = ({
   }, [initialData, reset, defaults]);
 
   return (
-    <BasePage component={"form"} onSubmit={handleSubmit(onSubmit)}>
+    <BasePage
+      component={"form"}
+      onSubmit={handleSubmit(onSubmit)}
+      breadcrumbOverride={breadcrumbOverride}
+    >
       <ConfigBox
         title="Team member"
         subtitle="Team member selection"

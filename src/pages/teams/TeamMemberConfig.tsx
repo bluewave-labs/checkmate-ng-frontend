@@ -16,7 +16,7 @@ const TeamMemberConfig = () => {
   const { deleteFn, loading: deleting } = useDelete();
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { id } = useParams();
+  const { id, memberId } = useParams();
   const { patch, loading } = usePatch();
   const { response } = useGet<ApiResponse<any>>("/team-members");
   const { response: rolesResponse } =
@@ -24,11 +24,11 @@ const TeamMemberConfig = () => {
   const teamMembers = response?.data || [];
   const roles = rolesResponse?.data || [];
 
-  const user = teamMembers?.find((tm: any) => tm._id === id);
+  const user = teamMembers?.find((tm: any) => tm._id === memberId);
 
   const onSubmit = async (data: any) => {
     const roleId = data.roleId;
-    const res = await patch(`/team-members/${id}`, { roleId });
+    const res = await patch(`/team-members/${memberId}`, { roleId });
     if (res) {
       navigate(-1);
     }
@@ -68,6 +68,7 @@ const TeamMemberConfig = () => {
             {t("delete")}
           </Button>
         }
+        breadcrumbOverride={["teams", id || "", "configure team member"]}
       />
       <Dialog
         open={dialogOpen}

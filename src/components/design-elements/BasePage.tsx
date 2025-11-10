@@ -7,18 +7,21 @@ import { useTheme } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
 interface BasePageProps extends StackProps {
   children: React.ReactNode;
+  breadcrumbOverride?: string[];
 }
 
 export const BasePage: React.FC<BasePageProps> = ({
   children,
+  breadcrumbOverride,
   ...props
 }: {
   children: React.ReactNode;
+  breadcrumbOverride?: string[];
 }) => {
   const theme = useTheme();
   return (
     <Stack spacing={theme.spacing(10)} {...props}>
-      <Breadcrumb />
+      <Breadcrumb breadcrumbOverride={breadcrumbOverride} />
       {children}
     </Stack>
   );

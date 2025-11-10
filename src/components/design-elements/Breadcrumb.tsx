@@ -21,7 +21,11 @@ const pathNameMap: Record<string, string> = {
   "team-members": "Team Members",
 };
 
-export const Breadcrumb = () => {
+export const Breadcrumb = ({
+  breadcrumbOverride,
+}: {
+  breadcrumbOverride?: string[];
+}) => {
   const theme = useTheme();
   const location = useLocation();
 
@@ -30,7 +34,8 @@ export const Breadcrumb = () => {
     return null;
   }
 
-  const pathnames = location.pathname.split("/").filter((x) => x);
+  const pathnames =
+    breadcrumbOverride || location.pathname.split("/").filter((x) => x);
 
   // Don't show if only one level (e.g., /uptime)
   if (pathnames.length === 0) {
