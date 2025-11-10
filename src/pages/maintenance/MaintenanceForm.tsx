@@ -13,12 +13,7 @@ import { useTranslation } from "react-i18next";
 import { z } from "zod";
 import { MaintenanceRepeats } from "@/types/maintenance";
 import { maintenanceSchema } from "@/validation/zod";
-import {
-  useForm,
-  Controller,
-  useWatch,
-  type SubmitHandler,
-} from "react-hook-form";
+import { useForm, Controller, type SubmitHandler } from "react-hook-form";
 import { useEffect } from "react";
 import { useInitForm } from "@/hooks/forms/UseInitMaintenanceForm";
 import type { IMonitor } from "@/types/monitor";
@@ -44,18 +39,12 @@ export const MaintenanceForm = ({
     handleSubmit,
     control,
     reset,
-    setValue,
     getValues,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(maintenanceSchema),
     defaultValues: defaults,
     mode: "onChange",
-  });
-
-  const monitors = useWatch({
-    control,
-    name: "monitors",
   });
 
   useEffect(() => {
@@ -84,7 +73,9 @@ export const MaintenanceForm = ({
               render={({ field }) => (
                 <TextInput
                   {...field}
-                  fieldLabel={t("createMaintenanceWindowPage.generalSettingsName")}
+                  fieldLabel={t(
+                    "createMaintenanceWindowPage.generalSettingsName"
+                  )}
                   required
                   type="text"
                   placeholder={t(
@@ -102,7 +93,9 @@ export const MaintenanceForm = ({
               render={({ field }) => (
                 <Select
                   value={field.value || ""}
-                  fieldLabel={t("createMaintenanceWindowPage.generalSettingsRepeat")}
+                  fieldLabel={t(
+                    "createMaintenanceWindowPage.generalSettingsRepeat"
+                  )}
                   required
                   error={!!errors.repeat}
                   onChange={field.onChange}
@@ -209,7 +202,9 @@ export const MaintenanceForm = ({
                   renderInput={(params) => (
                     <TextInput
                       {...params}
-                      placeholder={count > 0 ? `${count} selected` : "Type to search"}
+                      placeholder={
+                        count > 0 ? `${count} selected` : "Type to search"
+                      }
                     />
                   )}
                 />

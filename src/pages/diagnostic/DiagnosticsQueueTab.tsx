@@ -8,7 +8,6 @@ import { useGet } from "@/hooks/UseApi";
 import type { ApiResponse } from "@/hooks/UseApi";
 import type { IJob, IJobMetrics } from "@/types/job";
 import type { Header } from "@/components/design-elements/Table";
-import { Typography } from "@mui/material";
 
 export const DiagnosticsQueueTab = () => {
   const { t } = useTranslation();

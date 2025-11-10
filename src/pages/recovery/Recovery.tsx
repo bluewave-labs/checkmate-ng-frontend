@@ -4,7 +4,7 @@ import { RecoveryForm } from "./RecoveryForm";
 import { recoverySchema } from "@/validation/zod";
 import { z } from "zod";
 import { usePost } from "@/hooks/UseApi";
-import { useToast } from "@/hooks//UseToast";
+import { useToast } from "@/hooks/UseToast";
 
 type FormData = z.infer<typeof recoverySchema>;
 

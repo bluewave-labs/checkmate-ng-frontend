@@ -1,7 +1,6 @@
 import Stack from "@mui/material/Stack";
 import { TextInput } from "@/components/inputs";
 import { Button } from "@/components/inputs";
-import Typography from "@mui/material/Typography";
 
 import { useForm, Controller } from "react-hook-form";
 import type { SubmitHandler } from "react-hook-form";

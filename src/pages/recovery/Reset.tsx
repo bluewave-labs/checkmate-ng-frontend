@@ -5,7 +5,7 @@ import { ResetForm } from "@/pages/recovery/ResetForm";
 import { resetSchema } from "@/validation/zod";
 import { z } from "zod";
 import { usePost } from "@/hooks/UseApi";
-import { useToast } from "@/hooks//UseToast";
+import { useToast } from "@/hooks/UseToast";
 import { useNavigate } from "react-router";
 import { useAppDispatch } from "@/hooks/AppHooks";
 import {
