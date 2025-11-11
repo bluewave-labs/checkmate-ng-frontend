@@ -69,6 +69,9 @@ export const SettingsSwitch = () => {
           horizontal: "right",
         }}
       >
+        <MenuItem onClick={() => handleClick("profile")}>
+          <Typography>Profile</Typography>
+        </MenuItem>
         <MenuItem onClick={() => handleClick("settings")}>
           <Typography>General settings</Typography>
         </MenuItem>

@@ -44,6 +44,8 @@ import DiagnosticLogDetailsPage from "@/pages/diagnostic/DiagnosticLogDetails";
 import RecoveryPage from "@/pages/recovery/Recovery";
 import ResetPage from "@/pages/recovery/Reset";
 
+import ProfilePage from "@/pages/profile/Profile";
+
 import RootLayout from "@/components/layouts/RootLayout";
 import { ProtectedRoute } from "@/components/protected-route";
 
@@ -130,6 +132,8 @@ const Router = () => {
 
         <Route path="diagnostics" element={<DiagnosticPage />} />
         <Route path="diagnostics/log" element={<DiagnosticLogDetailsPage />} />
+
+        <Route path="profile" element={<ProfilePage />} />
       </Route>
     </Routes>
   );
