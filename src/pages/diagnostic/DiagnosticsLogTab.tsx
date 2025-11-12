@@ -4,6 +4,7 @@ import { Select } from "@/components/inputs";
 import MenuItem from "@mui/material/MenuItem";
 import { Table } from "@/components/design-elements";
 import type { Header } from "@/components/design-elements/Table";
+import { DiagnosticLogDetails } from "@/pages/diagnostic/DiagnosticLogDetails";
 
 import { useState } from "react";
 import { useGet } from "@/hooks/UseApi";
@@ -92,8 +93,9 @@ export const DiagnosticsLogTab = () => {
       <Table
         headers={headers}
         data={filteredLogEntries}
-        onRowClick={(log) => {
-          navigate(`/diagnostics/log`, { state: { logEntry: log } });
+        expandableRows={true}
+        renderExpandedContent={(row) => {
+          return <DiagnosticLogDetails logEntry={row} />;
         }}
         cardsOnSmallScreens={true}
       />

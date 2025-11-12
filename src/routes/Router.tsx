@@ -39,7 +39,6 @@ import StatusCreatePage from "@/pages/status-page/StatusPageCreate";
 import StatusConfigPage from "@/pages/status-page/StatusPageConfig";
 
 import DiagnosticPage from "@/pages/diagnostic/DiagnosticPage";
-import DiagnosticLogDetailsPage from "@/pages/diagnostic/DiagnosticLogDetails";
 
 import RecoveryPage from "@/pages/recovery/Recovery";
 import ResetPage from "@/pages/recovery/Reset";
@@ -131,7 +130,6 @@ const Router = () => {
         />
 
         <Route path="diagnostics" element={<DiagnosticPage />} />
-        <Route path="diagnostics/log" element={<DiagnosticLogDetailsPage />} />
 
         <Route path="profile" element={<ProfilePage />} />
       </Route>
