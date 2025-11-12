@@ -68,6 +68,8 @@ export function DataTable<
   };
 
   const isSmall = useMediaQuery(theme.breakpoints.down("md"));
+  if (data.length === 0 || headers.length === 0) return <EmptyView />;
+
   const keys = [];
   // Return stack of cards for small screens
   if (isSmall && cardsOnSmallScreens) {
@@ -116,7 +118,6 @@ export function DataTable<
     );
   }
 
-  if (data.length === 0 || headers.length === 0) return <div>No data</div>;
   return (
     <TableContainer component={Paper} elevation={0} sx={{ boxShadow: "none" }}>
       <Table
@@ -350,5 +351,23 @@ export const Pagination: React.FC<TablePaginationProps> = ({ ...props }) => {
         },
       }}
     />
+  );
+};
+
+const EmptyView = () => {
+  const theme = useTheme();
+  return (
+    <Stack
+      alignItems={"center"}
+      sx={{
+        p: theme.spacing(4),
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: theme.palette.primary.lowContrast,
+        borderRadius: theme.shape.borderRadius,
+      }}
+    >
+      <Typography>No data</Typography>
+    </Stack>
   );
 };
