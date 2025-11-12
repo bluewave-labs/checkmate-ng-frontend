@@ -63,7 +63,7 @@ export function DataTable<
   const theme = useTheme();
   const [expanded, setExpanded] = useState<(string | number) | null>(null);
   const handleExpand = (row: T) => {
-    const key = row.id || row._id;
+    const key = row.id || row._id || null;
     setExpanded(expanded === key ? null : key);
   };
 

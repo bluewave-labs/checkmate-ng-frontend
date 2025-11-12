@@ -4,6 +4,8 @@ import { ConfigBox, BasePage } from "@/components/design-elements";
 import { TextInput, Select } from "@/components/inputs";
 import MenuItem from "@mui/material/MenuItem";
 
+import { usePost } from "@/hooks/UseApi";
+import { useToast } from "@/hooks/UseToast";
 import { ChannelTypes } from "@/types/notification-channel";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
@@ -13,6 +15,8 @@ import { useForm, Controller, type SubmitHandler } from "react-hook-form";
 import { useEffect } from "react";
 import { useInitForm } from "@/hooks/forms/UseInitNotificationsChannelForm";
 import { Typography } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import { isAllOf } from "@reduxjs/toolkit";
 
 type FormValues = z.infer<typeof notificationChannelSchema>;
 
@@ -28,6 +32,9 @@ export const NotificationChannelsForm = ({
 }) => {
   const { t } = useTranslation();
   const { defaults } = useInitForm({ initialData: initialData });
+  const { post, loading: isPosting } = usePost();
+  const theme = useTheme();
+  const { toastSuccess } = useToast();
 
   const {
     handleSubmit,
@@ -35,6 +42,7 @@ export const NotificationChannelsForm = ({
     reset,
     watch,
     getValues,
+    trigger,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(notificationChannelSchema),
@@ -51,6 +59,16 @@ export const NotificationChannelsForm = ({
   const onError = (errors: any) => {
     console.log(errors);
     console.log(getValues());
+  };
+
+  const handleTest = async () => {
+    const isValid = await trigger();
+    if (isValid) {
+      const res = await post("/notification-channels/test", getValues());
+      if (res) {
+        toastSuccess("Success");
+      }
+    }
   };
 
   return (
@@ -189,9 +207,21 @@ export const NotificationChannelsForm = ({
           )
         }
       />
-      <Stack direction="row" justifyContent="flex-end">
+      <Stack
+        direction="row"
+        justifyContent="flex-end"
+        spacing={theme.spacing(2)}
+      >
         <Button
-          loading={loading}
+          variant="contained"
+          color="accent"
+          onClick={handleTest}
+          loading={isPosting || loading}
+        >
+          Test
+        </Button>
+        <Button
+          loading={isPosting || loading}
           type="submit"
           variant="contained"
           color="accent"
