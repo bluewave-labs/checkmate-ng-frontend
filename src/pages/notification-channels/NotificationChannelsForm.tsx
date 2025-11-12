@@ -16,7 +16,6 @@ import { useEffect } from "react";
 import { useInitForm } from "@/hooks/forms/UseInitNotificationsChannelForm";
 import { Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { isAllOf } from "@reduxjs/toolkit";
 
 type FormValues = z.infer<typeof notificationChannelSchema>;
 
