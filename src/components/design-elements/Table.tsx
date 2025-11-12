@@ -104,6 +104,11 @@ export function DataTable<
                   </Grid>
                 );
               })}
+              {expandableRows &&
+                renderExpandedContent &&
+                renderExpandedContent(row) && (
+                  <Grid size={12}>{renderExpandedContent(row)}</Grid>
+                )}
             </Stack>
           );
         })}
@@ -167,7 +172,6 @@ export function DataTable<
                 <TableRow
                   sx={{
                     cursor: onRowClick ? "pointer" : "default",
-                    "& > *": { borderBottom: "unset" },
                   }}
                   onClick={() => {
                     if (expandableRows) handleExpand(row);
@@ -190,25 +194,26 @@ export function DataTable<
                     );
                   })}
                 </TableRow>
-                {expandableRows && (
-                  <TableRow>
-                    <TableCell
-                      colSpan={headers.length}
-                      style={{
-                        paddingTop: 0,
-                        paddingBottom: 0,
-                      }}
-                    >
-                      <Collapse in={isExpanded} timeout="auto" unmountOnExit>
-                        <Box sx={{ pt: 4, pb: 4 }}>
-                          {renderExpandedContent
-                            ? renderExpandedContent(row)
-                            : null}
-                        </Box>
-                      </Collapse>
-                    </TableCell>
-                  </TableRow>
-                )}
+                {expandableRows &&
+                  renderExpandedContent &&
+                  renderExpandedContent(row) && (
+                    <TableRow>
+                      <TableCell
+                        colSpan={headers.length}
+                        style={{
+                          borderBottom: isExpanded ? undefined : "none",
+                          paddingTop: 0,
+                          paddingBottom: 0,
+                        }}
+                      >
+                        <Collapse in={isExpanded} timeout="auto" unmountOnExit>
+                          <Box sx={{ pt: 4, pb: 4 }}>
+                            {renderExpandedContent(row)}
+                          </Box>
+                        </Collapse>
+                      </TableCell>
+                    </TableRow>
+                  )}
               </Fragment>
             );
           })}

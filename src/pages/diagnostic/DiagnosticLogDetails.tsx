@@ -7,14 +7,6 @@ import type { ILogEntry } from "@/types/log";
 export const DiagnosticLogDetails = ({ logEntry }: { logEntry: ILogEntry }) => {
   const theme = useTheme();
 
-  if (!logEntry.stack) {
-    return (
-      <Typography textTransform={"capitalize"}>
-        {"No stack trace available"}
-      </Typography>
-    );
-  }
-
   return (
     <Stack
       bgcolor={alpha(theme.palette.error.main, 0.1)}

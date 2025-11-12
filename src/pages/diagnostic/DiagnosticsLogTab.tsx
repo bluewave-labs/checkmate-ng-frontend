@@ -93,6 +93,7 @@ export const DiagnosticsLogTab = () => {
         data={filteredLogEntries}
         expandableRows={true}
         renderExpandedContent={(row) => {
+          if (!row.stack) return null;
           return <DiagnosticLogDetails logEntry={row} />;
         }}
         cardsOnSmallScreens={true}
