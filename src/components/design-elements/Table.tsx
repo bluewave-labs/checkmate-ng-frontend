@@ -9,6 +9,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import Collapse from "@mui/material/Collapse";
 
 import IconButton from "@mui/material/IconButton";
 import {
@@ -21,6 +22,7 @@ import {
 import TablePagination from "@mui/material/TablePagination";
 import type { TablePaginationProps } from "@mui/material/TablePagination";
 
+import { useState, Fragment } from "react";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
@@ -40,6 +42,8 @@ type DataTableProps<T extends { id?: string | number; _id?: string | number }> =
     data: T[];
     onRowClick?: (row: T) => void;
     cardsOnSmallScreens?: boolean;
+    expandableRows?: boolean;
+    renderExpandedContent?: (row: T) => React.ReactNode;
   };
 
 export function DataTable<
@@ -53,8 +57,16 @@ export function DataTable<
   data,
   onRowClick,
   cardsOnSmallScreens = true,
+  expandableRows = false,
+  renderExpandedContent,
 }: DataTableProps<T>) {
   const theme = useTheme();
+  const [expanded, setExpanded] = useState<(string | number) | null>(null);
+  const handleExpand = (row: T) => {
+    const key = row.id || row._id;
+    setExpanded(expanded === key ? null : key);
+  };
+
   const isSmall = useMediaQuery(theme.breakpoints.down("md"));
   const keys = [];
   // Return stack of cards for small screens
@@ -148,29 +160,56 @@ export function DataTable<
         <TableBody>
           {data.map((row) => {
             const key = row.id || row._id || Math.random();
+            const isExpanded = expanded === key;
 
             return (
-              <TableRow
-                key={key}
-                sx={{ cursor: onRowClick ? "pointer" : "default" }}
-                onClick={() => (onRowClick ? onRowClick(row) : null)}
-              >
-                {headers.map((header, index) => {
-                  return (
+              <Fragment key={key}>
+                <TableRow
+                  sx={{
+                    cursor: onRowClick ? "pointer" : "default",
+                    "& > *": { borderBottom: "unset" },
+                  }}
+                  onClick={() => {
+                    if (expandableRows) handleExpand(row);
+                    else if (onRowClick) onRowClick(row);
+                  }}
+                >
+                  {headers.map((header, index) => {
+                    return (
+                      <TableCell
+                        align={index === 0 ? "left" : "center"}
+                        key={header.id}
+                        onClick={
+                          header.onClick
+                            ? (e) => header.onClick!(e, row)
+                            : undefined
+                        }
+                      >
+                        {header.render(row)}
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+                {expandableRows && (
+                  <TableRow>
                     <TableCell
-                      align={index === 0 ? "left" : "center"}
-                      key={header.id}
-                      onClick={
-                        header.onClick
-                          ? (e) => header.onClick!(e, row)
-                          : undefined
-                      }
+                      colSpan={headers.length}
+                      style={{
+                        paddingTop: 0,
+                        paddingBottom: 0,
+                      }}
                     >
-                      {header.render(row)}
+                      <Collapse in={isExpanded} timeout="auto" unmountOnExit>
+                        <Box sx={{ pt: 4, pb: 4 }}>
+                          {renderExpandedContent
+                            ? renderExpandedContent(row)
+                            : null}
+                        </Box>
+                      </Collapse>
                     </TableCell>
-                  );
-                })}
-              </TableRow>
+                  </TableRow>
+                )}
+              </Fragment>
             );
           })}
         </TableBody>
