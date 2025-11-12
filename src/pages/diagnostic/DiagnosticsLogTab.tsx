@@ -11,11 +11,9 @@ import { useGet } from "@/hooks/UseApi";
 import { useTheme } from "@mui/material/styles";
 import type { ILogEntry } from "@/types/log";
 import type { ApiResponse } from "@/hooks/UseApi";
-import { useNavigate } from "react-router";
 
 export const DiagnosticsLogTab = () => {
   const theme = useTheme();
-  const navigate = useNavigate();
   const [logLevel, setLogLevel] = useState("all");
   const { response } = useGet<ApiResponse<ILogEntry[]>>(
     `/diagnostic/logs`,
