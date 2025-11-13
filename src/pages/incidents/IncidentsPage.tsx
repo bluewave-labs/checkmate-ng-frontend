@@ -22,11 +22,16 @@ const IncidentsPage = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [range, setRange] = useState("2h");
+  const [resolved, setResolved] = useState<boolean | null>(false);
 
-  const { response, isValidating } = useGet<
+  const { response, isValidating, refetch } = useGet<
     ApiResponse<{ count: number; incidents: IIncident[] }>
   >(
-    `/incidents?page=${page}&rowsPerPage=${rowsPerPage}&range=${range}`,
+    `/incidents?page=${page}&rowsPerPage=${rowsPerPage}&range=${range}${
+      selectedMonitorId && selectedMonitorId !== "all"
+        ? `&monitorId=${selectedMonitorId}`
+        : ""
+    }${resolved !== null ? `&resolved=${resolved}` : ""}`,
     {},
     { keepPreviousData: true },
     { useTeamIdAsKey: true }
@@ -62,19 +67,42 @@ const IncidentsPage = () => {
         spacing={theme.spacing(8)}
         justifyContent={"space-between"}
       >
-        <Select<string>
-          onChange={(e: SelectChangeEvent<string>) => {
-            setSelectedMonitorId(e.target.value);
-          }}
-          value={selectedMonitorId}
+        <Stack
+          direction={{ xs: "column", md: "row" }}
+          spacing={theme.spacing(8)}
         >
-          <MenuItem value="all">All monitors</MenuItem>
-          {monitors.map((monitor) => (
-            <MenuItem key={monitor._id} value={monitor._id}>
-              {monitor.name}
-            </MenuItem>
-          ))}
-        </Select>
+          <Select<string>
+            onChange={(e: SelectChangeEvent<string>) => {
+              setSelectedMonitorId(e.target.value);
+            }}
+            value={selectedMonitorId}
+          >
+            <MenuItem value="all">All monitors</MenuItem>
+            {monitors.map((monitor) => (
+              <MenuItem key={monitor._id} value={monitor._id}>
+                {monitor.name}
+              </MenuItem>
+            ))}
+          </Select>
+          <Select<string>
+            onChange={(e: SelectChangeEvent<string>) => {
+              if (e.target.value === "resolved") {
+                setResolved(true);
+              } else if (e.target.value === "unresolved") {
+                setResolved(false);
+              } else {
+                setResolved(null);
+              }
+            }}
+            value={
+              resolved === null ? "all" : resolved ? "resolved" : "unresolved"
+            }
+          >
+            <MenuItem value={"all"}>All</MenuItem>
+            <MenuItem value={"resolved"}>Resolved</MenuItem>
+            <MenuItem value={"unresolved"}>Unresolved</MenuItem>
+          </Select>
+        </Stack>
         <HeaderRange range={range} setRange={setRange} loading={isValidating} />
       </Stack>
       <IncidentTable
@@ -84,6 +112,7 @@ const IncidentsPage = () => {
         page={page}
         setPage={setPage}
         count={count}
+        refetch={refetch}
       />
     </BasePage>
   );

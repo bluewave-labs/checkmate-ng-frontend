@@ -13,7 +13,7 @@ export {
 export { DataTable as Table, Pagination } from "./Table";
 export { GradientBox, StatBox } from "./StatBox";
 export { BaseBox } from "./BaseBox";
-export { StatusLabel } from "./StatusLabel";
+export { StatusLabel, ValueLabel } from "./StatusLabel";
 export {
   BaseFallback,
   ErrorFallback,
