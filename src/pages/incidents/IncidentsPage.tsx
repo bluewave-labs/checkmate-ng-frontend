@@ -32,7 +32,9 @@ const IncidentsPage = () => {
     { useTeamIdAsKey: true }
   );
 
-  const incidents = response?.data?.incidents || [];
+  const incidents = response?.data?.incidents
+    ? [...response.data.incidents].reverse()
+    : [];
   const count = response?.data?.count || 0;
 
   const { response: monitorResponse } = useGet<ApiResponse<IMonitor[]>>(
@@ -67,16 +69,16 @@ const IncidentsPage = () => {
           value={selectedMonitorId}
         >
           <MenuItem value="all">All monitors</MenuItem>
-          {incidents.map((incident) => (
-            <MenuItem key={incident._id} value={incident._id}>
-              {incident._id}
+          {monitors.map((monitor) => (
+            <MenuItem key={monitor._id} value={monitor._id}>
+              {monitor.name}
             </MenuItem>
           ))}
         </Select>
         <HeaderRange range={range} setRange={setRange} loading={isValidating} />
       </Stack>
       <IncidentTable
-        incidents={incidents.reverse()}
+        incidents={incidents}
         rowsPerPage={rowsPerPage}
         setRowsPerPage={setRowsPerPage}
         page={page}
