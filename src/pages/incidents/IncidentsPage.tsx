@@ -12,6 +12,7 @@ import { useGet } from "@/hooks/UseApi";
 import type { ApiResponse } from "@/hooks/UseApi";
 import type { SelectChangeEvent } from "@mui/material/Select";
 import type { IIncident } from "@/types/incident";
+import type { IMonitor } from "@/types/monitor";
 
 const IncidentsPage = () => {
   const theme = useTheme();
@@ -33,6 +34,14 @@ const IncidentsPage = () => {
 
   const incidents = response?.data?.incidents || [];
   const count = response?.data?.count || 0;
+
+  const { response: monitorResponse } = useGet<ApiResponse<IMonitor[]>>(
+    `/monitors`,
+    {},
+    { keepPreviousData: true }
+  );
+
+  const monitors: IMonitor[] = monitorResponse?.data || [];
 
   useEffect(() => {
     if (id) {
