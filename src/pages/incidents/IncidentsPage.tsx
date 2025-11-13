@@ -2,16 +2,16 @@ import Stack from "@mui/material/Stack";
 import MenuItem from "@mui/material/MenuItem";
 import { Select } from "@/components/inputs";
 import { BasePage, InfoBox } from "@/components/design-elements";
-import { CheckTable } from "@/pages/incidents/CheckTable";
+import { IncidentTable } from "@/pages/incidents/IncidentTable";
 import { HeaderRange } from "@/components/common/HeaderRange";
 
 import { useTheme } from "@mui/material/styles";
 import { useParams } from "react-router";
-import type { IMonitor } from "@/types/monitor";
 import { useState, useEffect } from "react";
 import { useGet } from "@/hooks/UseApi";
 import type { ApiResponse } from "@/hooks/UseApi";
 import type { SelectChangeEvent } from "@mui/material/Select";
+import type { IIncident } from "@/types/incident";
 
 const IncidentsPage = () => {
   const theme = useTheme();
@@ -22,26 +22,16 @@ const IncidentsPage = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [range, setRange] = useState("2h");
 
-  const { response, isValidating } = useGet<ApiResponse<any>>(
-    `/checks?status=down&page=${page}&rowsPerPage=${rowsPerPage}&range=${range}${
-      selectedMonitorId && selectedMonitorId !== "all"
-        ? `&monitorId=${selectedMonitorId}`
-        : ""
-    }`,
+  const { response, isValidating } = useGet<
+    ApiResponse<{ count: number; incidents: IIncident[] }>
+  >(
+    `/incidents?page=${page}&rowsPerPage=${rowsPerPage}&range=${range}`,
     {},
     { keepPreviousData: true },
     { useTeamIdAsKey: true }
   );
 
-  const { response: monitorResponse } = useGet<ApiResponse<IMonitor[]>>(
-    `/monitors`,
-    {},
-    { keepPreviousData: true }
-  );
-
-  const monitors: IMonitor[] = monitorResponse?.data || [];
-
-  const checks = response?.data?.checks || [];
+  const incidents = response?.data?.incidents || [];
   const count = response?.data?.count || 0;
 
   useEffect(() => {
@@ -68,21 +58,21 @@ const IncidentsPage = () => {
           value={selectedMonitorId}
         >
           <MenuItem value="all">All monitors</MenuItem>
-          {monitors.map((monitor) => (
-            <MenuItem key={monitor._id} value={monitor._id}>
-              {monitor.name}
+          {incidents.map((incident) => (
+            <MenuItem key={incident._id} value={incident._id}>
+              {incident._id}
             </MenuItem>
           ))}
         </Select>
         <HeaderRange range={range} setRange={setRange} loading={isValidating} />
       </Stack>
-      <CheckTable
-        checks={checks}
-        count={count}
-        page={page}
-        setPage={setPage}
+      <IncidentTable
+        incidents={incidents.reverse()}
         rowsPerPage={rowsPerPage}
         setRowsPerPage={setRowsPerPage}
+        page={page}
+        setPage={setPage}
+        count={count}
       />
     </BasePage>
   );
