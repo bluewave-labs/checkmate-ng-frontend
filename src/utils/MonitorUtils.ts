@@ -1,6 +1,7 @@
 import type { MonitorStatus } from "@/types/monitor";
 import type { IMonitor } from "@/types/monitor";
 import type { PaletteKey } from "@/theme/theme";
+import type { ValueType } from "@/components/design-elements/StatusLabel";
 export const getStatusPalette = (status: MonitorStatus): PaletteKey => {
   const paletteMap: Record<MonitorStatus, PaletteKey> = {
     up: "success",
@@ -8,6 +9,15 @@ export const getStatusPalette = (status: MonitorStatus): PaletteKey => {
     initializing: "warning",
   };
   return paletteMap[status];
+};
+
+export const getValuePalette = (value: ValueType): PaletteKey => {
+  const paletteMap: Record<ValueType, PaletteKey> = {
+    positive: "success",
+    negative: "error",
+    neutral: "warning",
+  };
+  return paletteMap[value];
 };
 
 export const getStatusColor = (status: MonitorStatus, theme: any): string => {

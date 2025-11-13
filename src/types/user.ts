@@ -13,3 +13,9 @@ export interface IUser {
     permissions: string;
   }[];
 }
+export interface IMongoUser {
+  _id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+}
